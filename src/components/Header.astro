@@ -24,7 +24,7 @@ const navLinks = [
     <a href="/" class="z-50 flex flex-col items-start group">
       <img
         id="header-logo"
-        src={isHome ? "/logo-white.png" : "/logo-dark.png"}
+        src={isHome ? "/logo-white.webp" : "/logo-dark.webp"}
         alt="Fiodorow Photography"
         class="h-10 md:h-14 w-auto object-contain transition-opacity duration-300"
       />
@@ -133,7 +133,7 @@ const navLinks = [
       header?.classList.add("text-charcoal");
 
       // Logo must be dark because menu bg is white
-      if (logo) logo.src = "/logo-dark.png";
+      if (logo) logo.src = "/logo-dark.webp";
 
       return;
     }
@@ -149,7 +149,7 @@ const navLinks = [
       );
       header?.classList.remove("text-white");
 
-      if (logo) logo.src = "/logo-dark.png";
+      if (logo) logo.src = "/logo-dark.webp";
 
       // Update nav links color
       const links = document.querySelectorAll(".nav-link");
@@ -172,7 +172,7 @@ const navLinks = [
       );
       header?.classList.add("text-white");
 
-      if (logo) logo.src = "/logo-white.png";
+      if (logo) logo.src = "/logo-white.webp";
 
       // Update nav links color
       const links = document.querySelectorAll(".nav-link");

@@ -43,7 +43,7 @@ const fallbackItems = [
 
 // Use Sanity data if available
 const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
-  image: item.coverImage ? urlFor(item.coverImage).width(1200).quality(90).url() : fallbackItems[0].image,
+  image: item.coverImage ? urlFor(item.coverImage).width(800).quality(80).url() : fallbackItems[0].image,
   category: item.category,
   title: item.title,
   slug: item.slug,
@@ -178,7 +178,6 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
               alt="Mateusz i Weronika - Duet Fotografów" 
               class="w-full h-auto aspect-[3/2] object-cover object-center rounded-sm shadow-2xl transition-transform duration-1000 group-hover:scale-[1.02]" 
             />
-             <!-- Duo Badge Removed -->
           </div>
         </div>
         
@@ -236,7 +235,6 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <!-- Image 1 -->
             <div class="aspect-[3/4] overflow-hidden rounded-sm group relative animate-fade-in-up" style="animation-delay: 0ms;">
                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" 
                     alt="Wedding Detail" 
@@ -245,7 +243,6 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
                <div class="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             
-            <!-- Image 2 (Staggered) -->
             <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative animate-fade-in-up" style="animation-delay: 100ms;">
                <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=800&q=80" 
                     alt="Emotional Moment" 
@@ -253,7 +250,6 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
                     loading="lazy" />
             </div>
 
-            <!-- Image 3 -->
             <div class="aspect-[3/4] overflow-hidden rounded-sm group relative animate-fade-in-up" style="animation-delay: 200ms;">
                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80" 
                     alt="Couple Portrait" 
@@ -261,7 +257,6 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
                     loading="lazy" />
             </div>
 
-            <!-- Image 4 (Staggered) -->
             <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative animate-fade-in-up" style="animation-delay: 300ms;">
                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80" 
                     alt="Wedding Celebrate" 
