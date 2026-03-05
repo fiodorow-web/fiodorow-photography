@@ -226,12 +226,12 @@ a {
     opacity: 0;
     will-change: opacity, transform;
     transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-      transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   }
 
   /* Active state — triggered by IntersectionObserver */
   .reveal.active {
-    opacity: 1;
+    opacity: 1 !important;
     transform: translate(0, 0) scale(1) !important;
   }
 
@@ -250,6 +250,16 @@ a {
   /* Slide from right */
   .reveal-right {
     transform: translateX(20px);
+  }
+
+  /* Dramatic slide from left */
+  .reveal-slide-left-heavy {
+    transform: translateX(-80px);
+  }
+
+  /* Dramatic slide from right */
+  .reveal-slide-right-heavy {
+    transform: translateX(80px);
   }
 
   /* Scale in */
@@ -274,6 +284,14 @@ a {
 
     .reveal-right {
       transform: translateX(40px);
+    }
+
+    .reveal-slide-left-heavy {
+      transform: translateX(-150px);
+    }
+
+    .reveal-slide-right-heavy {
+      transform: translateX(150px);
     }
 
     .reveal-scale {
