@@ -73,6 +73,7 @@ const categories = [
 <BaseLayout
   title="Portfolio | Fiodorow Photography"
   description="Portfolio fotograficzne - reportaże ślubne, sesje narzeczeńskie, portrety. Fotograf Siedlce, Białystok, Warszawa."
+  breadcrumbs={[{ name: "Portfolio", href: "/portfolio" }]}
 >
   <Header currentPath="/portfolio" />
 
@@ -80,7 +81,7 @@ const categories = [
   <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-cream">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
       <!-- Title -->
-      <div class="text-center mb-16">
+      <div class="text-center mb-16 reveal reveal-up">
         <h1
           class="font-serif text-3xl md:text-4xl tracking-[0.2em] uppercase text-charcoal mb-4"
         >
@@ -94,7 +95,7 @@ const categories = [
 
       <!-- Category Filter -->
       <div
-        class="flex flex-wrap justify-center gap-3 md:gap-4 mb-16"
+        class="flex flex-wrap justify-center gap-3 md:gap-4 mb-16 reveal reveal-up reveal-d1"
         id="category-filter"
       >
         {
@@ -116,16 +117,15 @@ const categories = [
 
       <!-- Symmetric 3-Column Portfolio Grid -->
       <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 reveal-stagger"
         id="portfolio-grid"
       >
         {
           portfolioItems.map((item, index) => (
             <a
               href={`/portfolio/${item.slug.current}`}
-              class="portfolio-card group relative overflow-hidden block"
+              class="portfolio-card group relative overflow-hidden block reveal reveal-scale"
               data-category={categoryLabels[item.category] || item.category}
-              style={`animation-delay: ${index * 80}ms`}
             >
               <div class="relative aspect-[3/4] overflow-hidden">
                 <img
@@ -156,59 +156,23 @@ const categories = [
   <!-- CTA Section -->
   <section class="py-20 md:py-24 bg-white">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="section-title mb-6">
+      <h2 class="section-title mb-6 reveal reveal-up">
         Chcesz zobaczyć <i class="font-light italic text-olive">więcej</i>?
       </h2>
       <p
-        class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto"
+        class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto reveal reveal-up reveal-d1"
       >
         Każda sesja to dla nas nowe wyzwanie. Skontaktuj się z nami, aby omówić
         Twój projekt.
       </p>
-      <a href="/kontakt" class="btn-primary"> Skontaktuj się </a>
+      <a href="/kontakt" class="btn-primary reveal reveal-up reveal-d2">
+        Skontaktuj się
+      </a>
     </div>
   </section>
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .portfolio-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .portfolio-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-  }
-
-  .portfolio-card {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
 
 <script>
   const filterBtns = document.querySelectorAll(".category-btn");

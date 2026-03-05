@@ -11,10 +11,11 @@ export async function getStaticPaths() {
     "joanna-darek": {
       title: "Joanna & Darek",
       date: "8 czerwca 2024",
-      description:
-        "To był słoneczny, czerwcowy dzień pełen radości i dobrej energii. Asia i Darek powiedzieli sobie TAK wśród najbliższych i serdecznych znajomych.",
       category: "reportaz-slubny",
-      location: "Siedlce",
+      venue: {
+        venueName: "Siedlce",
+        venueUrl: "https://maps.google.com/?q=Siedlce",
+      },
       images: [
         "https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90",
         "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90",
@@ -24,10 +25,11 @@ export async function getStaticPaths() {
     "natalia-michal": {
       title: "Natalia & Michał",
       date: "15 maja 2024",
-      description:
-        "Romantyczna sesja narzeczeńska w historycznych zaułkach Białegostoku.",
       category: "sesja-narzeczenska",
-      location: "Białystok",
+      venue: {
+        venueName: "Białystok",
+        venueUrl: "https://maps.google.com/?q=Bialystok",
+      },
       images: [
         "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90",
         "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90",
@@ -36,9 +38,11 @@ export async function getStaticPaths() {
     "amelia-damian": {
       title: "Amelia & Damian",
       date: "22 lipca 2024",
-      description: "Piękny letni ślub w sercu Warszawy.",
       category: "reportaz-slubny",
-      location: "Warszawa",
+      venue: {
+        venueName: "Warszawa",
+        venueUrl: "https://maps.google.com/?q=Warszawa",
+      },
       images: [
         "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90",
         "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90",
@@ -67,10 +71,8 @@ export async function getStaticPaths() {
               year: "numeric",
             })
           : "",
-        description: item.description || "",
         category: item.category || "reportaz-slubny",
-        location: item.location || "",
-        // Use higher quality images (1400px width, 90% quality)
+        venue: item.venue || null,
         coverImage: item.coverImage
           ? urlFor(item.coverImage).width(1400).quality(90).url()
           : null,
@@ -107,7 +109,11 @@ if (!portfolio) {
 
 <BaseLayout
   title={`${portfolio.title} | Fiodorow Photography`}
-  description={portfolio.description}
+  description={`${portfolio.title} — ${categoryLabels[portfolio.category] || portfolio.category}${portfolio.venue?.venueName ? `, ${portfolio.venue.venueName}` : ""} | Fiodorow Photography`}
+  breadcrumbs={[
+    { name: "Portfolio", href: "/portfolio" },
+    { name: portfolio.title, href: `/portfolio/${Astro.params.slug}` },
+  ]}
 >
   <Header currentPath="/portfolio" />
 
@@ -126,17 +132,82 @@ if (!portfolio) {
         >
           {portfolio.title}
         </h1>
-        <p class="font-serif text-lg text-olive italic mb-8">
+        <p class="font-serif text-lg text-olive italic mb-4">
           {portfolio.date}
         </p>
-        <!-- Description -->
-        <div class="max-w-3xl mx-auto mb-16 px-4">
-          <p
-            class="text-center text-charcoal-light text-base md:text-lg leading-relaxed font-light whitespace-pre-line"
-          >
-            {portfolio.description}
-          </p>
-        </div>
+        {
+          portfolio.venue?.venueName && (
+            <div class="mb-10">
+              {portfolio.venue.venueUrl ? (
+                <a
+                  href={portfolio.venue.venueUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-sm text-charcoal-light hover:text-olive transition-colors duration-300 group"
+                >
+                  <svg
+                    class="w-4 h-4 text-olive"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <span class="group-hover:underline underline-offset-4">
+                    {portfolio.venue.venueName}
+                  </span>
+                  <svg
+                    class="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              ) : (
+                <span class="inline-flex items-center gap-2 text-sm text-charcoal-light">
+                  <svg
+                    class="w-4 h-4 text-olive"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  {portfolio.venue.venueName}
+                </span>
+              )}
+            </div>
+          )
+        }
 
         <!-- Image Grid - Masonry Style (CSS Columns) -->
         <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
@@ -157,33 +228,6 @@ if (!portfolio) {
               </div>
             ))
           }
-        </div>
-
-        <!-- Location badge -->
-        <div class="mt-16 text-center">
-          <span
-            class="inline-flex items-center gap-2 text-sm text-charcoal-light px-6 py-3 border border-charcoal/10 bg-white"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            {portfolio.location}
-          </span>
         </div>
 
         <!-- Navigation -->

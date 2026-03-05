@@ -45,17 +45,25 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: 'location',
-            title: 'Lokalizacja',
-            type: 'string',
-            description: 'Miejsce sesji, np. "Siedlce"',
-        }),
-        defineField({
-            name: 'description',
-            title: 'Opis',
-            type: 'text',
-            rows: 4,
-            description: 'Krótki opis sesji',
+            name: 'venue',
+            title: 'Miejsce',
+            type: 'object',
+            description: 'Miejsce sesji z opcjonalnym linkiem zewnętrznym (np. Google Maps, strona sali)',
+            fields: [
+                defineField({
+                    name: 'venueName',
+                    title: 'Nazwa miejsca',
+                    type: 'string',
+                    description: 'np. "Sala Wodnik, Kontuń"',
+                }),
+                defineField({
+                    name: 'venueUrl',
+                    title: 'Link do miejsca',
+                    type: 'url',
+                    description: 'np. link do Google Maps lub strony sali weselnej',
+                    validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+                }),
+            ],
         }),
         defineField({
             name: 'coverImage',

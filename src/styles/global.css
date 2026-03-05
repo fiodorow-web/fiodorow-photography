@@ -13,7 +13,7 @@
 
 /* ===================================
    FIODOROW PHOTOGRAPHY - DESIGN SYSTEM
-   Elegant, Minimalist Photography Portfolioo
+   Elegant, Minimalist Photography Portfolio
    =================================== */
 
 /* CSS Custom Properties */
@@ -214,6 +214,130 @@ a {
         var(--color-cream) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
+  }
+
+  /* ===================================
+     SCROLL-REVEAL ANIMATION SYSTEM
+     Mobile-first, elegant, accessible
+     =================================== */
+
+  /* Base reveal class — hidden by default */
+  .reveal {
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+      transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  /* Active state — triggered by IntersectionObserver */
+  .reveal.active {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) !important;
+  }
+
+  /* === Direction variants (mobile-first: subtle) === */
+
+  /* Slide up */
+  .reveal-up {
+    transform: translateY(20px);
+  }
+
+  /* Slide from left */
+  .reveal-left {
+    transform: translateX(-20px);
+  }
+
+  /* Slide from right */
+  .reveal-right {
+    transform: translateX(20px);
+  }
+
+  /* Scale in */
+  .reveal-scale {
+    transform: scale(0.96);
+  }
+
+  /* Fade only (no transform) */
+  .reveal-fade {
+    transform: none;
+  }
+
+  /* === Desktop: fuller motion === */
+  @media (min-width: 768px) {
+    .reveal-up {
+      transform: translateY(40px);
+    }
+
+    .reveal-left {
+      transform: translateX(-40px);
+    }
+
+    .reveal-right {
+      transform: translateX(40px);
+    }
+
+    .reveal-scale {
+      transform: scale(0.93);
+    }
+
+    .reveal {
+      transition-duration: 1s;
+    }
+  }
+
+  /* === Delay utilities === */
+  .reveal-d1 {
+    transition-delay: 100ms;
+  }
+
+  .reveal-d2 {
+    transition-delay: 200ms;
+  }
+
+  .reveal-d3 {
+    transition-delay: 300ms;
+  }
+
+  .reveal-d4 {
+    transition-delay: 400ms;
+  }
+
+  .reveal-d5 {
+    transition-delay: 500ms;
+  }
+
+  /* === Stagger for grid children === */
+  .reveal-stagger>.reveal:nth-child(1) {
+    transition-delay: 0ms;
+  }
+
+  .reveal-stagger>.reveal:nth-child(2) {
+    transition-delay: 120ms;
+  }
+
+  .reveal-stagger>.reveal:nth-child(3) {
+    transition-delay: 240ms;
+  }
+
+  .reveal-stagger>.reveal:nth-child(4) {
+    transition-delay: 360ms;
+  }
+
+  .reveal-stagger>.reveal:nth-child(5) {
+    transition-delay: 480ms;
+  }
+
+  .reveal-stagger>.reveal:nth-child(6) {
+    transition-delay: 600ms;
+  }
+
+  /* === Accessibility: respect reduced motion === */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
   }
 }
 

@@ -6,18 +6,66 @@ import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 import aboutImg from "../assets/about/about.jpg";
 
-// Placeholder images - will be replaced with Sanity
-// const aboutImage = "https://images.unsplash.com/photo-1503516459261-40c66117780a?w=800&q=80";
 const studioImage =
   "https://images.unsplash.com/photo-1554941068-a252680d25d9?w=800&q=80";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Jak wcześnie rezerwować termin?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Najlepiej 6-12 miesięcy przed ślubem, szczególnie w sezonie (maj-wrzesień). Im wcześniej, tym większa pewność, że będziemy dostępni w Waszym terminie!",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Czy dojeżdżacie poza Mazowsze?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Tak! Działamy głównie na Mazowszu, Podlasiu i Lubelszczyźnie, ale chętnie dojedziemy też dalej. Skontaktujcie się z nami, a ustalimy szczegóły.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ile zdjęć otrzymamy i kiedy?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Przeciętnie otrzymacie 400-600 starannie wyselekcjonowanych i obrobionych zdjęć z reportażu. Galeria online będzie gotowa w ciągu 4-6 tygodni od ślubu.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Czy oferujecie sesję narzeczeńską?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Tak! Sesja narzeczeńska to świetna okazja, żebyśmy się poznali przed wielkim dniem. Często wchodzi w skład pakietu, ale można ją też zamówić osobno.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: 'Jak wygląda praca "w duecie"?',
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Pracujemy razem jako zespół — dwa spojrzenia, dwie perspektywy. Dzięki temu nie umknie żaden ważny moment, a Wy otrzymacie bogatszą historię Waszego dnia.",
+      },
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="O nas | Fiodorow Photography"
   description="Poznaj zespół Fiodorow Photography. Profesjonalna fotografia ślubna i portretowa w Siedlcach, Białymstoku i Warszawie."
+  breadcrumbs={[{ name: "O nas", href: "/o-nas" }]}
 >
   <Header currentPath="/o-nas" />
 
+  <!-- FAQ Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- Hero Section - Contained & Elegant -->
   <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
@@ -25,7 +73,7 @@ const studioImage =
         class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
       >
         <!-- Content Side (Left) -->
-        <div class="order-2 lg:order-1 animate-fade-in-up">
+        <div class="order-2 lg:order-1 reveal reveal-up">
           <h1
             class="font-serif text-4xl md:text-5xl tracking-[0.1em] uppercase mb-8 text-charcoal"
           >
@@ -63,7 +111,9 @@ const studioImage =
         </div>
 
         <!-- Image Side (Right) -->
-        <div class="relative order-1 lg:order-2 mb-10 lg:mb-0">
+        <div
+          class="relative order-1 lg:order-2 mb-10 lg:mb-0 reveal reveal-right"
+        >
           <div class="relative z-10">
             <Image
               src={aboutImg}
@@ -84,31 +134,16 @@ const studioImage =
     </div>
   </section>
 
-  <style>
-    .animate-fade-in-up {
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-
   <!-- Values Section -->
   <section class="py-20 md:py-32 section-cream">
     <div class="max-w-6xl mx-auto px-6 md:px-12">
-      <h2 class="section-title text-center mb-16">Nasze <i class="font-light italic text-olive">podejście</i></h2>
+      <h2 class="section-title text-center mb-16 reveal reveal-up">
+        Nasze <i class="font-light italic text-olive">podejście</i>
+      </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 reveal-stagger">
         <!-- Value 1 -->
-        <div class="text-center">
+        <div class="text-center reveal reveal-up">
           <div
             class="w-16 h-16 mx-auto mb-6 flex items-center justify-center border border-charcoal/20"
           >
@@ -136,7 +171,7 @@ const studioImage =
         </div>
 
         <!-- Value 2 -->
-        <div class="text-center">
+        <div class="text-center reveal reveal-up">
           <div
             class="w-16 h-16 mx-auto mb-6 flex items-center justify-center border border-charcoal/20"
           >
@@ -165,7 +200,7 @@ const studioImage =
         </div>
 
         <!-- Value 3 -->
-        <div class="text-center">
+        <div class="text-center reveal reveal-up">
           <div
             class="w-16 h-16 mx-auto mb-6 flex items-center justify-center border border-charcoal/20"
           >
@@ -202,7 +237,7 @@ const studioImage =
         class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
       >
         <!-- Image -->
-        <div class="order-2 lg:order-1">
+        <div class="order-2 lg:order-1 reveal reveal-left">
           <img
             src={studioImage}
             alt="Obszar działania - Siedlce, Białystok, Warszawa"
@@ -212,8 +247,10 @@ const studioImage =
         </div>
 
         <!-- Content -->
-        <div class="order-1 lg:order-2">
-          <h2 class="section-title mb-8">Gdzie <i class="font-light italic text-olive">działamy</i></h2>
+        <div class="order-1 lg:order-2 reveal reveal-right">
+          <h2 class="section-title mb-8">
+            Gdzie <i class="font-light italic text-olive">działamy</i>
+          </h2>
           <div
             class="space-y-6 text-charcoal-light text-sm md:text-base leading-relaxed"
           >
@@ -258,27 +295,52 @@ const studioImage =
   <!-- FAQ Section -->
   <section class="py-20 md:py-28 bg-cream">
     <div class="max-w-3xl mx-auto px-6 md:px-12">
-      <div class="text-center mb-12">
-        <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">FAQ</span>
+      <div class="text-center mb-12 reveal reveal-up">
+        <span
+          class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
+          >FAQ</span
+        >
         <h2 class="font-serif text-3xl md:text-4xl text-charcoal mb-4">
-          Najczęściej zadawane <i class="font-light italic text-olive font-serif">pytania</i>
+          Najczęściej zadawane <i
+            class="font-light italic text-olive font-serif">pytania</i
+          >
         </h2>
       </div>
-      
-      <div class="space-y-4" id="faq-accordion">
+
+      <div class="space-y-4 reveal-stagger" id="faq-accordion">
         <!-- Question 1 -->
-        <div class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white">
-          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group">
-            <span class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors">Jak wcześnie rezerwować termin?</span>
-            <svg class="faq-icon w-5 h-5 text-olive transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div
+          class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white reveal reveal-up"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group"
+          >
+            <span
+              class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors"
+              >Jak wcześnie rezerwować termin?</span
+            >
+            <svg
+              class="faq-icon w-5 h-5 text-olive transition-transform duration-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out">
+          <div
+            class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out"
+          >
             <div class="overflow-hidden">
               <div class="p-6 pt-0">
                 <p class="text-charcoal-light text-sm leading-relaxed">
-                  Najlepiej 6-12 miesięcy przed ślubem, szczególnie w sezonie (maj-wrzesień). Im wcześniej, tym większa pewność, że będziemy dostępni w Waszym terminie!
+                  Najlepiej 6-12 miesięcy przed ślubem, szczególnie w sezonie
+                  (maj-wrzesień). Im wcześniej, tym większa pewność, że będziemy
+                  dostępni w Waszym terminie!
                 </p>
               </div>
             </div>
@@ -286,18 +348,38 @@ const studioImage =
         </div>
 
         <!-- Question 2 -->
-        <div class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white">
-          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group">
-            <span class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors">Czy dojeżdżacie poza Mazowsze?</span>
-            <svg class="faq-icon w-5 h-5 text-olive transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div
+          class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white reveal reveal-up"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group"
+          >
+            <span
+              class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors"
+              >Czy dojeżdżacie poza Mazowsze?</span
+            >
+            <svg
+              class="faq-icon w-5 h-5 text-olive transition-transform duration-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out">
+          <div
+            class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out"
+          >
             <div class="overflow-hidden">
               <div class="p-6 pt-0">
                 <p class="text-charcoal-light text-sm leading-relaxed">
-                  Tak! Działamy głównie na Mazowszu, Podlasiu i Lubelszczyźnie, ale chętnie dojedziemy też dalej. Skontaktujcie się z nami, a ustalimy szczegóły.
+                  Tak! Działamy głównie na Mazowszu, Podlasiu i Lubelszczyźnie,
+                  ale chętnie dojedziemy też dalej. Skontaktujcie się z nami, a
+                  ustalimy szczegóły.
                 </p>
               </div>
             </div>
@@ -305,18 +387,38 @@ const studioImage =
         </div>
 
         <!-- Question 3 -->
-        <div class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white">
-          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group">
-            <span class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors">Ile zdjęć otrzymamy i kiedy?</span>
-            <svg class="faq-icon w-5 h-5 text-olive transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div
+          class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white reveal reveal-up"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group"
+          >
+            <span
+              class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors"
+              >Ile zdjęć otrzymamy i kiedy?</span
+            >
+            <svg
+              class="faq-icon w-5 h-5 text-olive transition-transform duration-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out">
+          <div
+            class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out"
+          >
             <div class="overflow-hidden">
               <div class="p-6 pt-0">
                 <p class="text-charcoal-light text-sm leading-relaxed">
-                  Przeciętnie otrzymacie 400-600 starannie wyselekcjonowanych i obrobionych zdjęć z reportażu. Galeria online będzie gotowa w ciągu 4-6 tygodni od ślubu.
+                  Przeciętnie otrzymacie 400-600 starannie wyselekcjonowanych i
+                  obrobionych zdjęć z reportażu. Galeria online będzie gotowa w
+                  ciągu 4-6 tygodni od ślubu.
                 </p>
               </div>
             </div>
@@ -324,18 +426,38 @@ const studioImage =
         </div>
 
         <!-- Question 4 -->
-        <div class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white">
-          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group">
-            <span class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors">Czy oferujecie sesję narzeczeńską?</span>
-            <svg class="faq-icon w-5 h-5 text-olive transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div
+          class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white reveal reveal-up"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group"
+          >
+            <span
+              class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors"
+              >Czy oferujecie sesję narzeczeńską?</span
+            >
+            <svg
+              class="faq-icon w-5 h-5 text-olive transition-transform duration-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out">
+          <div
+            class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out"
+          >
             <div class="overflow-hidden">
               <div class="p-6 pt-0">
                 <p class="text-charcoal-light text-sm leading-relaxed">
-                  Tak! Sesja narzeczeńska to świetna okazja, żebyśmy się poznali przed wielkim dniem. Często wchodzi w skład pakietu, ale można ją też zamówić osobno.
+                  Tak! Sesja narzeczeńska to świetna okazja, żebyśmy się poznali
+                  przed wielkim dniem. Często wchodzi w skład pakietu, ale można
+                  ją też zamówić osobno.
                 </p>
               </div>
             </div>
@@ -343,18 +465,38 @@ const studioImage =
         </div>
 
         <!-- Question 5 -->
-        <div class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white">
-          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group">
-            <span class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors">Jak wygląda praca "w duecie"?</span>
-            <svg class="faq-icon w-5 h-5 text-olive transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div
+          class="faq-item border border-charcoal/10 rounded-sm overflow-hidden bg-white reveal reveal-up"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-cream/30 hover:bg-cream transition-colors group"
+          >
+            <span
+              class="font-serif text-lg text-charcoal group-hover:text-olive transition-colors"
+              >Jak wygląda praca "w duecie"?</span
+            >
+            <svg
+              class="faq-icon w-5 h-5 text-olive transition-transform duration-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out">
+          <div
+            class="faq-content grid grid-rows-[0fr] transition-all duration-500 ease-out"
+          >
             <div class="overflow-hidden">
               <div class="p-6 pt-0">
                 <p class="text-charcoal-light text-sm leading-relaxed">
-                  Pracujemy razem jako zespół — dwa spojrzenia, dwie perspektywy. Dzięki temu nie umknie żaden ważny moment, a Wy otrzymacie bogatszą historię Waszego dnia.
+                  Pracujemy razem jako zespół — dwa spojrzenia, dwie
+                  perspektywy. Dzięki temu nie umknie żaden ważny moment, a Wy
+                  otrzymacie bogatszą historię Waszego dnia.
                 </p>
               </div>
             </div>
@@ -366,7 +508,9 @@ const studioImage =
 
   <!-- Equipment Section -->
   <section class="py-16 md:py-20 section-olive">
-    <div class="max-w-4xl mx-auto px-6 md:px-12 text-center text-white">
+    <div
+      class="max-w-4xl mx-auto px-6 md:px-12 text-center text-white reveal reveal-fade"
+    >
       <h2
         class="font-serif text-xl md:text-2xl tracking-[0.2em] uppercase mb-6"
       >
@@ -383,47 +527,47 @@ const studioImage =
   <Footer />
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       // FAQ Accordion functionality
-      const faqTriggers = document.querySelectorAll('.faq-trigger');
-      
-      faqTriggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
+      const faqTriggers = document.querySelectorAll(".faq-trigger");
+
+      faqTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
           const faqItem = trigger.parentElement;
           if (!faqItem) return;
-          
-          const content = faqItem.querySelector('.faq-content');
-          const icon = trigger.querySelector('.faq-icon');
+
+          const content = faqItem.querySelector(".faq-content");
+          const icon = trigger.querySelector(".faq-icon");
           if (!content || !icon) return;
-          
+
           // Check if current item is open (using grid-rows-[1fr])
-          const isOpen = content.classList.contains('grid-rows-[1fr]');
+          const isOpen = content.classList.contains("grid-rows-[1fr]");
 
           // Close all other FAQ items
-          document.querySelectorAll('.faq-item').forEach(item => {
+          document.querySelectorAll(".faq-item").forEach((item) => {
             if (item !== faqItem) {
-              const itemContent = item.querySelector('.faq-content');
-              const itemIcon = item.querySelector('.faq-icon');
-              
+              const itemContent = item.querySelector(".faq-content");
+              const itemIcon = item.querySelector(".faq-icon");
+
               if (itemContent) {
-                itemContent.classList.remove('grid-rows-[1fr]');
-                itemContent.classList.add('grid-rows-[0fr]');
+                itemContent.classList.remove("grid-rows-[1fr]");
+                itemContent.classList.add("grid-rows-[0fr]");
               }
               if (itemIcon) {
-                itemIcon.classList.remove('rotate-180');
+                itemIcon.classList.remove("rotate-180");
               }
             }
           });
 
           // Toggle current item
           if (isOpen) {
-            content.classList.remove('grid-rows-[1fr]');
-            content.classList.add('grid-rows-[0fr]');
-            icon.classList.remove('rotate-180');
+            content.classList.remove("grid-rows-[1fr]");
+            content.classList.add("grid-rows-[0fr]");
+            icon.classList.remove("rotate-180");
           } else {
-            content.classList.remove('grid-rows-[0fr]');
-            content.classList.add('grid-rows-[1fr]');
-            icon.classList.add('rotate-180');
+            content.classList.remove("grid-rows-[0fr]");
+            content.classList.add("grid-rows-[1fr]");
+            icon.classList.add("rotate-180");
           }
         });
       });

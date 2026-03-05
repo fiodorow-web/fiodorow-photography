@@ -1,0 +1,36 @@
+
+> fiodorow-photography@0.0.1 build
+> astro build
+
+[2m18:21:30[22m [34m[content][39m Syncing content
+[2m18:21:30[22m [34m[content][39m Synced content
+[2m18:21:30[22m [34m[types][39m Generated [2m41ms[22m
+[2m18:21:30[22m [34m[build][39m output: [34m"static"[39m
+[2m18:21:30[22m [34m[build][39m mode: [34m"static"[39m
+[2m18:21:30[22m [34m[build][39m directory: [34mC:\Users\Fiodorow Photography\.gemini\antigravity\scratch\fiodorow-photography\dist\[39m
+[2m18:21:30[22m [34m[build][39m Collecting build info...
+[2m18:21:30[22m [34m[build][39m [32m✓ Completed in 63ms.[39m
+[2m18:21:30[22m [34m[build][39m Building static entrypoints...
+[2m18:21:31[22m [34m[vite][39m [32m✓ built in 920ms[39m
+[2m18:21:31[22m [34m[build][39m [32m✓ Completed in 950ms.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m18:21:31[22m [34m[vite][39m transforming...
+[2m18:21:31[22m [34m[vite][39m [32m✓[39m 10 modules transformed.
+[2m18:21:31[22m [34m[vite][39m rendering chunks...
+[2m18:21:31[22m [34m[vite][39m [32m✓ built in 31ms[39m
+
+[42m[30m generating static routes [39m[49m
+[2m18:21:31[22m [32m▶[39m src/pages/kontakt.astro
+[2m18:21:31[22m   [34m└─[39m [2m/kontakt/index.html[22m [2m(+8ms)[22m 
+[2m18:21:31[22m [32m▶[39m src/pages/o-nas.astro
+[2m18:21:31[22m   [34m└─[39m [2m/o-nas/index.html[22m [2m(+6ms)[22m 
+The default export of @sanity/image-url has been deprecated. Use the named export `createImageUrlBuilder` instead.
+[2m18:21:31[22m [32m▶[39m src/pages/portfolio/[slug].astro
+[2m18:21:31[22m   [34m├─[39m [2m/portfolio/maria-piotr/index.html[22mCannot read properties of undefined (reading 'current')
+  [1mStack trace:[22m
+[2m    at file:///C:/Users/Fiodorow%20Photography/.gemini/antigravity/scratch/fiodorow-photography/dist/pages/portfolio/_slug_.astro.mjs?time=1772731291232:99:65
+    at callComponentAsTemplateResultOrResponse (file:///C:/Users/Fiodorow%20Photography/.gemini/antigravity/scratch/fiodorow-photography/node_modules/astro/dist/runtime/server/render/astro/render.js:96:31)
+    at renderPage (file:///C:/Users/Fiodorow%20Photography/.gemini/antigravity/scratch/fiodorow-photography/node_modules/astro/dist/runtime/server/render/page.js:49:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async callMiddleware (file:///C:/Users/Fiodorow%20Photography/.gemini/antigravity/scratch/fiodorow-photography/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)[22m

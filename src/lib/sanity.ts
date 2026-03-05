@@ -24,8 +24,7 @@ export interface PortfolioItem {
   slug: { current: string }
   date: string
   category: string
-  location: string
-  description: string
+  venue?: { venueName?: string; venueUrl?: string }
   coverImage: any
   images: any[]
   featured: boolean
@@ -41,8 +40,7 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
       slug,
       date,
       category,
-      location,
-      description,
+      venue { venueName, venueUrl },
       coverImage,
       images,
       featured,
@@ -59,8 +57,7 @@ export async function getPortfolioItem(slug: string): Promise<PortfolioItem | nu
       slug,
       date,
       category,
-      location,
-      description,
+      venue { venueName, venueUrl },
       coverImage,
       images,
       featured

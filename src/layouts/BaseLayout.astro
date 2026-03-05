@@ -8,15 +8,38 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  breadcrumbs?: { name: string; href: string }[];
 }
 
 const {
   title,
   description = "Fiodorow Photography - Profesjonalna fotografia ślubna i portretowa. Siedlce, Białystok, Warszawa.",
   image = "/og-image.jpg",
+  breadcrumbs,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const breadcrumbSchema = breadcrumbs
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Strona główna",
+          item: "https://fiodorowphotography.pl/",
+        },
+        ...breadcrumbs.map((crumb, i) => ({
+          "@type": "ListItem",
+          position: i + 2,
+          name: crumb.name,
+          item: `https://fiodorowphotography.pl${crumb.href}`,
+        })),
+      ],
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -53,8 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
 
-    <!-- Vercel Web Analytics -->
-    <Analytics />
+    <meta name="generator" content={Astro.generator} />
 
     <!-- Schema.org for Photographer -->
     <script
@@ -73,7 +95,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           addressCountry: "PL",
         },
         priceRange: "$$",
-        telephone: "+48 600 872 127",
+        telephone: "+48 660 872 121",
         url: "https://fiodorowphotography.pl",
         sameAs: [
           "https://www.instagram.com/fiodorowphotography",
@@ -81,10 +103,56 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         ],
       })}
     />
+    {
+      breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(breadcrumbSchema)}
+        />
+      )
+    }
   </head>
   <body class="antialiased">
     <slot />
     <SpeedInsights />
     <Analytics />
+
+    <!-- Global Scroll-Reveal Animation Observer -->
+    <script>
+      const initRevealObserver = () => {
+        const revealElements = document.querySelectorAll(".reveal");
+        if (!revealElements.length) return;
+
+        // Respect reduced motion preference
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          revealElements.forEach((el) => el.classList.add("active"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            root: null,
+            rootMargin: "0px 0px -40px 0px",
+            threshold: 0.1,
+          },
+        );
+
+        revealElements.forEach((el) => observer.observe(el));
+      };
+
+      // Run on initial load
+      document.addEventListener("DOMContentLoaded", initRevealObserver);
+
+      // Re-run on Astro page navigation (View Transitions)
+      document.addEventListener("astro:page-load", initRevealObserver);
+    </script>
   </body>
 </html>

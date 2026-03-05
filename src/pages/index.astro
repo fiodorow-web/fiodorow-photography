@@ -51,7 +51,10 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
 })) : fallbackItems;
 ---
 
-<BaseLayout title="Fiodorow Photography | Fotograf Siedlce, Białystok, Warszawa">
+<BaseLayout
+  title="Fiodorow Photography | Fotograf Siedlce, Białystok, Warszawa"
+  description="Profesjonalna fotografia ślubna i portretowa – Fiodorow Photography. Reportaże ślubne, sesje narzeczeńskie i plenerowe. Siedlce, Białystok, Warszawa."
+>
   <Header currentPath="/" />
   
   <!-- Hero Section -->
@@ -59,7 +62,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   
   <!-- Portfolio Section - Asymmetric Grid with Hover Effects -->
   <section class="py-20 md:py-32 bg-cream">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 reveal-stagger">
       
       <!-- Asymmetric Grid Layout -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
@@ -67,7 +70,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
         <!-- Left Column: Title + Single Large Item (Centered) -->
         <div class="flex flex-col relative lg:h-full lg:justify-center">
           <!-- Moved Title and Subtitle Here -->
-          <div class="text-left mb-12 lg:mb-0 lg:absolute lg:top-0 lg:left-0 lg:w-full z-20">
+          <div class="text-left mb-12 lg:mb-0 lg:absolute lg:top-0 lg:left-0 lg:w-full z-20 reveal reveal-up">
             <h2 class="font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase text-charcoal mb-4">
               Portfolio
             </h2>
@@ -80,8 +83,8 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
           {portfolioItems[0] && (
             <a 
               href={`/portfolio/${portfolioItems[0].slug.current}`} 
-              class="portfolio-item group block w-full relative overflow-hidden"
-              style="animation-delay: 0ms"
+              class="reveal reveal-up group block w-full relative overflow-hidden"
+              
             >
               <div class="relative w-full aspect-[3/4] overflow-hidden">
                 <img 
@@ -118,8 +121,8 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
           {portfolioItems.slice(1, 3).map((item, index) => (
             <a 
               href={`/portfolio/${item.slug.current}`} 
-              class="portfolio-item group block relative overflow-hidden"
-              style={`animation-delay: ${(index + 1) * 100}ms`}
+              class="reveal reveal-up group block relative overflow-hidden"
+              
             >
               <div class="relative w-full aspect-[3/4] overflow-hidden">
                 <img 
@@ -153,7 +156,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
       </div>
       
       <!-- CTA Button -->
-      <div class="text-center mt-12">
+      <div class="text-center mt-12 reveal reveal-up reveal-d3">
         <a href="/portfolio" class="btn-primary">
           Zobacz wszystkie
         </a>
@@ -167,7 +170,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
         
         <!-- Image Side with Badge -->
-        <div class="relative group animate-fade-in-up order-2 md:order-1 lg:col-span-7">
+        <div class="relative group reveal reveal-left order-2 md:order-1 lg:col-span-7">
           <!-- Decorative Elements -->
           <div class="absolute top-8 -right-8 w-full h-full border border-charcoal/10 rounded-sm -z-10 transition-transform duration-700 group-hover:translate-x-2 group-hover:-translate-y-2 hidden md:block"></div>
           <div class="absolute -bottom-12 -left-12 w-3/4 h-3/4 bg-olive/10 rounded-full blur-3xl -z-20 mix-blend-multiply"></div>
@@ -182,7 +185,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
         </div>
         
         <!-- Text Side -->
-        <div class="order-1 md:order-2 animate-fade-in-up lg:col-span-5" style="animation-delay: 300ms;">
+        <div class="order-1 md:order-2 reveal reveal-right lg:col-span-5">
           <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Dlaczego My?</span>
           <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal mb-8 leading-tight">
             Duet w życiu <br/> <i class="font-light italic text-olive font-serif">i w fotografii</i>
@@ -204,7 +207,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   <!-- Testimonials Section -->
   <section class="py-20 md:py-28 bg-cream">
     <div class="max-w-5xl mx-auto px-6 md:px-12">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12 reveal reveal-up">
         <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Opinie</span>
         <h2 class="font-serif text-3xl md:text-4xl text-charcoal mb-4">
           Co mówią <i class="font-light italic text-olive font-serif">Pary</i>
@@ -215,7 +218,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
       </div>
       
       <!-- Elfsight Google Reviews Widget -->
-      <div class="elfsight-reviews-container">
+      <div class="elfsight-reviews-container reveal reveal-up reveal-d2">
         <script src="https://elfsightcdn.com/platform.js" async></script>
         <div class="elfsight-app-11d18e3f-c547-4cab-adfc-247a1b196ee8" data-elfsight-app-lazy></div>
       </div>
@@ -225,7 +228,7 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   <!-- Mood Gallery / Visual Strip -->
   <section class="py-20 bg-cream border-t border-charcoal/5">
      <div class="max-w-[1800px] mx-auto px-6">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 reveal reveal-fade">
           <span class="text-[0.65rem] tracking-[0.25em] uppercase text-charcoal-light/80 block mb-3">
              Moments & Details
           </span>
@@ -234,32 +237,32 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
           </h2>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            <div class="aspect-[3/4] overflow-hidden rounded-sm group relative animate-fade-in-up" style="animation-delay: 0ms;">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 reveal-stagger">
+            <div class="aspect-[3/4] overflow-hidden rounded-sm group relative reveal reveal-scale">
                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" 
-                    alt="Wedding Detail" 
+                    alt="Detal ślubny - bukiet i obrączki" 
                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                     loading="lazy" />
                <div class="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             
-            <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative animate-fade-in-up" style="animation-delay: 100ms;">
+            <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative reveal reveal-scale">
                <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=800&q=80" 
-                    alt="Emotional Moment" 
+                    alt="Emocjonalny moment podczas ślubu" 
                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 transition-all duration-700" 
                     loading="lazy" />
             </div>
 
-            <div class="aspect-[3/4] overflow-hidden rounded-sm group relative animate-fade-in-up" style="animation-delay: 200ms;">
+            <div class="aspect-[3/4] overflow-hidden rounded-sm group relative reveal reveal-scale">
                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80" 
-                    alt="Couple Portrait" 
+                    alt="Portret pary młodej" 
                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                     loading="lazy" />
             </div>
 
-            <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative animate-fade-in-up" style="animation-delay: 300ms;">
+            <div class="aspect-[3/4] overflow-hidden rounded-sm group mt-12 md:mt-24 relative reveal reveal-scale">
                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80" 
-                    alt="Wedding Celebrate" 
+                    alt="Zabawa weselna" 
                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 transition-all duration-700" 
                     loading="lazy" />
             </div>
@@ -270,14 +273,14 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   <!-- CTA Section -->
   <section class="py-20 md:py-24 bg-cream-dark">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="section-title mb-6">
+      <h2 class="section-title mb-6 reveal reveal-up">
         Opowiedzcie nam swoją <i class="font-light italic text-olive font-serif">historię</i>
       </h2>
-      <p class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto">
+      <p class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto reveal reveal-up reveal-d1">
         Każda sesja to dla nas nowe wyzwanie i nowa przygoda. 
         Skontaktujcie się z nami i pozwólcie nam uwiecznić Wasze najważniejsze chwile.
       </p>
-      <a href="/kontakt" class="btn-primary">
+      <a href="/kontakt" class="btn-primary reveal reveal-up reveal-d2">
         Skontaktuj się
       </a>
     </div>
@@ -286,39 +289,4 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   <Footer />
 </BaseLayout>
 
-<style>
-  .animate-fade-in-up, .portfolio-item {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    will-change: opacity, transform;
-  }
-  
-  .animate-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
 
-<script>
-  // Simple intersection observer for fade-in animations
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-active');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.animate-fade-in-up, .portfolio-item');
-    animatedElements.forEach(el => observer.observe(el));
-  });
-</script>

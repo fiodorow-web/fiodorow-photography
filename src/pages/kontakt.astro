@@ -16,14 +16,15 @@ const eventTypes = [
 
 <BaseLayout
   title="Kontakt | Fiodorow Photography"
-  description="Skontaktuj się z nami. Fotograf Siedlce, Białystok, Warszawa. Telefon: +48 600 872 127"
+  description="Skontaktuj się z nami. Fotograf Siedlce, Białystok, Warszawa. Telefon: +48 660 872 121"
+  breadcrumbs={[{ name: "Kontakt", href: "/kontakt" }]}
 >
   <Header currentPath="/kontakt" />
 
   <main class="pt-24 pb-12 md:pt-32 md:pb-20 bg-cream">
     <!-- Hero Text -->
     <div
-      class="max-w-5xl mx-auto px-6 text-center mb-12 md:mb-16 animate-fade-in-up"
+      class="max-w-5xl mx-auto px-6 text-center mb-12 md:mb-16 reveal reveal-up"
     >
       <h1
         class="font-serif !text-3xl md:!text-4xl lg:!text-5xl text-charcoal mb-4 md:mb-6 tracking-wide"
@@ -42,7 +43,7 @@ const eventTypes = [
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
         <!-- Contact Info Card (Left/Top) -->
         <div
-          class="lg:col-span-4 lg:sticky lg:top-32 space-y-6 animate-fade-in-left"
+          class="lg:col-span-4 lg:sticky lg:top-32 space-y-6 reveal reveal-left"
         >
           <!-- Info Box -->
           <div
@@ -118,14 +119,14 @@ const eventTypes = [
                   </h3>
                   <div class="space-y-1">
                     <a
-                      href="tel:+48600872127"
+                      href="tel:+48660872121"
                       class="block text-charcoal-light hover:text-olive transition-colors text-xs font-light"
-                      >+48 600 872 127</a
+                      >+48 660 872 121</a
                     >
                     <a
-                      href="tel:+48515651646"
+                      href="tel:+48515631646"
                       class="block text-charcoal-light hover:text-olive transition-colors text-xs font-light"
-                      >+48 515 651 646</a
+                      >+48 515 631 646</a
                     >
                   </div>
                 </div>
@@ -175,6 +176,7 @@ const eventTypes = [
                   <a
                     href="https://instagram.com/fiodorowphotography"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="w-8 h-8 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-olive transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
                     aria-label="Instagram"
                   >
@@ -190,6 +192,7 @@ const eventTypes = [
                   <a
                     href="https://facebook.com/fiodorowphotography"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="w-8 h-8 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-olive transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
                     aria-label="Facebook"
                   >
@@ -209,7 +212,7 @@ const eventTypes = [
 
           <!-- Map Preview -->
           <div
-            class="rounded-xl shadow-lg shadow-black/5 overflow-hidden h-64 grayscale hover:grayscale-0 transition-all duration-500 border border-white/50"
+            class="rounded-xl shadow-lg shadow-black/5 overflow-hidden h-64 grayscale hover:grayscale-0 transition-all duration-500 border border-white/50 reveal reveal-up reveal-d2"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2447.3815267585055!2d22.289457499999997!3d52.163756400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471f5b8c194a2613%3A0x1595c46df6b04c22!2sFiodorow%20Photography!5e0!3m2!1spl!2spl!4v1770225249373!5m2!1spl!2spl"
@@ -223,10 +226,7 @@ const eventTypes = [
         </div>
 
         <!-- Contact Form (Right/Main) -->
-        <div
-          class="lg:col-span-8 animate-fade-in-up"
-          style="animation-delay: 100ms"
-        >
+        <div class="lg:col-span-8 reveal reveal-right">
           <div
             class="bg-white rounded-xl shadow-lg shadow-black/5 p-8 md:p-12 border border-white/50"
           >
@@ -417,40 +417,6 @@ const eventTypes = [
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-fade-in-left {
-    animation: fadeInLeft 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-</style>
 
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement;
