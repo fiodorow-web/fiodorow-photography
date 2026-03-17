@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Get other posts for "Read more" section
+const allPosts = await getCollection('blog');
+const otherPosts = allPosts
+  .filter(p => p.id !== post.id)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 2);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.image,
+  "datePublished": post.data.date,
+  "author": {
+    "@type": "Organization",
+    "name": post.data.author,
+    "url": "https://fiodorowphotography.pl"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fiodorow Photography",
+    "url": "https://fiodorowphotography.pl",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fiodorowphotography.pl/logo-dark.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://fiodorowphotography.pl/blog/${post.id}`
+  }
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | Fiodorow Photography Blog`}
+  description={post.data.description}
+  image={post.data.image}
+  breadcrumbs={[
+    { name: "Blog", href: "/blog" },
+    { name: post.data.title, href: `/blog/${post.id}` }
+  ]}
+>
+  <Header currentPath="/blog" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <!-- Article Hero -->
+  <section class="pt-32 pb-0 md:pt-40 bg-white">
+    <div class="max-w-4xl mx-auto px-6 md:px-12">
+      <!-- Back to blog -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-charcoal-light hover:text-olive transition-colors mb-8 reveal reveal-up">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+        </svg>
+        Wróć do bloga
+      </a>
+
+      <!-- Article Meta -->
+      <div class="reveal reveal-up">
+        <div class="flex items-center gap-3 text-xs text-charcoal-light mb-6">
+          <time datetime={post.data.date}>
+            {new Date(post.data.date).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+          <span class="w-1 h-1 bg-olive rounded-full"></span>
+          <span>{post.data.readingTime} czytania</span>
+          <span class="w-1 h-1 bg-olive rounded-full"></span>
+          <span>{post.data.author}</span>
+        </div>
+
+        <h1 class="font-serif text-3xl md:text-5xl tracking-[0.05em] text-charcoal mb-8 leading-tight normal-case">
+          {post.data.title}
+        </h1>
+
+        <p class="text-charcoal-light text-base md:text-lg leading-relaxed mb-10 font-light italic font-serif">
+          {post.data.description}
+        </p>
+      </div>
+
+      <!-- Featured Image -->
+      <div class="reveal reveal-up reveal-d1">
+        <img
+          src={post.data.image}
+          alt={post.data.imageAlt}
+          class="w-full aspect-[16/9] object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <section class="py-12 md:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <article class="blog-content reveal reveal-up">
+        <Content />
+      </article>
+
+      <!-- Tags -->
+      {post.data.tags.length > 0 && (
+        <div class="mt-12 pt-8 border-t border-charcoal/10 reveal reveal-up">
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag: string) => (
+              <span class="px-3 py-1 bg-cream-dark text-xs text-charcoal-light tracking-wider uppercase">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Share / CTA -->
+      <div class="mt-12 p-8 md:p-12 bg-cream text-center reveal reveal-up">
+        <h3 class="font-serif text-xl md:text-2xl tracking-[0.1em] uppercase text-charcoal mb-4">
+          Spodobał się artykuł?
+        </h3>
+        <p class="text-charcoal-light text-sm leading-relaxed mb-6 max-w-md mx-auto">
+          Chcesz dowiedzieć się więcej lub umówić się na sesję? Skontaktuj się z nami!
+        </p>
+        <a href="/kontakt" class="btn-primary">
+          Napisz do nas
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Articles -->
+  {otherPosts.length > 0 && (
+    <section class="py-16 md:py-24 bg-cream-dark">
+      <div class="max-w-6xl mx-auto px-6 md:px-12">
+        <h2 class="section-title text-center mb-12 reveal reveal-up">
+          Inne <i class="font-light italic text-olive font-serif">artykuły</i>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 reveal-stagger">
+          {otherPosts.map((otherPost, index) => (
+            <article class={`group reveal reveal-up ${index > 0 ? 'reveal-d1' : ''}`}>
+              <a href={`/blog/${otherPost.id}`} class="block">
+                <div class="relative overflow-hidden mb-5 aspect-[4/3]">
+                  <img
+                    src={otherPost.data.image}
+                    alt={otherPost.data.imageAlt}
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="flex items-center gap-3 text-xs text-charcoal-light mb-3">
+                  <time datetime={otherPost.data.date}>
+                    {new Date(otherPost.data.date).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </time>
+                  <span class="w-1 h-1 bg-olive rounded-full"></span>
+                  <span>{otherPost.data.readingTime} czytania</span>
+                </div>
+                <h3 class="font-serif text-xl tracking-[0.05em] text-charcoal group-hover:text-olive transition-colors duration-300 leading-snug">
+                  {otherPost.data.title}
+                </h3>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer />
+</BaseLayout>
