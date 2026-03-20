@@ -1,14 +1,15 @@
 ---
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
-
 import SpeedInsights from "@vercel/speed-insights/astro";
+import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
   breadcrumbs?: { name: string; href: string }[];
+  noindex?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = "Fiodorow Photography - Profesjonalna fotografia ślubna i portretowa. Siedlce, Białystok, Warszawa.",
   image = "/og-image.jpg",
   breadcrumbs,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -65,6 +67,8 @@ const breadcrumbSchema = breadcrumbs
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -116,6 +120,7 @@ const breadcrumbSchema = breadcrumbs
     <slot />
     <SpeedInsights />
     <Analytics />
+    <CookieBanner />
 
     <!-- Global Scroll-Reveal Animation Observer -->
     <script>
