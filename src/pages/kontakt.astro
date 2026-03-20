@@ -12,14 +12,35 @@ const eventTypes = [
   "Sesja plenerowa",
   "Inne",
 ];
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://fiodorowphotography.pl",
+  name: "Fiodorow Photography",
+  description: "Duet fotografów ślubnych z Siedlec. Naturalny reportaż ślubny, sesje narzeczeńskie i poślubne.",
+  url: "https://fiodorowphotography.pl",
+  telephone: "+48660872121",
+  email: "fiodorowphotography@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Siedlce",
+    postalCode: "08-110",
+    addressRegion: "Mazowieckie",
+    addressCountry: "PL",
+  },
+};
 ---
 
 <BaseLayout
-  title="Kontakt | Fiodorow Photography"
-  description="Skontaktuj się z nami. Fotograf Siedlce, Białystok, Warszawa. Telefon: +48 660 872 121"
+  title="Kontakt — Fotograf Ślubny Siedlce | Fiodorow Photography"
+  description="Zarezerwuj termin na reportaż ślubny. Fotograf Siedlce, Białystok, Warszawa. Tel: 660 872 121. Formularz kontaktowy online — odpowiadamy w ciągu 6h."
   breadcrumbs={[{ name: "Kontakt", href: "/kontakt" }]}
 >
   <Header currentPath="/kontakt" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
   <main class="pt-24 pb-12 md:pt-32 md:pb-20 bg-cream">
     <!-- Hero Text -->
@@ -174,7 +195,7 @@ const eventTypes = [
                 </h3>
                 <div class="flex gap-3">
                   <a
-                    href="https://instagram.com/fiodorowphotography"
+                    href="https://instagram.com/fiodorow_photography"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="w-8 h-8 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-olive transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
@@ -231,10 +252,13 @@ const eventTypes = [
             class="bg-white rounded-xl shadow-lg shadow-black/5 p-8 md:p-12 border border-white/50"
           >
             <h2
-              class="font-serif text-base tracking-[0.2em] uppercase text-charcoal mb-8 border-b border-charcoal/10 pb-4"
+              class="font-serif text-base tracking-[0.2em] uppercase text-charcoal mb-2 border-b border-charcoal/10 pb-4"
             >
               Formularz <i class="font-light italic text-olive">kontaktowy</i>
             </h2>
+            <p class="text-charcoal-light text-xs leading-relaxed mb-8 font-light">
+              Opowiedzcie nam o swoich planach — każde zapytanie jest niezobowiązujące i traktujemy je indywidualnie.
+            </p>
 
             <form id="contact-form" class="space-y-6">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,7 +377,7 @@ const eventTypes = [
                   <label
                     for="eventDate"
                     class="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-charcoal-light"
-                    >Data reportażu</label
+                    >Planowana data</label
                   >
                   <input
                     type="date"
@@ -402,6 +426,11 @@ const eventTypes = [
                   >
                 </button>
               </div>
+
+              <!-- Response time note -->
+              <p class="text-charcoal-light/60 text-[0.6rem] text-center md:text-left font-light mt-2">
+                📩 Odpowiadamy w ciągu 6 godzin. Jeśli sprawa pilna — zadzwońcie!
+              </p>
 
               <div
                 id="form-message"

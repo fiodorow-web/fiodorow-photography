@@ -1,6 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Disallow: /studio
 
 # Sitemap
 Sitemap: https://fiodorowphotography.pl/sitemap-index.xml

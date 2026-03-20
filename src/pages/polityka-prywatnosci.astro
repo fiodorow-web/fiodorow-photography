@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Polityka Prywatności | Fiodorow Photography"
+  description="Polityka prywatności Fiodorow Photography. Informacje o przetwarzaniu danych osobowych zgodnie z RODO."
+  breadcrumbs={[{ name: "Polityka Prywatności", href: "/polityka-prywatnosci" }]}
+>
+  <Header currentPath="/polityka-prywatnosci" />
+
+  <main class="pt-32 pb-20 md:pt-40 md:pb-32 bg-cream">
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h1 class="font-serif text-3xl md:text-4xl tracking-[0.1em] uppercase text-charcoal mb-12">
+        Polityka <i class="font-light italic text-olive">Prywatności</i>
+      </h1>
+
+      <div class="prose-custom space-y-8 text-charcoal-light text-sm leading-relaxed">
+        
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">1. Administrator danych</h2>
+          <p>
+            Administratorem Waszych danych osobowych jest <strong class="text-charcoal">Fiodorow Photography</strong>, 
+            z siedzibą w Siedlcach (08-110), woj. mazowieckie.
+          </p>
+          <p class="mt-2">
+            Kontakt: <a href="mailto:fiodorowphotography@gmail.com" class="text-olive hover:underline">fiodorowphotography@gmail.com</a>, 
+            tel. <a href="tel:+48660872121" class="text-olive hover:underline">+48 660 872 121</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">2. Jakie dane zbieramy</h2>
+          <p>Zbieramy dane wyłącznie w zakresie niezbędnym do realizacji usług:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li><strong class="text-charcoal">Formularz kontaktowy</strong> — imię, nazwisko, email, numer telefonu (opcjonalnie), rodzaj wydarzenia, data, treść wiadomości.</li>
+            <li><strong class="text-charcoal">Cookies analityczne</strong> — anonimowe dane o sposobie korzystania ze strony (Vercel Analytics).</li>
+            <li><strong class="text-charcoal">Widget opinii</strong> — dane przetwarzane przez Elfsight (Google Reviews) zgodnie z ich własną polityką prywatności.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">3. Cel przetwarzania</h2>
+          <p>Wasze dane przetwarzamy w celu:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li>Odpowiedzi na zapytania przesłane przez formularz kontaktowy.</li>
+            <li>Przygotowania i realizacji usługi fotograficznej.</li>
+            <li>Analizy ruchu na stronie w celu poprawy jej funkcjonalności.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">4. Podstawa prawna</h2>
+          <p>
+            Dane przetwarzamy na podstawie: zgody (art. 6 ust. 1 lit. a RODO) przy wysłaniu formularza, 
+            realizacji umowy (art. 6 ust. 1 lit. b RODO) przy świadczeniu usług, 
+            oraz prawnie uzasadnionego interesu (art. 6 ust. 1 lit. f RODO) przy analizie ruchu.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">5. Okres przechowywania</h2>
+          <p>
+            Dane z formularza kontaktowego przechowujemy do czasu zakończenia korespondencji lub realizacji usługi, 
+            a następnie przez okres wymagany przepisami prawa. Dane analityczne przechowywane są w formie zanonimizowanej.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">6. Wasze prawa</h2>
+          <p>Macie prawo do:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li>Dostępu do swoich danych i ich kopii.</li>
+            <li>Sprostowania (poprawiania) danych.</li>
+            <li>Usunięcia danych („prawo do bycia zapomnianym").</li>
+            <li>Ograniczenia przetwarzania.</li>
+            <li>Wniesienia sprzeciwu wobec przetwarzania.</li>
+            <li>Przenoszenia danych.</li>
+            <li>Cofnięcia zgody w dowolnym momencie.</li>
+            <li>Wniesienia skargi do Prezesa UODO.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">7. Pliki cookies</h2>
+          <p>
+            Strona wykorzystuje pliki cookies w celu analizy ruchu (Vercel Analytics) oraz 
+            wyświetlania widgetu opinii Google (Elfsight). Cookies analityczne nie zawierają danych osobowych.
+          </p>
+          <p class="mt-2">
+            Możecie zarządzać ustawieniami cookies w przeglądarce. Wyłączenie cookies może wpłynąć 
+            na poprawne działanie niektórych elementów strony.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">8. Odbiorcy danych</h2>
+          <p>Wasze dane mogą być przekazywane:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li><strong class="text-charcoal">Vercel Inc.</strong> — hosting i analityka strony.</li>
+            <li><strong class="text-charcoal">Elfsight</strong> — widget opinii Google.</li>
+            <li><strong class="text-charcoal">Sanity.io</strong> — system zarządzania treścią (CMS).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">9. Kontakt</h2>
+          <p>
+            W sprawach dotyczących ochrony danych osobowych prosimy o kontakt: 
+            <a href="mailto:fiodorowphotography@gmail.com" class="text-olive hover:underline">fiodorowphotography@gmail.com</a>.
+          </p>
+        </section>
+
+        <p class="text-xs text-charcoal-light/60 pt-8 border-t border-charcoal/10">
+          Ostatnia aktualizacja: marzec 2026
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

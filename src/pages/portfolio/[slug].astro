@@ -108,8 +108,8 @@ if (!portfolio) {
 ---
 
 <BaseLayout
-  title={`${portfolio.title} | Fiodorow Photography`}
-  description={`${portfolio.title} — ${categoryLabels[portfolio.category] || portfolio.category}${portfolio.venue?.venueName ? `, ${portfolio.venue.venueName}` : ""} | Fiodorow Photography`}
+  title={`${portfolio.title} — ${categoryLabels[portfolio.category] || portfolio.category} | Fiodorow Photography`}
+  description={`${categoryLabels[portfolio.category] || portfolio.category}: ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}. Zobacz galerię zdjęć | Fiodorow Photography, fotograf ślubny Siedlce.`}
   breadcrumbs={[
     { name: "Portfolio", href: "/portfolio" },
     { name: portfolio.title, href: `/portfolio/${Astro.params.slug}` },
@@ -125,7 +125,7 @@ if (!portfolio) {
         <span
           class="inline-block text-[0.65rem] tracking-[0.25em] uppercase text-charcoal-light mb-4 px-4 py-2 border border-charcoal/20"
         >
-          {portfolio.category}
+          {categoryLabels[portfolio.category] || portfolio.category}
         </span>
         <h1
           class="font-serif text-4xl md:text-5xl lg:text-6xl tracking-[0.1em] uppercase text-charcoal mt-4 mb-6"
@@ -209,6 +209,11 @@ if (!portfolio) {
           )
         }
 
+        <!-- Mobile hint -->
+        <p class="text-charcoal-light/50 text-[0.6rem] tracking-[0.1em] uppercase mb-8 lg:hidden">
+          🔍 Kliknij zdjęcie, aby powiększyć
+        </p>
+
         <!-- Image Grid - Masonry Style (CSS Columns) -->
         <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
           {
@@ -220,7 +225,7 @@ if (!portfolio) {
               >
                 <img
                   src={image}
-                  alt={`${portfolio.title} - zdjęcie ${index + 1}`}
+                  alt={`${categoryLabels[portfolio.category] || portfolio.category} ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ''}, zdjęcie ${index + 1}`}
                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   loading={index < 5 ? "eager" : "lazy"}
                 />
