@@ -68,6 +68,8 @@ const navLinks = [
         class="flex flex-col gap-1.5 p-2"
         id="mobile-menu-btn"
         aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
       >
         <span
           class={`w-6 h-px transition-all duration-300 ${isHome ? "bg-white" : "bg-charcoal"}`}
@@ -233,6 +235,7 @@ const navLinks = [
 
   menuBtn?.addEventListener("click", () => {
     isOpen = !isOpen;
+    menuBtn?.setAttribute("aria-expanded", String(isOpen));
 
     if (isOpen) {
       mobileMenu?.classList.remove("opacity-0", "pointer-events-none");

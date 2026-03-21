@@ -1,7 +1,5 @@
 ---
 import "../styles/global.css";
-import Analytics from "@vercel/analytics/astro";
-import SpeedInsights from "@vercel/speed-insights/astro";
 import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
@@ -115,9 +113,25 @@ const breadcrumbSchema = breadcrumbs
   </head>
   <body class="antialiased">
     <slot />
-    <SpeedInsights />
-    <Analytics />
     <CookieBanner />
+    <script>
+      function loadAnalytics() {
+        if (document.querySelector('[data-analytics-loaded]')) return;
+        const va = document.createElement('script');
+        va.src = '/_vercel/insights/script.js';
+        va.defer = true;
+        va.dataset.analyticsLoaded = '';
+        document.head.appendChild(va);
+        const si = document.createElement('script');
+        si.src = '/_vercel/speed-insights/script.js';
+        si.defer = true;
+        document.head.appendChild(si);
+      }
+      if (localStorage.getItem('cookies-accepted')) {
+        loadAnalytics();
+      }
+      document.addEventListener('cookies-accepted', loadAnalytics);
+    </script>
 
     <!-- Global Scroll-Reveal Animation Observer -->
     <script>

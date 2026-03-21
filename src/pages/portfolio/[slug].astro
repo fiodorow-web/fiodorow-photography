@@ -110,6 +110,7 @@ if (!portfolio) {
 <BaseLayout
   title={`${portfolio.title} — ${categoryLabels[portfolio.category] || portfolio.category} | Fiodorow Photography`}
   description={`${categoryLabels[portfolio.category] || portfolio.category}: ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}. Zobacz galerię zdjęć | Fiodorow Photography, fotograf ślubny Siedlce.`}
+  image={portfolio.coverImage || "/og-image.jpg"}
   breadcrumbs={[
     { name: "Portfolio", href: "/portfolio" },
     { name: portfolio.title, href: `/portfolio/${Astro.params.slug}` },
@@ -216,14 +217,13 @@ if (!portfolio) {
           🔍 Kliknij zdjęcie, aby powiększyć
         </p>
 
-        <!-- Image Grid - Masonry Style (CSS Columns) -->
-        <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+        <!-- Image Grid - Masonry Style (Row-ordered via JS) -->
+        <div id="gallery-grid" class="columns-1 md:columns-2 gap-4 space-y-4">
           {
             portfolio.images.map((image: string, index: number) => (
               <div
                 class="break-inside-avoid overflow-hidden cursor-pointer gallery-item relative group"
                 data-index={index}
-                style={`animation-delay: ${index * 50}ms`}
               >
                 <img
                   src={image}
@@ -236,6 +236,62 @@ if (!portfolio) {
             ))
           }
         </div>
+
+        <script is:inline>
+          (function() {
+            function initMasonry() {
+              var grid = document.getElementById('gallery-grid');
+              if (!grid) return;
+
+              var items = Array.from(grid.querySelectorAll('.gallery-item'));
+              if (!items.length) return;
+
+              var width = window.innerWidth;
+              var numCols = width >= 768 ? 2 : 1;
+
+              // Skip if column count hasn't changed
+              if (grid.dataset.cols === String(numCols)) return;
+              grid.dataset.cols = String(numCols);
+
+              // Detach items before clearing
+              items.forEach(function(item) {
+                item.style.marginTop = '';
+              });
+
+              // Reset grid
+              grid.className = '';
+              grid.innerHTML = '';
+
+              if (numCols === 1) {
+                grid.style.cssText = 'display:flex;flex-direction:column;gap:1rem';
+                items.forEach(function(item) { grid.appendChild(item); });
+                return;
+              }
+
+              grid.style.cssText = 'display:flex;gap:1rem';
+
+              var columns = [];
+              for (var i = 0; i < numCols; i++) {
+                var col = document.createElement('div');
+                col.style.cssText = 'flex:1;display:flex;flex-direction:column;gap:1rem';
+                grid.appendChild(col);
+                columns.push(col);
+              }
+
+              // Round-robin: items go row by row across columns
+              items.forEach(function(item, i) {
+                columns[i % numCols].appendChild(item);
+              });
+            }
+
+            initMasonry();
+            var timer;
+            window.addEventListener('resize', function() {
+              clearTimeout(timer);
+              timer = setTimeout(initMasonry, 150);
+            });
+          })();
+        </script>
 
         <!-- Navigation -->
         <div

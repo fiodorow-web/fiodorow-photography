@@ -36,6 +36,7 @@
 
   acceptBtn?.addEventListener('click', () => {
     localStorage.setItem('cookies-accepted', 'true');
+    document.dispatchEvent(new Event('cookies-accepted'));
     banner?.classList.remove('translate-y-0');
     banner?.classList.add('translate-y-full');
   });

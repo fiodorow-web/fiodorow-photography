@@ -5,9 +5,7 @@ import Footer from "../components/Footer.astro";
 
 import { Image } from "astro:assets";
 import aboutImg from "../assets/about/about.jpg";
-
-const studioImage =
-  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80";
+import gdzieDialamyImg from "../assets/about/fotografowie-slubni-siedlce-cypr.jpg";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -78,6 +76,16 @@ const localBusinessSchema = {
     { "@type": "State", name: "Podlaskie" },
     { "@type": "State", name: "Lubelskie" },
   ],
+  sameAs: [
+    "https://facebook.com/fiodorowphotography",
+    "https://instagram.com/fiodorow_photography"
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "30",
+    bestRating: "5"
+  },
   priceRange: "$$",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -291,11 +299,15 @@ const localBusinessSchema = {
       >
         <!-- Image -->
         <div class="order-2 lg:order-1 reveal reveal-left">
-          <img
-            src={studioImage}
-            alt="Obszar działania - Siedlce, Białystok, Warszawa"
-            class="w-full h-[500px] object-cover"
+          <Image
+            src={gdzieDialamyImg}
+            alt="Fotografowie ślubni Fiodorow Photography — sesja zagraniczna Cypr"
+            class="w-full aspect-[4/3] object-cover object-center"
             loading="lazy"
+            widths={[600, 1200]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={85}
+            format="webp"
           />
         </div>
 

@@ -3,11 +3,13 @@ import { Image } from "astro:assets";
 import slide1 from "../assets/hero/sesja-slubna-para-mloda.jpg";
 import slide2 from "../assets/hero/panna-mloda-bukiet-portret.jpg";
 import slide3 from "../assets/hero/ceremonia-slubna-reportaz.jpg";
+import slide4 from "../assets/hero/sesja-poslubna-palac-para-mloda.jpg";
 
 const slides = [
   {
     image: slide1,
     alt: "Para młoda w objęciach podczas sesji ślubnej",
+    position: "45% center",
     title: "Tworzymy dla Was",
     subtitle: "Fotografie dopasowane do Waszej historii.",
     buttonText: "Zobacz nasze prace",
@@ -16,6 +18,7 @@ const slides = [
   {
     image: slide2,
     alt: "Panna młoda z bukietem — portret ślubny",
+    position: "40% center",
     title: "Tworzymy z pasją",
     subtitle: "Nie tylko fotografujemy - kochamy to co robimy.",
     buttonText: "Zobacz nasze prace",
@@ -24,8 +27,18 @@ const slides = [
   {
     image: slide3,
     alt: "Ceremonia ślubna — reportaż fotograficzny",
+    position: "center center",
     title: "Tworzymy z miłością",
     subtitle: "Miłość w każdym kadrze",
+    buttonText: "Zobacz nasze prace",
+    buttonLink: "/portfolio"
+  },
+  {
+    image: slide4,
+    alt: "Sesja poślubna przed pałacem — romantyczny plener ślubny, fotograf Siedlce",
+    position: "center 30%",
+    title: "Tworzymy wspomnienia",
+    subtitle: "Każdy moment zasługuje na piękną oprawę.",
     buttonText: "Zobacz nasze prace",
     buttonLink: "/portfolio"
   },
@@ -46,6 +59,7 @@ const slides = [
             src={slide.image}
             alt={slide.alt}
             class="absolute inset-0 w-full h-full object-cover animate-ken-burns"
+            style={`object-position: ${slide.position}`}
             loading={index === 0 ? "eager" : "lazy"}
             fetchpriority={index === 0 ? "high" : "low"}
             decoding={index === 0 ? "sync" : "async"}
@@ -59,9 +73,9 @@ const slides = [
           <!-- Content Overlay (Per Slide) -->
           <div class="relative z-20 h-full flex items-center justify-center text-center text-white px-6">
             <div class="hero-content">
-              <h1 class="font-serif font-light tracking-[0.2em] mb-6">
+              <h2 class="font-serif font-light tracking-[0.2em] mb-6">
                 {slide.title}
-              </h1>
+              </h2>
               <p class="font-sans text-sm md:text-base tracking-[0.15em] mb-10 max-w-md mx-auto">
                 {slide.subtitle}
               </p>
@@ -162,14 +176,14 @@ const slides = [
   }
   
   /* Initial hidden state */
-  .hero-content h1,
+  .hero-content h2,
   .hero-content p,
   .hero-content div {
     opacity: 0;
   }
 
   /* Animation classes applied when parent has .active-slide */
-  .active-slide .hero-content h1 {
+  .active-slide .hero-content h2 {
     animation: cinematic-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: 0.3s;
   }
