@@ -1,19 +1,9 @@
-/* Local Fonts via Fontsource — only weights we actually use */
-@import '@fontsource/cormorant-garamond/300.css';
-@import '@fontsource/cormorant-garamond/400.css';
-@import '@fontsource/cormorant-garamond/400-italic.css';
-@import '@fontsource/montserrat/300.css';
-@import '@fontsource/montserrat/400.css';
-
-/* Force font-display: swap for faster rendering */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-display: swap;
-}
+/* Local Fonts — latin-ext only (covers Polish), swap for instant render */
+@import '@fontsource/cormorant-garamond/latin-ext-300.css';
+@import '@fontsource/cormorant-garamond/latin-ext-400.css';
+@import '@fontsource/cormorant-garamond/latin-ext-400-italic.css';
+@import '@fontsource/montserrat/latin-ext-300.css';
+@import '@fontsource/montserrat/latin-ext-400.css';
 
 @import "tailwindcss";
 

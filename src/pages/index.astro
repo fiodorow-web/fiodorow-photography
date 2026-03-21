@@ -43,7 +43,7 @@ const fallbackItems = [
 
 // Use Sanity data if available
 const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
-  image: item.coverImage ? urlFor(item.coverImage).width(800).quality(80).url() : fallbackItems[0].image,
+  image: item.coverImage ? urlFor(item.coverImage).width(640).quality(70).auto('format').url() : fallbackItems[0].image,
   category: item.category,
   title: item.title,
   slug: item.slug,
