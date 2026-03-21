@@ -306,13 +306,13 @@ if (!portfolio) {
     <!-- Lightbox -->
     <div
       id="lightbox"
-      class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center"
-      style="touch-action:none;-webkit-touch-callout:none;user-select:none;"
+      class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center select-none"
     >
       <button
         id="lightbox-close"
-        class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+        class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-20 p-3"
         aria-label="Zamknij"
+        style="touch-action:manipulation;"
       >
         <svg
           class="w-8 h-8"
@@ -330,8 +330,9 @@ if (!portfolio) {
 
       <button
         id="lightbox-prev"
-        class="absolute left-4 md:left-6 text-white/70 hover:text-white transition-colors z-10 p-2"
+        class="absolute left-0 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-20 p-4"
         aria-label="Poprzednie"
+        style="touch-action:manipulation;"
       >
         <svg
           class="w-8 h-8"
@@ -349,8 +350,9 @@ if (!portfolio) {
 
       <button
         id="lightbox-next"
-        class="absolute right-4 md:right-6 text-white/70 hover:text-white transition-colors z-10 p-2"
+        class="absolute right-0 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-20 p-4"
         aria-label="Następne"
+        style="touch-action:manipulation;"
       >
         <svg
           class="w-8 h-8"
@@ -366,18 +368,26 @@ if (!portfolio) {
         </svg>
       </button>
 
-      <div id="lightbox-track" class="w-full h-full flex items-center justify-center overflow-hidden">
+      <div id="lightbox-track" class="absolute inset-0 z-10 overflow-hidden">
         <img
-          id="lightbox-img"
+          id="lightbox-img-a"
           src=""
           alt=""
-          class="max-w-[90vw] max-h-[85vh] object-contain transition-transform duration-300 ease-out"
-          style="touch-action:none;pointer-events:none;"
+          class="absolute top-1/2 left-1/2 max-w-[90vw] max-h-[85vh] object-contain"
+          style="transform:translate(-50%,-50%);pointer-events:none;"
+          draggable="false"
+        />
+        <img
+          id="lightbox-img-b"
+          src=""
+          alt=""
+          class="absolute top-1/2 left-1/2 max-w-[90vw] max-h-[85vh] object-contain"
+          style="transform:translate(-50%,-50%);pointer-events:none;opacity:0;"
           draggable="false"
         />
       </div>
 
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-wider z-10">
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-wider z-20">
         <span id="lightbox-counter"></span>
       </div>
     </div>
@@ -386,17 +396,25 @@ if (!portfolio) {
   </section>
 
   <script define:vars={{ images: portfolio.images }}>
-    const galleryItems = document.querySelectorAll(".gallery-item");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const lightboxTrack = document.getElementById("lightbox-track");
-    const lightboxCounter = document.getElementById("lightbox-counter");
-    const closeBtn = document.getElementById("lightbox-close");
-    const prevBtn = document.getElementById("lightbox-prev");
-    const nextBtn = document.getElementById("lightbox-next");
+    var galleryItems = document.querySelectorAll(".gallery-item");
+    var lightbox = document.getElementById("lightbox");
+    var imgA = document.getElementById("lightbox-img-a");
+    var imgB = document.getElementById("lightbox-img-b");
+    var lightboxTrack = document.getElementById("lightbox-track");
+    var lightboxCounter = document.getElementById("lightbox-counter");
+    var closeBtn = document.getElementById("lightbox-close");
+    var prevBtn = document.getElementById("lightbox-prev");
+    var nextBtn = document.getElementById("lightbox-next");
 
-    let currentIndex = 0;
-    let scrollY = 0;
+    var currentIndex = 0;
+    var scrollY = 0;
+    var isAnimating = false;
+    // activeImg is the currently visible image element
+    var activeImg = imgA;
+
+    function pos(el, x) {
+      el.style.transform = "translate(calc(-50% + " + x + "px), -50%)";
+    }
 
     function updateCounter() {
       if (lightboxCounter) lightboxCounter.textContent = (currentIndex + 1) + " / " + images.length;
@@ -404,13 +422,16 @@ if (!portfolio) {
 
     function openLightbox(index) {
       currentIndex = index;
-      lightboxImg.src = images[index];
-      lightboxImg.style.transform = "translateX(0)";
-      lightboxImg.style.opacity = "1";
+      activeImg = imgA;
+      imgA.src = images[index];
+      imgA.style.opacity = "1";
+      imgA.style.transition = "none";
+      pos(imgA, 0);
+      imgB.style.opacity = "0";
+      imgB.src = "";
       updateCounter();
       lightbox.classList.remove("hidden");
       lightbox.classList.add("flex");
-      // Lock scroll and prevent background movement
       scrollY = window.scrollY;
       document.body.style.position = "fixed";
       document.body.style.top = "-" + scrollY + "px";
@@ -422,7 +443,6 @@ if (!portfolio) {
     function closeLightbox() {
       lightbox.classList.add("hidden");
       lightbox.classList.remove("flex");
-      // Restore scroll position
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.left = "";
@@ -431,119 +451,139 @@ if (!portfolio) {
       window.scrollTo(0, scrollY);
     }
 
-    function slideTo(newIndex, direction) {
-      // direction: -1 = slide left (next), 1 = slide right (prev)
-      var img = lightboxImg;
-      img.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
-      img.style.transform = "translateX(" + (direction * 40) + "%)";
-      img.style.opacity = "0.3";
+    function goTo(newIndex, direction, swipeOffset) {
+      if (isAnimating) return;
+      isAnimating = true;
 
+      var outImg = activeImg;
+      var inImg = (activeImg === imgA) ? imgB : imgA;
+      var w = window.innerWidth;
+      var exitDist = w * 0.55;
+      var fromSwipe = typeof swipeOffset === "number";
+
+      // Preload next image into incoming element
+      currentIndex = newIndex;
+      inImg.src = images[currentIndex];
+      updateCounter();
+
+      // Calculate proportional duration for swipe (shorter if already dragged far)
+      var dur;
+      if (fromSwipe) {
+        var remaining = exitDist - Math.abs(swipeOffset);
+        dur = Math.max(0.15, 0.3 * (remaining / exitDist));
+      } else {
+        dur = 0.3;
+      }
+      var durStr = dur.toFixed(2) + "s";
+      var ease = "cubic-bezier(0.25, 0.1, 0.25, 1)";
+
+      // Position incoming off-screen on the entry side
+      inImg.style.transition = "none";
+      inImg.style.opacity = "1";
+      pos(inImg, direction * exitDist);
+
+      // Commit current state of both images before animating
+      if (fromSwipe) {
+        outImg.style.transition = "none";
+      }
+      void inImg.offsetWidth;
+      void outImg.offsetWidth;
+
+      // Animate both simultaneously
+      outImg.style.transition = "transform " + durStr + " " + ease + ", opacity " + durStr + " " + ease;
+      inImg.style.transition = "transform " + durStr + " " + ease;
+
+      pos(outImg, -direction * exitDist);
+      outImg.style.opacity = "0";
+      pos(inImg, 0);
+
+      activeImg = inImg;
+
+      var timeoutMs = Math.ceil(dur * 1000) + 20;
       setTimeout(function() {
-        img.style.transition = "none";
-        img.style.transform = "translateX(" + (-direction * 40) + "%)";
-        img.style.opacity = "0";
-        currentIndex = newIndex;
-        img.src = images[currentIndex];
-        updateCounter();
-
-        // Force reflow
-        void img.offsetWidth;
-
-        img.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
-        img.style.transform = "translateX(0)";
-        img.style.opacity = "1";
-      }, 250);
+        outImg.style.transition = "none";
+        outImg.src = "";
+        isAnimating = false;
+      }, timeoutMs);
     }
 
-    function showPrev() {
-      var newIndex = (currentIndex - 1 + images.length) % images.length;
-      slideTo(newIndex, 1);
-    }
-
-    function showNext() {
-      var newIndex = (currentIndex + 1) % images.length;
-      slideTo(newIndex, -1);
-    }
+    function showPrev() { goTo((currentIndex - 1 + images.length) % images.length, -1); }
+    function showNext() { goTo((currentIndex + 1) % images.length, 1); }
 
     galleryItems.forEach(function(item) {
       item.addEventListener("click", function() {
-        var index = parseInt(item.getAttribute("data-index") || "0");
-        openLightbox(index);
+        openLightbox(parseInt(item.getAttribute("data-index") || "0"));
       });
     });
 
-    closeBtn?.addEventListener("click", closeLightbox);
+    closeBtn?.addEventListener("click", function(e) { e.stopPropagation(); closeLightbox(); });
     prevBtn?.addEventListener("click", function(e) { e.stopPropagation(); showPrev(); });
     nextBtn?.addEventListener("click", function(e) { e.stopPropagation(); showNext(); });
 
-    lightbox?.addEventListener("click", function(e) {
-      if (e.target === lightbox || e.target === lightboxTrack) closeLightbox();
-    });
+    // Lightbox closes only via X button or Escape key
 
     document.addEventListener("keydown", function(e) {
-      if (!lightbox?.classList.contains("hidden")) {
-        if (e.key === "Escape") closeLightbox();
-        if (e.key === "ArrowLeft") showPrev();
-        if (e.key === "ArrowRight") showNext();
-      }
+      if (lightbox?.classList.contains("hidden")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
     });
 
-    // Touch swipe support
+    // ---- Touch swipe ----
     var touchStartX = 0;
     var touchStartY = 0;
     var touchDeltaX = 0;
-    var isSwiping = false;
+    var swiping = false;
+    var swipeLocked = false;
 
-    lightbox?.addEventListener("touchstart", function(e) {
-      if (e.touches.length !== 1) return;
+    lightboxTrack?.addEventListener("touchstart", function(e) {
+      if (isAnimating || e.touches.length !== 1) return;
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
       touchDeltaX = 0;
-      isSwiping = false;
-      lightboxImg.style.transition = "none";
+      swiping = false;
+      swipeLocked = false;
+      activeImg.style.transition = "none";
     }, { passive: true });
 
-    lightbox?.addEventListener("touchmove", function(e) {
-      if (e.touches.length !== 1) return;
+    lightboxTrack?.addEventListener("touchmove", function(e) {
+      if (isAnimating || swipeLocked || e.touches.length !== 1) return;
       var dx = e.touches[0].clientX - touchStartX;
-      var dy = e.touches[0].clientY - touchStartY;
 
-      // Determine if horizontal swipe
-      if (!isSwiping && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
-        isSwiping = true;
-      }
-
-      if (isSwiping) {
-        e.preventDefault();
-        touchDeltaX = dx;
-        var pct = (dx / window.innerWidth) * 100;
-        lightboxImg.style.transform = "translateX(" + pct + "%)";
-        lightboxImg.style.opacity = String(Math.max(0.3, 1 - Math.abs(pct) / 100));
-      }
-    }, { passive: false });
-
-    lightbox?.addEventListener("touchend", function(e) {
-      if (!isSwiping) return;
-      var threshold = window.innerWidth * 0.15;
-
-      if (Math.abs(touchDeltaX) > threshold) {
-        if (touchDeltaX < 0) {
-          showNext();
-        } else {
-          showPrev();
+      if (!swiping) {
+        var absDx = Math.abs(dx);
+        var absDy = Math.abs(e.touches[0].clientY - touchStartY);
+        if (absDy > 10 && absDy > absDx) {
+          swipeLocked = true; // vertical scroll, ignore
+          return;
         }
-      } else {
-        // Snap back
-        lightboxImg.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
-        lightboxImg.style.transform = "translateX(0)";
-        lightboxImg.style.opacity = "1";
+        if (absDx > 10) {
+          swiping = true;
+        } else {
+          return;
+        }
       }
-      isSwiping = false;
-    }, { passive: true });
 
-    // Prevent zoom on double-tap
-    lightbox?.addEventListener("touchend", function(e) {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
+      touchDeltaX = dx;
+      pos(activeImg, dx);
     }, { passive: false });
+
+    lightboxTrack?.addEventListener("touchend", function() {
+      if (!swiping || isAnimating) return;
+      swiping = false;
+      var threshold = window.innerWidth * 0.12;
+
+      if (touchDeltaX < -threshold) {
+        // Swiped left → next image
+        goTo((currentIndex + 1) % images.length, 1, touchDeltaX);
+      } else if (touchDeltaX > threshold) {
+        // Swiped right → previous image
+        goTo((currentIndex - 1 + images.length) % images.length, -1, touchDeltaX);
+      } else {
+        activeImg.style.transition = "transform 0.2s ease-out";
+        pos(activeImg, 0);
+      }
+    }, { passive: true });
   </script>
 </BaseLayout>
