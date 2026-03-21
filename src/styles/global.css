@@ -1,9 +1,9 @@
-/* Local Fonts — latin-ext only (covers Polish), swap for instant render */
-@import '@fontsource/cormorant-garamond/latin-ext-300.css';
-@import '@fontsource/cormorant-garamond/latin-ext-400.css';
-@import '@fontsource/cormorant-garamond/latin-ext-400-italic.css';
-@import '@fontsource/montserrat/latin-ext-300.css';
-@import '@fontsource/montserrat/latin-ext-400.css';
+/* Local Fonts via Fontsource */
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/montserrat/300.css';
+@import '@fontsource/montserrat/400.css';
 
 @import "tailwindcss";
 
