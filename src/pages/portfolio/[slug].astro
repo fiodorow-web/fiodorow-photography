@@ -210,7 +210,9 @@ if (!portfolio) {
         }
 
         <!-- Mobile hint -->
-        <p class="text-charcoal-light/50 text-[0.6rem] tracking-[0.1em] uppercase mb-8 lg:hidden">
+        <p
+          class="text-charcoal-light/50 text-[0.6rem] tracking-[0.1em] uppercase mb-8 lg:hidden"
+        >
           🔍 Kliknij zdjęcie, aby powiększyć
         </p>
 
@@ -225,7 +227,7 @@ if (!portfolio) {
               >
                 <img
                   src={image}
-                  alt={`${categoryLabels[portfolio.category] || portfolio.category} ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ''}, zdjęcie ${index + 1}`}
+                  alt={`${categoryLabels[portfolio.category] || portfolio.category} ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}, zdjęcie ${index + 1}`}
                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   loading={index < 5 ? "eager" : "lazy"}
                 />
