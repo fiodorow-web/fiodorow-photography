@@ -5,6 +5,16 @@
 @import '@fontsource/montserrat/300.css';
 @import '@fontsource/montserrat/400.css';
 
+/* Force font-display: swap for faster rendering */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 /* ===================================

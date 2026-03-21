@@ -195,6 +195,10 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
               src={aboutImg} 
               alt="Mateusz i Weronika - Duet Fotografów" 
               class="w-full h-auto aspect-[3/2] object-cover object-center rounded-sm shadow-2xl transition-transform duration-1000 group-hover:scale-[1.02]" 
+              widths={[480, 800, 1500]}
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              quality={75}
+              format="webp"
             />
           </div>
         </div>
@@ -361,11 +365,27 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
         </p>
       </div>
       
-      <!-- Elfsight Google Reviews Widget -->
-      <div class="elfsight-reviews-container reveal reveal-up reveal-d2">
-        <script src="https://elfsightcdn.com/platform.js" async></script>
+      <!-- Elfsight Google Reviews Widget (lazy-loaded) -->
+      <div class="elfsight-reviews-container reveal reveal-up reveal-d2" id="elfsight-container">
         <div class="elfsight-app-11d18e3f-c547-4cab-adfc-247a1b196ee8" data-elfsight-app-lazy></div>
       </div>
+      <script>
+        const elfsightContainer = document.getElementById('elfsight-container');
+        if (elfsightContainer) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const script = document.createElement('script');
+                script.src = 'https://elfsightcdn.com/platform.js';
+                script.async = true;
+                document.head.appendChild(script);
+                observer.disconnect();
+              }
+            });
+          }, { rootMargin: '200px' });
+          observer.observe(elfsightContainer);
+        }
+      </script>
     </div>
   </section>
   
