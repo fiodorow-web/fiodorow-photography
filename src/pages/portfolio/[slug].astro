@@ -307,10 +307,11 @@ if (!portfolio) {
     <div
       id="lightbox"
       class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center"
+      style="touch-action:none;-webkit-touch-callout:none;user-select:none;"
     >
       <button
         id="lightbox-close"
-        class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+        class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
         aria-label="Zamknij"
       >
         <svg
@@ -329,7 +330,7 @@ if (!portfolio) {
 
       <button
         id="lightbox-prev"
-        class="absolute left-6 text-white/70 hover:text-white transition-colors"
+        class="absolute left-4 md:left-6 text-white/70 hover:text-white transition-colors z-10 p-2"
         aria-label="Poprzednie"
       >
         <svg
@@ -348,7 +349,7 @@ if (!portfolio) {
 
       <button
         id="lightbox-next"
-        class="absolute right-6 text-white/70 hover:text-white transition-colors"
+        class="absolute right-4 md:right-6 text-white/70 hover:text-white transition-colors z-10 p-2"
         aria-label="Następne"
       >
         <svg
@@ -365,12 +366,20 @@ if (!portfolio) {
         </svg>
       </button>
 
-      <img
-        id="lightbox-img"
-        src=""
-        alt=""
-        class="max-w-[90vw] max-h-[90vh] object-contain"
-      />
+      <div id="lightbox-track" class="w-full h-full flex items-center justify-center overflow-hidden">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-w-[90vw] max-h-[85vh] object-contain transition-transform duration-300 ease-out"
+          style="touch-action:none;pointer-events:none;"
+          draggable="false"
+        />
+      </div>
+
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-wider z-10">
+        <span id="lightbox-counter"></span>
+      </div>
     </div>
 
     <Footer />
@@ -380,57 +389,161 @@ if (!portfolio) {
     const galleryItems = document.querySelectorAll(".gallery-item");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxTrack = document.getElementById("lightbox-track");
+    const lightboxCounter = document.getElementById("lightbox-counter");
     const closeBtn = document.getElementById("lightbox-close");
     const prevBtn = document.getElementById("lightbox-prev");
     const nextBtn = document.getElementById("lightbox-next");
 
     let currentIndex = 0;
+    let scrollY = 0;
+
+    function updateCounter() {
+      if (lightboxCounter) lightboxCounter.textContent = (currentIndex + 1) + " / " + images.length;
+    }
 
     function openLightbox(index) {
       currentIndex = index;
       lightboxImg.src = images[index];
+      lightboxImg.style.transform = "translateX(0)";
+      lightboxImg.style.opacity = "1";
+      updateCounter();
       lightbox.classList.remove("hidden");
       lightbox.classList.add("flex");
+      // Lock scroll and prevent background movement
+      scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = "-" + scrollY + "px";
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
     }
 
     function closeLightbox() {
       lightbox.classList.add("hidden");
       lightbox.classList.remove("flex");
+      // Restore scroll position
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
+    }
+
+    function slideTo(newIndex, direction) {
+      // direction: -1 = slide left (next), 1 = slide right (prev)
+      var img = lightboxImg;
+      img.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
+      img.style.transform = "translateX(" + (direction * 40) + "%)";
+      img.style.opacity = "0.3";
+
+      setTimeout(function() {
+        img.style.transition = "none";
+        img.style.transform = "translateX(" + (-direction * 40) + "%)";
+        img.style.opacity = "0";
+        currentIndex = newIndex;
+        img.src = images[currentIndex];
+        updateCounter();
+
+        // Force reflow
+        void img.offsetWidth;
+
+        img.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
+        img.style.transform = "translateX(0)";
+        img.style.opacity = "1";
+      }, 250);
     }
 
     function showPrev() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      lightboxImg.src = images[currentIndex];
+      var newIndex = (currentIndex - 1 + images.length) % images.length;
+      slideTo(newIndex, 1);
     }
 
     function showNext() {
-      currentIndex = (currentIndex + 1) % images.length;
-      lightboxImg.src = images[currentIndex];
+      var newIndex = (currentIndex + 1) % images.length;
+      slideTo(newIndex, -1);
     }
 
-    galleryItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const index = parseInt(item.getAttribute("data-index") || "0");
+    galleryItems.forEach(function(item) {
+      item.addEventListener("click", function() {
+        var index = parseInt(item.getAttribute("data-index") || "0");
         openLightbox(index);
       });
     });
 
     closeBtn?.addEventListener("click", closeLightbox);
-    prevBtn?.addEventListener("click", showPrev);
-    nextBtn?.addEventListener("click", showNext);
+    prevBtn?.addEventListener("click", function(e) { e.stopPropagation(); showPrev(); });
+    nextBtn?.addEventListener("click", function(e) { e.stopPropagation(); showNext(); });
 
-    lightbox?.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
+    lightbox?.addEventListener("click", function(e) {
+      if (e.target === lightbox || e.target === lightboxTrack) closeLightbox();
     });
 
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", function(e) {
       if (!lightbox?.classList.contains("hidden")) {
         if (e.key === "Escape") closeLightbox();
         if (e.key === "ArrowLeft") showPrev();
         if (e.key === "ArrowRight") showNext();
       }
     });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchDeltaX = 0;
+    var isSwiping = false;
+
+    lightbox?.addEventListener("touchstart", function(e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchDeltaX = 0;
+      isSwiping = false;
+      lightboxImg.style.transition = "none";
+    }, { passive: true });
+
+    lightbox?.addEventListener("touchmove", function(e) {
+      if (e.touches.length !== 1) return;
+      var dx = e.touches[0].clientX - touchStartX;
+      var dy = e.touches[0].clientY - touchStartY;
+
+      // Determine if horizontal swipe
+      if (!isSwiping && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        isSwiping = true;
+      }
+
+      if (isSwiping) {
+        e.preventDefault();
+        touchDeltaX = dx;
+        var pct = (dx / window.innerWidth) * 100;
+        lightboxImg.style.transform = "translateX(" + pct + "%)";
+        lightboxImg.style.opacity = String(Math.max(0.3, 1 - Math.abs(pct) / 100));
+      }
+    }, { passive: false });
+
+    lightbox?.addEventListener("touchend", function(e) {
+      if (!isSwiping) return;
+      var threshold = window.innerWidth * 0.15;
+
+      if (Math.abs(touchDeltaX) > threshold) {
+        if (touchDeltaX < 0) {
+          showNext();
+        } else {
+          showPrev();
+        }
+      } else {
+        // Snap back
+        lightboxImg.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
+        lightboxImg.style.transform = "translateX(0)";
+        lightboxImg.style.opacity = "1";
+      }
+      isSwiping = false;
+    }, { passive: true });
+
+    // Prevent zoom on double-tap
+    lightbox?.addEventListener("touchend", function(e) {
+      e.preventDefault();
+    }, { passive: false });
   </script>
 </BaseLayout>

@@ -80,6 +80,10 @@ h2 {
   font-weight: 400;
 }
 
+.hero-content h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
 h3 {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 400;
