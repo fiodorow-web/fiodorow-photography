@@ -2,6 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+import siedlceHeroimg from "../assets/pseo/siedlce/fotograf-slubny-siedlce-sesja-plenerowa.jpg";
+import siedlceGridImg1 from "../assets/pseo/siedlce/sesja-slubna-siedlce-para-mloda.jpg";
+import siedlceGridImg2 from "../assets/pseo/siedlce/fotografia-portretowa-siedlce-plener.jpg";
+import warszawaHeroimg from "../assets/pseo/warszawa/fotograf-slubny-warszawa-sesja-plenerowa.jpg";
+import warszawaGridImg1 from "../assets/pseo/warszawa/sesja-slubna-warszawa-para-mloda.jpg";
+import warszawaGridImg2 from "../assets/pseo/warszawa/fotografia-portretowa-warszawa-plener.jpg";
+import bialystokHeroimg from "../assets/pseo/bialystok/fotograf-slubny-bialystok-sesja-plenerowa.jpg";
+import bialystokGridImg1 from "../assets/pseo/bialystok/sesja-slubna-bialystok-para-mloda.jpg";
+import bialystokGridImg2 from "../assets/pseo/bialystok/fotografia-portretowa-bialystok-plener.jpg";
 
 export function getStaticPaths() {
   const cities = {
@@ -13,10 +23,10 @@ export function getStaticPaths() {
       region: "Mazowieckie",
       postalCode: "08-110",
       metaDescription:
-        "Fotograf ślubny w Siedlcach ✦ Naturalna fotografia ślubna, sesje narzeczeńskie i portrety. Duet fotografów z Siedlec. Zadzwoń: +48 660 872 121",
+        "Fotograf ślubny w Siedlcach ✦ Naturalna fotografia ślubna, sesje narzeczeńskie i poślubne. Duet fotografów z Siedlec. Zadzwoń: +48 660 872 121",
       aboutParagraphs: [
-        "To nasze rodzinne miasto – tu zaczynała się nasza fotograficzna przygoda i tu mamy swoją bazę. Znamy każdy zakątek okolicy, który sprawdzi się jako tło do sesji ślubnej, narzeczeńskiej czy portretowej. Od malowniczego Parku Aleksandria, przez klimatyczne uliczki Starego Miasta, aż po okoliczne pola i lasy – wiemy, gdzie światło jest najpiękniejsze.",
-        "Współpracujemy z wieloma lokalnymi salami weselnymi i miejscami ceremonii. Dzięki temu doskonale znamy warunki oświetleniowe i najlepsze punkty do zdjęć w najpopularniejszych lokalizacjach. Nie tracimy czasu na rozpoznanie terenu – od pierwszej minuty skupiamy się na Was i Waszych emocjach.",
+        "To nasze rodzinne miasto – tu zaczynała się nasza fotograficzna przygoda i tu mamy swoją bazę. Znamy każdy zakątek okolicy, który sprawdzi się jako tło do sesji ślubnej, narzeczeńskiej czy portretowej. Od malowniczego Parku Aleksandria, aż po okoliczne pola i lasy.",
+        "Znamy wiele lokalnych sal weselnych, dzięki temu mamy pogląd na warunki oświetleniowe i najlepsze punkty do zdjęć. Nie tracimy czasu na rozpoznanie terenu – od pierwszej minuty skupiamy się na Was i Waszych emocjach. ",
         "Realizujemy sesje na terenie całego Mazowsza wschodniego – dojeżdżamy do Łukowa, Mińska Mazowieckiego, Sokołowa Podlaskiego, Węgrowa i Garwolina bez dodatkowych kosztów dojazdu.",
       ],
       serviceDescriptions: {
@@ -24,31 +34,25 @@ export function getStaticPaths() {
           "Kompletny reportaż z Waszego ślubu – od przygotowań w domu, przez ceremonię w kościele czy USC, aż po szaloną zabawę weselną. Znamy lokalne sale weselne i kościoły, więc wiemy, jak uchwycić najlepsze kadry w każdym z nich.",
         engagement:
           "Sesja narzeczeńska w najpiękniejszych plenerach okolicy. Park Aleksandria, nadrzeczne ścieżki czy malownicze łąki – dobierzemy miejsce idealne dla Was. To też świetna okazja, żebyśmy się poznali przed wielkim dniem.",
-        portrait:
-          "Profesjonalne portrety indywidualne, rodzinne i biznesowe. Sesje w plenerze lub w wybranej lokalizacji – dostosowujemy się do Waszych potrzeb i stylu.",
+        postwedding:
+          "Wasza miłość zasługuje na wyjątkową oprawę. Sesja poślubna to nie tylko piękne kadry, ale przede wszystkim wspólny czas, emocje i atmosfera, w której możecie być sobą. Razem wybierzemy miejsce, które najlepiej odda Wasz charakter.",
       },
       faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Siedlcach?",
-          answer:
-            "Ceny pakietów zaczynają się od 4000 zł za podstawowy reportaż. Dokładną wycenę przygotowujemy indywidualnie – zależy ona od zakresu usług, czasu trwania i lokalizacji. Skontaktujcie się z nami po szczegółową ofertę dopasowaną do Waszych potrzeb.",
-        },
         {
           question:
             "Czy dojeżdżacie na śluby w okolice Siedlec bez dodatkowych opłat?",
           answer:
-            "Tak! Dojazd w promieniu ok. 50 km (m.in. Łuków, Mińsk Mazowiecki, Sokołów Podlaski, Węgrów, Garwolin) jest wliczony w cenę pakietu. Przy dalszych lokalizacjach doliczamy jedynie koszty paliwa.",
+            "Tak! Dojazd w promieniu ok. 100 km (m.in. Łuków, Mińsk Mazowiecki, Sokołów Podlaski, Węgrów, Garwolin, Warszawa) jest wliczony w cenę pakietu. Przy dalszych lokalizacjach doliczamy jedynie koszty paliwa.",
         },
         {
-          question:
-            "Jak długo czeka się na zdjęcia ślubne po weselu?",
+          question: "Jak długo czeka się na zdjęcia ślubne po weselu?",
           answer:
-            "Wybrane zdjęcia z podglądem otrzymujecie w ciągu 7 dni od ślubu. Pełna, profesjonalnie obrobiona galeria jest gotowa w ciągu 6-8 tygodni. Zależy nam na jakości, dlatego każde zdjęcie jest indywidualnie retuszowane.",
+            "Pełna, profesjonalnie przygotowana galeria jest gotowa w ciągu 3 miesięcy. Zależy nam na jakości, dlatego każde zdjęcie jest dokładnie obrabiane.",
         },
         {
           question: "Gdzie najlepiej zrobić sesję narzeczeńską w Siedlcach?",
           answer:
-            "Nasze ulubione lokalizacje to Park Aleksandria, okolice Stawów Siedleckich, malownicze łąki pod miastem i leśne ścieżki w okolicach Stoku Lackiego. Chętnie pomożemy Wam wybrać miejsce, które pasuje do Waszego stylu.",
+            "Nasze ulubione lokalizacje to Park Aleksandria, młyn w Stoku Wiśniewskim, okoliczne lasy i łąki. Możemy wybrać się z Wami także na sesję  w stylu miejskim. Chętnie pomożemy Wam wybrać miejsce, które pasuje do Waszego stylu.",
         },
         {
           question: "Czy fotografujecie również śluby cywilne?",
@@ -58,10 +62,12 @@ export function getStaticPaths() {
       ],
       localPlaces: [
         "Park Aleksandria",
-        "Stawy Siedleckie",
-        "Stare Miasto",
-        "Stok Lacki",
-        "okolice Kotunia",
+        "Uliczki miasta",
+        "Okoliczne lasy",
+        "Młyn w Stoku Wiśniewskim",
+        "Pałac w Patrykozach",
+        "Siedleckie wydmy",
+        "Zalew siedlecki",
       ],
       highlights: [
         "Nasz dom — znamy każdy plener w okolicy",
@@ -76,70 +82,59 @@ export function getStaticPaths() {
         "Węgrów",
         "Garwolin",
       ],
-      heroImage:
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=600&q=80",
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80",
-      ],
+      heroImage: siedlceHeroimg,
+      gridImages: [siedlceGridImg1, siedlceGridImg2],
     },
     bialystok: {
       name: "Białystok",
       nameLocative: "Białymstoku",
       nameGenitive: "Białegostoku",
-      nameAdjective: "białostocki",
+      nameAdjective: "białostockie",
       region: "Podlaskie",
       postalCode: "15-001",
       metaDescription:
         "Fotograf ślubny w Białymstoku ✦ Reportaże ślubne, sesje plenerowe na Podlasiu. Naturalna fotografia pełna emocji. Zadzwoń: +48 660 872 121",
       aboutParagraphs: [
         "Podlasie to region, który pokochaliśmy za niezwykłe krajobrazy i wyjątkowy klimat. Regularnie realizujemy tu reportaże ślubne i sesje plenerowe, korzystając z tego, co ten region ma najpiękniejszego – Puszcza Knyszyńska, Dolina Narwi, pałace i dworki otoczone starymi alejami. To miejsca, które nadają zdjęciom niepowtarzalny charakter.",
-        "Znamy specyfikę podlaskich wesel – ich tradycje, gościnność i emocje, które towarzyszą każdej uroczystości. Współpracujemy z wieloma salami weselnymi w regionie i wiemy, jak najlepiej wykorzystać ich atuty do tworzenia pięknych zdjęć.",
-        "Obsługujemy śluby i sesje w całym województwie podlaskim – Supraśl, Hajnówka, Augustów, Suwałki czy Łomża to miejsca, do których dojeżdżamy regularnie.",
+        "Znamy specyfikę podlaskich wesel – ich tradycje, gościnność i emocje, które towarzyszą każdej uroczystości.",
+        "Obsługujemy śluby i sesje w całym województwie podlaskim – Supraśl, Hajnówka, Augustów, Suwałki czy Łomża, to miejsca, do których z chęcią do Was dojedziemy.",
       ],
       serviceDescriptions: {
         wedding:
-          "Reportaż ślubny od przygotowań, przez wzruszającą ceremonię, aż po szaloną zabawę. Podlaskie wesela mają niepowtarzalny klimat, a my potrafimy go uchwycić w każdym kadrze. Znamy tutejsze sale i kościoły, więc czujemy się tu jak u siebie.",
+          "Reportaż ślubny od przygotowań, przez wzruszającą ceremonię, aż po szaloną zabawę. Podlaskie wesela mają niepowtarzalny klimat, a my potrafimy go uchwycić w każdym kadrze. Mieszkamy oraz studiujemy tutaj na codzień, więc znamy tutejsze okolice.",
         engagement:
           "Sesje narzeczeńskie w najpiękniejszych zakątkach Podlasia. Puszcza Knyszyńska, okolice Supraśla, Dolina Narwi – te miejsca tworzą magiczne tło dla Waszych zdjęć. To też okazja, żebyśmy się lepiej poznali przed ślubem.",
-        portrait:
-          "Portrety indywidualne i rodzinne w podlaskich plenerach. Wykorzystujemy piękno tutejszej przyrody, aby stworzyć zdjęcia, które zachwycą Was na lata.",
+        postwedding:
+          "Odpocznijcie po weselu i pozwólcie zaprosić się na luźną sesję poślubną w otoczeniu dzikiej podlaskiej przyrody. Zjawiskowe kadry z Rezerwatu Krzemionki, czy klimatycznej Kiszukówki to pamiątka na całe życie.",
       },
       faq: [
         {
-          question: "Ile kosztuje fotograf ślubny w Białymstoku?",
-          answer:
-            "Ceny zaczynają się od 4500 zł z wliczonym dojazdem. Dokładna wycena zależy od zakresu usług i czasu reportażu – chętnie przygotujemy ofertę dopasowaną do Waszego wesela.",
-        },
-        {
           question: "Czy dojeżdżacie na śluby do Białegostoku?",
           answer:
-            "Tak! Regularnie tu dojeżdżamy i obsługujemy całe Podlasie. Koszty dojazdu są wliczone w pakiet, więc nie musicie się o to martwić. Działamy na miejscu jak lokalni fotografowie.",
+            "Tak! Można powiedzieć, że Białystok to nasza druga baza, ponieważ tutaj mieszkamy i studiujemy. Działamy na miejscu jak lokalni fotografowie, a dojazd do 50km od Białegostoku jest darmowy.",
         },
         {
-          question:
-            "Gdzie zrobić sesję narzeczeńską w okolicach Białegostoku?",
+          question: "Gdzie zrobić sesję narzeczeńską w okolicach Białegostoku?",
           answer:
             "Nasze ulubione miejsca to Puszcza Knyszyńska, okolice Supraśla z Monasterem, malownicze łąki nad Narwią i zabytkowe dworki. Każda z tych lokalizacji daje zupełnie inny klimat zdjęć.",
         },
         {
-          question:
-            "Jak wygląda współpraca z fotografem dojeżdżającym na Podlasie?",
+          question: "Jak wygląda współpraca z Wami?",
           answer:
-            "Bardzo podobnie jak z lokalnym fotografem! Przed ślubem spotykamy się na sesji narzeczeńskiej, żebyśmy się poznali. W dniu ślubu jesteśmy na miejscu z odpowiednim wyprzedzeniem. Znamy podlaskie sale i kościoły, więc czujemy się tu jak u siebie.",
+            "Na początku spotykamy się w celu ustalenia wszystkich szczegółów i poznania Waszej wizji. Jeśli macie ochotę, to przed ślubem widzimy się na sesji narzeczeńskiej. W dniu ślubu towarzyszymy Wam od przygotowań do około godziny 1:00",
         },
         {
-          question:
-            "Czy fotografujecie na Podlasiu poza Białymstokiem?",
+          question: "Czy fotografujecie na Podlasiu poza Białymstokiem?",
           answer:
-            "Oczywiście! Działamy w całym województwie – Supraśl, Hajnówka, Augustów, Suwałki, Łomża i wiele innych lokalizacji. Podlasie to nasz drugi dom fotograficzny.",
+            "Oczywiście! Działamy w całym województwie – Supraśl, Ostrołęka, Augustów, Suwałki, Łomża i wiele innych lokalizacji. Podlasie to nasz drugi dom fotograficzny.",
         },
       ],
       localPlaces: [
         "Puszcza Knyszyńska",
-        "Supraśl i Monaster",
+        "Klimatyczna Kiszukówka",
         "Dolina Narwi",
         "Pałac Branickich",
+        "Pałac Lubomirskich",
         "Park Planty",
       ],
       highlights: [
@@ -148,72 +143,61 @@ export function getStaticPaths() {
         "Współpraca z podlaskimi salami weselnymi",
         "Dojazd wliczony w cenę pakietu",
       ],
-      nearbyAreas: ["Supraśl", "Hajnówka", "Augustów", "Suwałki", "Łomża"],
-      heroImage:
-        "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-      ],
+      nearbyAreas: ["Supraśl", "Ostrołęka", "Augustów", "Suwałki", "Łomża"],
+      heroImage: bialystokHeroimg,
+      heroPosition: "object-center",
+      gridImages: [bialystokGridImg1, bialystokGridImg2],
     },
     warszawa: {
       name: "Warszawa",
       nameLocative: "Warszawie",
       nameGenitive: "Warszawy",
-      nameAdjective: "warszawski",
+      nameAdjective: "warszawskie",
       region: "Mazowieckie",
       postalCode: "00-001",
       metaDescription:
-        "Fotograf ślubny w Warszawie ✦ Elegancka fotografia ślubna w stolicy, sesje narzeczeńskie, portrety. Duet fotografów. Zadzwoń: +48 660 872 121",
+        "Fotograf ślubny w Warszawie ✦ Elegancka fotografia ślubna w stolicy, sesje narzeczeńskie i ślubne. Duet fotografów. Zadzwoń: +48 660 872 121",
       aboutParagraphs: [
-        "Stolica oferuje nieograniczone możliwości dla fotografii ślubnej. Eleganckie pałace, nowoczesna architektura, urokliwe parki i nastrojowe kawiarnie – to daje nam wyjątkowe tła do tworzenia zdjęć, które zachwycą Was na lata. Regularnie fotografujemy śluby w warszawskich kościołach, pałacach i prestiżowych salach weselnych.",
-        "Jako duet fotografów działający głównie na Mazowszu, stolica jest dla nas naturalnym kierunkiem. Znamy ją doskonale i potrafimy wykorzystać jej charakter w zdjęciach – czy to podczas sesji w Łazienkach Królewskich, na Starym Mieście, czy w nowoczesnych wnętrzach Mokotowa i Wilanowa.",
-        "Docieramy do wszystkich dzielnic i okolic – Piaseczno, Pruszków, Legionowo, Otwock czy Konstancin-Jeziorna to miejsca, w których również regularnie pracujemy.",
+        "Warszawa oferuje nieograniczone możliwości dla fotografii ślubnej. Eleganckie pałace, nowoczesna architektura, urokliwe parki i nastrojowe kawiarnie – to daje nam wyjątkowe tła do tworzenia zdjęć, które zachwycą Was na lata.",
+        "Jako duet fotografów działający głównie na Mazowszu, stolica jest dla nas naturalnym kierunkiem. Chętnie spotkamy się z wami także na sesji narzeczeńskiej lub poślubnej w Łazienkach Królewskich, na Starym Mieście, czy w nowoczesnych wnętrzach Wilanowa.",
       ],
       serviceDescriptions: {
         wedding:
-          "Fotoreportaż ślubny – od przygotowań w hotelowym apartamencie, przez ceremonię w zabytkowym kościele, aż po eleganckie wesele w jednej z prestiżowych sal. Stolica daje wyjątkowe tło dla każdego momentu Waszego dnia.",
+          "Opowiadamy Wasz dzień w sposób naturalny, subtelny i pełen emocji. Od pierwszych przygotowań, przez wzruszającą ceremonię, aż po radość wspólnego świętowania — tworzymy kadry, do których będziecie wracać przez lata.",
         engagement:
-          "Sesja narzeczeńska w klimatycznych zakątkach stolicy. Łazienki Królewskie, Stare Miasto, Bulwary Wiślane, Centrum Praskie Koneser – dobierzemy lokalizację, która podkreśli Wasz styl. Idealna okazja, żebyśmy się poznali przed ślubem.",
-        portrait:
-          "Profesjonalne portrety w najpiękniejszych lokalizacjach. Sesje indywidualne, rodzinne i biznesowe – dostosowujemy styl i miejsce do Waszych potrzeb. Od parkowych plenerów po nowoczesne wnętrza.",
+          "Sesja narzeczeńska w klimatycznych zakątkach stolicy. Łazienki Królewskie, Stare Miasto, Park w Wilanowie, Muzeum Chopina – dobierzemy lokalizację, która podkreśli Wasz styl. To idealna okazja, żebyśmy poznali się przed ślubem.",
+        postwedding:
+          "Zjawiskowe sesje plenerowe niedługo po dniu Waszego ślubu. To szansa na odwiedzenie najbardziej spektakularnych miejsc na Mazowszu i w stolicy, bez stresu i pospiechu, w sam raz na romantyczne ujęcia w Waszych kreacjach.",
       },
       faq: [
         {
-          question: "Ile kosztuje fotograf ślubny w Warszawie?",
-          answer:
-            "Ceny zaczynają się od 5000 zł za kompletny reportaż. W cenie dojazd, pełna obsługa dnia ślubu i profesjonalnie obrobione zdjęcia. Dokładną ofertę przygotowujemy indywidualnie po poznaniu szczegółów Waszego wesela.",
-        },
-        {
-          question:
-            "Czy dojeżdżacie na śluby do Warszawy i ile to kosztuje?",
+          question: "Czy dojeżdżacie na śluby do Warszawy i ile to kosztuje?",
           answer:
             "Tak! Stolica to jedno z głównych miast, w których działamy. Koszty dojazdu są wliczone w pakiet. Jesteśmy na miejscu z odpowiednim wyprzedzeniem, żeby nic nas nie zaskoczyło.",
         },
         {
           question: "Gdzie najlepiej zrobić sesję narzeczeńską w Warszawie?",
           answer:
-            "Mnóstwo pięknych lokalizacji na sesje! Nasze ulubione to Łazienki Królewskie (klasyczna elegancja), Stare Miasto (romantyczny klimat), Bulwary Wiślane (nowoczesny styl) i okolice Pałacu w Wilanowie. Chętnie pomożemy Wam wybrać miejsce.",
+            "Warszawa oferuje wiele pięknych lokalizacji na sesje! Nasze ulubione to Łazienki Królewskie (klasyczna elegancja), Stare Miasto (romantyczny klimat), Bulwary Wiślane (nowoczesny styl) i okolice Pałacu w Wilanowie. Chętnie pomożemy Wam wybrać miejsce.",
         },
         {
           question:
             "Czy fotografujecie śluby w podwarszawskich miejscowościach?",
           answer:
-            "Oczywiście! Obsługujemy zarówno śluby w stolicy, jak i wesela w Piasecznie, Pruszkowie, Legionowie, Otwocku, Konstancinie-Jeziornie i innych okolicach. Podwarszawskie rezydencje i sale weselne to fantastyczne lokalizacje.",
+            "Oczywiście! Obsługujemy zarówno śluby w stolicy, jak i wesela w Piasecznie, Pruszkowie, Legionowie, Otwocku, Konstancinie-Jeziornie i innych okolicach. Podwarszawskie sale weselne to fantastyczne lokalizacje.",
         },
         {
-          question:
-            "Jak wygląda współpraca z fotografem spoza Warszawy?",
+          question: "Jak wygląda współpraca z fotografem spoza Warszawy?",
           answer:
-            "Dokładnie tak samo jak z lokalnym! Siedlce dzieli od stolicy niecała godzina jazdy. Przed ślubem spotykamy się osobiście lub online, żeby omówić szczegóły. W dniu ślubu jesteśmy obecni od rana do końca zabawy.",
+            "Dokładnie tak samo jak z lokalnym! Siedlce dzieli od stolicy niecała godzina jazdy. Przed ślubem spotykamy się osobiście lub online, żeby omówić szczegóły. W dniu ślubu jesteśmy obecni od rana do około godziny 1:00",
         },
       ],
       localPlaces: [
         "Łazienki Królewskie",
         "Stare Miasto",
         "Pałac w Wilanowie",
-        "Bulwary Wiślane",
-        "Centrum Praskie Koneser",
+        "Pałac Rzeczypospolitej",
+        "Muzeum Chopina",
       ],
       highlights: [
         "Sesje w prestiżowych lokalizacjach stolicy",
@@ -228,386 +212,9 @@ export function getStaticPaths() {
         "Otwock",
         "Konstancin-Jeziorna",
       ],
-      heroImage:
-        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80",
-        "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=600&q=80",
-      ],
-    },
-    lublin: {
-      name: "Lublin",
-      nameLocative: "Lublinie",
-      nameGenitive: "Lublina",
-      nameAdjective: "lubelski",
-      region: "Lubelskie",
-      postalCode: "20-001",
-      metaDescription:
-        "Fotograf ślubny w Lublinie ✦ Naturalna fotografia ślubna, sesje narzeczeńskie na Lubelszczyźnie. Duet fotografów. Zadzwoń: +48 660 872 121",
-      aboutParagraphs: [
-        "Lubelszczyzna to region, do którego dojeżdżamy z ogromną przyjemnością. Historyczne Stare Miasto, klimatyczne kamienice, okoliczne dworki i malownicze krajobrazy Roztocza tworzą wyjątkowe tło do sesji ślubnych i narzeczeńskich. Każdy kadr ma tu w sobie coś magicznego.",
-        "Znamy specyfikę wesel w tym regionie – ich serdeczność, rozmach i wspaniałą atmosferę. Współpracujemy z salami weselnymi w okolicy, dzięki czemu wiemy, jak najlepiej wykorzystać każdą lokalizację.",
-        "Realizujemy sesje w całym województwie – Zamość, Puławy, Chełm, Świdnik i Kraśnik to miejsca, do których dojeżdżamy regularnie.",
-      ],
-      serviceDescriptions: {
-        wedding:
-          "Reportaż ślubny na Lubelszczyźnie – dokumentujemy każdą emocję od przygotowań po ostatni taniec. Tutejsze wesela słyną z gościnności i niesamowitej energii, a my potrafimy to uchwycić w zdjęciach.",
-        engagement:
-          "Sesja narzeczeńska w urokliwych zakątkach regionu. Stare Miasto, Ogród Saski, okolice Zamku Lubelskiego czy plener na Roztoczu – każda z tych lokalizacji nada Waszym zdjęciom wyjątkowy charakter.",
-        portrait:
-          "Portrety indywidualne i rodzinne w pięknych plenerach okolicy. Od historycznego Starego Miasta po spokojne tereny podmiejskie – tworzymy zdjęcia, które opowiadają Waszą historię.",
-      },
-      faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Lublinie?",
-          answer:
-            "Ceny zaczynają się od 4500 zł z wliczonym dojazdem. Ostateczna cena zależy od zakresu usług i czasu trwania reportażu. Skontaktujcie się z nami po indywidualną ofertę.",
-        },
-        {
-          question: "Czy dojeżdżacie na śluby do Lublina?",
-          answer:
-            "Tak! Lubelszczyzna to jeden z głównych kierunków naszej działalności. Dojazd jest wliczony w cenę pakietu. Jesteśmy na miejscu z odpowiednim wyprzedzeniem.",
-        },
-        {
-          question: "Gdzie najlepiej zrobić sesję narzeczeńską w Lublinie?",
-          answer:
-            "Nasze ulubione lokalizacje to Stare Miasto z klimatycznymi kamieniczkami, Ogród Saski, okolice Zamku Lubelskiego i malownicze plenery na Roztoczu. Chętnie pomożemy Wam dobrać miejsce idealne.",
-        },
-        {
-          question: "Fotografujecie również wesela na Roztoczu?",
-          answer:
-            "Oczywiście! Roztocze to jeden z najpiękniejszych regionów w Polsce i chętnie tam dojeżdżamy. Zamość, Zwierzyniec, Krasnobród – to fantastyczne lokalizacje zarówno na wesela, jak i sesje plenerowe.",
-        },
-        {
-          question: "Jak wcześnie trzeba zarezerwować fotografa na ślub?",
-          answer:
-            "Zalecamy rezerwację z minimum 6-12 miesięcznym wyprzedzeniem, szczególnie na popularne terminy (maj-październik). Im wcześniej się odezwiecie, tym większa szansa na Wasz wymarzony termin.",
-        },
-      ],
-      localPlaces: [
-        "Stare Miasto w Lublinie",
-        "Zamek Lubelski",
-        "Ogród Saski",
-        "Roztocze",
-        "okolice Kazimierza Dolnego",
-      ],
-      highlights: [
-        "Regularne sesje na Lubelszczyźnie",
-        "Znajomość lubelskich sal i plenerów",
-        "Dojazd wliczony w cenę pakietu",
-        "Doświadczenie z weselami w regionie",
-      ],
-      nearbyAreas: ["Zamość", "Puławy", "Chełm", "Świdnik", "Kraśnik"],
-      heroImage:
-        "https://images.unsplash.com/photo-1510076857177-7470076d4098?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80",
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80",
-      ],
-    },
-    radom: {
-      name: "Radom",
-      nameLocative: "Radomiu",
-      nameGenitive: "Radomia",
-      nameAdjective: "radomski",
-      region: "Mazowieckie",
-      postalCode: "26-600",
-      metaDescription:
-        "Fotograf ślubny w Radomiu ✦ Naturalna fotografia ślubna i sesje narzeczeńskie. Profesjonalny duet fotografów. Zadzwoń: +48 660 872 121",
-      aboutParagraphs: [
-        "Region ten chętnie odwiedzamy na reportaże ślubne i sesje zdjęciowe. Miasto otoczone jest pięknymi terenami zielonymi i malowniczymi lokalizacjami, które doskonale sprawdzają się jako tło do zdjęć. Od parków miejskich po okoliczne dwory i rezydencje – możliwości fotograficzne są tu ogromne.",
-        "Przywozimy ze sobą świeże spojrzenie i doświadczenie zdobyte w wielu regionach Polski. Jednocześnie respektujemy lokalne tradycje weselne i potrafimy je pięknie uchwycić. Współpracujemy z tutejszymi salami weselnymi i znamy specyfikę lokalnych uroczystości.",
-        "Obsługujemy wesela w całym regionie – Kozienice, Zwoleń, Przysucha, Szydłowiec i Pionki to miejsca, do których dojeżdżamy bez problemu.",
-      ],
-      serviceDescriptions: {
-        wedding:
-          "Kompletny reportaż ślubny – od emocjonalnych przygotowań, przez ceremonię, aż po radosne wesele. Każde tutejsze wesele ma swój niepowtarzalny charakter, a naszym zadaniem jest uchwycić go w naturalnych, pełnych emocji zdjęciach.",
-        engagement:
-          "Sesja narzeczeńska w urokliwych zakątkach okolicy. Parki miejskie, okoliczne rezydencje i malownicze tereny zielone – dobierzemy lokalizację, która odzwierciedli Wasz styl i osobowość.",
-        portrait:
-          "Portrety indywidualne, rodzinne i biznesowe. Naturalne, niesztuczne zdjęcia w plenerze lub wybranej lokalizacji – tworzymy obrazy, w których odnajdziecie siebie.",
-      },
-      faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Radomiu?",
-          answer:
-            "Ceny zaczynają się od 4000 zł z wliczonym dojazdem. Ostateczna cena jest ustalana indywidualnie na podstawie zakresu usług. Zapraszamy do kontaktu po szczegółową ofertę.",
-        },
-        {
-          question: "Czy dojeżdżacie na śluby do Radomia?",
-          answer:
-            "Tak! Regularnie tu dojeżdżamy. Koszty dojazdu z naszej bazy są wliczone w cenę pakietu.",
-        },
-        {
-          question: "Gdzie najlepiej zrobić sesję narzeczeńską w Radomiu?",
-          answer:
-            "Polecamy sesje w Parku Kościuszki, na terenie zabytkowego Centrum, w okolicach pałacu w Orońsku lub w malowniczych plenerach pod miastem. Chętnie pomożemy Wam wybrać idealne miejsce.",
-        },
-        {
-          question: "Ile zdjęć otrzymamy z reportażu ślubnego?",
-          answer:
-            "Z pełnego reportażu ślubnego otrzymujecie zwykle 400-600 profesjonalnie obrobionych zdjęć. Każde z nich jest indywidualnie retuszowane. Liczba zależy od czasu trwania reportażu i ilości wydarzeń w ciągu dnia.",
-        },
-        {
-          question: "Czy fotografujecie również w okolicznych miejscowościach?",
-          answer:
-            "Oczywiście! Obsługujemy również Kozienice, Zwoleń, Przysuchę, Szydłowiec, Pionki i inne miejscowości w regionie.",
-        },
-      ],
-      localPlaces: [
-        "Park Kościuszki",
-        "Centrum Rzeźby w Orońsku",
-        "zabytkowe centrum Radomia",
-        "Kozienice i okolice",
-        "malownicze tereny podmiejskie",
-      ],
-      highlights: [
-        "Doświadczenie z weselami w regionie",
-        "Dojazd w cenie pakietu",
-        "Elastyczne terminy",
-        "Współpraca z lokalnymi salami weselnymi",
-      ],
-      nearbyAreas: [
-        "Kozienice",
-        "Zwoleń",
-        "Przysucha",
-        "Szydłowiec",
-        "Pionki",
-      ],
-      heroImage:
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1510076857177-7470076d4098?w=600&q=80",
-        "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=600&q=80",
-      ],
-    },
-    lomza: {
-      name: "Łomża",
-      nameLocative: "Łomży",
-      nameGenitive: "Łomży",
-      nameAdjective: "łomżyński",
-      region: "Podlaskie",
-      postalCode: "18-400",
-      metaDescription:
-        "Fotograf ślubny w Łomży ✦ Naturalna fotografia ślubna, sesje narzeczeńskie i portrety w regionie łomżyńskim. Zadzwoń: +48 660 872 121",
-      aboutParagraphs: [
-        "Region łomżyński chętnie odwiedzamy na reportaże ślubne. Dolina Narwi, malownicze łąki, zabytkowe kościoły i urokliwe okolice tworzą niepowtarzalne tło dla fotografii ślubnej. Tutejsze wesela mają swój wyjątkowy, serdeczny charakter, który uwielbiamy uwieczniać.",
-        "Znamy lokalne tradycje i potrafimy je pięknie sfotografować. Współpracujemy z salami weselnymi w regionie i wiemy, jak wykorzystać ich atuty do tworzenia zachwycających zdjęć.",
-        "Dojeżdżamy na sesje i wesela do Zambrowa, Ostrołęki, Kolna, Wysokiego Mazowieckiego i Grajewo. Cały region to nasz teren działania.",
-      ],
-      serviceDescriptions: {
-        wedding:
-          "Reportaż ślubny – od wzruszających przygotowań po szaloną zabawę weselną. Tutejsze wesela słyną z gościnności i fantastycznej atmosfery, a my potrafimy uchwycić to wszystko w naturalnych zdjęciach pełnych emocji.",
-        engagement:
-          "Sesja narzeczeńska w malowniczych plenerach okolicy. Dolina Narwi, łąki nad rzeką, leśne ścieżki – te miejsca dają piękne, naturalne tło. To też okazja, żebyśmy się poznali przed ślubem.",
-        portrait:
-          "Portrety indywidualne i rodzinne w tutejszych plenerach. Wykorzystujemy piękno regionu, aby stworzyć zdjęcia, z których będziecie dumni przez lata.",
-      },
-      faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Łomży?",
-          answer:
-            "Ceny zaczynają się od 4000 zł z wliczonym dojazdem. Dokładna wycena zależy od zakresu reportażu i dodatkowych usług. Skontaktujcie się z nami po indywidualną ofertę.",
-        },
-        {
-          question: "Czy dojeżdżacie na śluby do Łomży?",
-          answer:
-            "Tak! Leżymy na trasie między naszą bazą a Białymstokiem, więc dojeżdżamy tu regularnie. Koszty dojazdu są wliczone w cenę pakietu.",
-        },
-        {
-          question: "Gdzie najlepiej zrobić sesję narzeczeńską w okolicach Łomży?",
-          answer:
-            "Nasze ulubione lokalizacje to Dolina Narwi z malowniczymi łąkami, okolice Nowogrodu z widokiem na rzekę, leśne ścieżki pod Łomżą i zabytkowe zakątki miasta. Każda z tych lokalizacji daje inny, wyjątkowy klimat zdjęć.",
-        },
-        {
-          question: "Czy fotografujecie wesela w okolicznych miejscowościach?",
-          answer:
-            "Oczywiście! Dojeżdżamy też do Zambrowa, Ostrołęki, Kolna, Grajewo, Wysokiego Mazowieckiego i wielu innych miejscowości w regionie.",
-        },
-        {
-          question: "Jak wygląda rezerwacja terminu?",
-          answer:
-            "Prosta sprawa – skontaktujcie się z nami telefonicznie lub przez formularz, omówimy szczegóły i podpiszemy umowę. Zalecamy rezerwację z minimum 6-miesięcznym wyprzedzeniem.",
-        },
-      ],
-      localPlaces: [
-        "Dolina Narwi",
-        "Nowogród nad Narwią",
-        "Stare Miasto w Łomży",
-        "okolice Zambrowa",
-        "lasy i łąki regionu łomżyńskiego",
-      ],
-      highlights: [
-        "Na trasie Siedlce–Białystok – dojeżdżamy regularnie",
-        "Znajomość plenerów regionu łomżyńskiego",
-        "Dojazd wliczony w cenę pakietu",
-        "Doświadczenie z lokalnymi weselami",
-      ],
-      nearbyAreas: [
-        "Zambrów",
-        "Ostrołęka",
-        "Kolno",
-        "Grajewo",
-        "Wysokie Mazowieckie",
-      ],
-      heroImage:
-        "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80",
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
-      ],
-    },
-    "biala-podlaska": {
-      name: "Biała Podlaska",
-      nameLocative: "Białej Podlaskiej",
-      nameGenitive: "Białej Podlaskiej",
-      nameAdjective: "bialskopodlaski",
-      region: "Lubelskie",
-      postalCode: "21-500",
-      metaDescription:
-        "Fotograf ślubny w Białej Podlaskiej ✦ Naturalna fotografia ślubna i sesje na Podlasiu Południowym. Duet fotografów. Zadzwoń: +48 660 872 121",
-      aboutParagraphs: [
-        "To region, który jest nam szczególnie bliski – leży w pobliżu naszej bazy, dzięki czemu czujemy się tu jak u siebie. Miasto otoczone jest malowniczymi terenami Podlasia Południowego, które oferują piękne tło do sesji ślubnych i narzeczeńskich.",
-        "Znamy lokalne sale weselne, kościoły i plenerowe lokalizacje. Wiemy, gdzie światło jest najpiękniejsze i jak wykorzystać charakter tego regionu w zdjęciach. Podlaskie wesela mają w sobie coś wyjątkowego – serdeczność, rodzinną atmosferę i wspaniałą energię.",
-        "Dojeżdżamy na sesje do Międzyrzeca Podlaskiego, Radzynia Podlaskiego, Parczewa, Łukowa i innych miejscowości w regionie. Bliskość naszej bazy oznacza szybki dojazd i brak dodatkowych kosztów.",
-      ],
-      serviceDescriptions: {
-        wedding:
-          "Kompletny reportaż ślubny – uchwytujemy emocje od pierwszych przygotowań po ostatni taniec. Znamy tutejsze sale weselne i kościoły, więc wiemy, jak idealnie skomponować kadry w każdym z tych miejsc.",
-        engagement:
-          "Sesja narzeczeńska w plenerach okolicy. Park Radziwiłłowski, okoliczne łąki i lasy, malownicze zakątki regionu – dobierzemy lokalizację idealną dla Was.",
-        portrait:
-          "Portrety indywidualne i rodzinne w okolicy. Naturalne zdjęcia w plenerze lub wybranej lokalizacji – tworzymy obrazy, które opowiedzą Waszą historię.",
-      },
-      faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Białej Podlaskiej?",
-          answer:
-            "Ceny zaczynają się od 4000 zł. Ze względu na bliskość naszej bazy, dojazd jest wliczony w cenę. Skontaktujcie się z nami po szczegółową ofertę.",
-        },
-        {
-          question: "Jak daleko macie do Białej Podlaskiej?",
-          answer:
-            "Biała Podlaska leży ok. 80 km od naszej bazy w Siedlcach, co oznacza niecałą godzinę jazdy. Dzięki temu dojazd jest szybki i wliczony w cenę pakietu – nie ponosicie żadnych dodatkowych kosztów.",
-        },
-        {
-          question: "Gdzie najlepiej zrobić sesję narzeczeńską w Białej Podlaskiej?",
-          answer:
-            "Polecamy Park Radziwiłłowski z pięknym pałacem w tle, okoliczne łąki i lasy, a także zabytkowe zakątki miasta. Dla par lubiących przyrodę – tereny nad Krzną oferują bajeczne krajobrazy.",
-        },
-        {
-          question: "Czy obsługujecie okolice Białej Podlaskiej?",
-          answer:
-            "Tak! Dojeżdżamy do Międzyrzeca Podlaskiego, Radzynia Podlaskiego, Parczewa, Łukowa i wielu innych miejscowości w regionie. Cały rejon Podlasia Południowego to nasz teren działania.",
-        },
-        {
-          question: "Ile czasu przed ślubem najlepiej zarezerwować fotografa?",
-          answer:
-            "Zalecamy kontakt z minimum 6-12 miesięcznym wyprzedzeniem, szczególnie jeśli planujecie ślub w sezonie (maj-październik). Popularne terminy rezerwowane są szybko!",
-        },
-      ],
-      localPlaces: [
-        "Park Radziwiłłowski",
-        "okolice rzeki Krzna",
-        "zabytkowe centrum miasta",
-        "Międzyrzec Podlaski",
-        "tereny Podlasia Południowego",
-      ],
-      highlights: [
-        "Blisko naszej bazy – szybki dojazd",
-        "Brak dodatkowych kosztów dojazdu",
-        "Znajomość lokalnych sal i plenerów",
-        "Doświadczenie z podlaskimi weselami",
-      ],
-      nearbyAreas: [
-        "Międzyrzec Podlaski",
-        "Radzyń Podlaski",
-        "Parczew",
-        "Łuków",
-        "Terespol",
-      ],
-      heroImage:
-        "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80",
-      ],
-    },
-    ostroleka: {
-      name: "Ostrołęka",
-      nameLocative: "Ostrołęce",
-      nameGenitive: "Ostrołęki",
-      nameAdjective: "ostrołęcki",
-      region: "Mazowieckie",
-      postalCode: "07-400",
-      metaDescription:
-        "Fotograf ślubny w Ostrołęce ✦ Profesjonalna fotografia ślubna, sesje narzeczeńskie w regionie kurpiowskim. Zadzwoń: +48 660 872 121",
-      aboutParagraphs: [
-        "Region kurpiowski to niezwykłe miejsce na mapie fotografii ślubnej. Bogata tradycja, piękne krajobrazy nad Narwią i urokliwe sale weselne tworzą idealne warunki do tworzenia wyjątkowych zdjęć. Kurpiowskie wesela mają niepowtarzalny klimat, który uwielbiamy uwieczniać.",
-        "Cenimy ten region za jego autentyczność i piękno. Znamy lokalne tradycje weselne i potrafimy je pięknie sfotografować. Współpracujemy z salami weselnymi w okolicy i wiemy, jak najlepiej wykorzystać każdą lokalizację.",
-        "Obsługujemy wesela w całym regionie kurpiowskim – Myszyniec, Przasnysz, Maków Mazowiecki, Wyszków i Pułtusk to miejsca, do których dojeżdżamy regularnie.",
-      ],
-      serviceDescriptions: {
-        wedding:
-          "Reportaż ślubny w regionie kurpiowskim – od przygotowań po ostatni taniec. Kurpiowskie wesela mają w sobie niezwykłą energię i tradycję, a my potrafimy uchwycić te momenty w naturalnych, pełnych emocji kadrach.",
-        engagement:
-          "Sesja narzeczeńska w plenerach okolicy. Brzegi Narwi, Kurpiowska Puszcza Zielona, malownicze łąki i okoliczne dworki – dobierzemy lokalizację, która odzwierciedli Wasz romantyczny charakter.",
-        portrait:
-          "Portrety indywidualne i rodzinne w tutejszych plenerach. Naturalne zdjęcia w pięknym regionie kurpiowskim – tworzymy obrazy, które zachwycają na lata.",
-      },
-      faq: [
-        {
-          question: "Ile kosztuje fotograf ślubny w Ostrołęce?",
-          answer:
-            "Ceny zaczynają się od 4000 zł z wliczonym dojazdem. Ostateczna cena zależy od zakresu usług i czasu trwania reportażu. Zapraszamy do kontaktu po indywidualną ofertę.",
-        },
-        {
-          question: "Czy dojeżdżacie na śluby do Ostrołęki?",
-          answer:
-            "Tak! Leżymy w rozsądnej odległości zarówno od Siedlec, jak i od Białegostoku, więc dojeżdżamy tu regularnie. Koszty dojazdu są wliczone w cenę pakietu.",
-        },
-        {
-          question: "Gdzie najlepiej zrobić sesję narzeczeńską w regionie ostrołęckim?",
-          answer:
-            "Polecamy malownicze brzegi Narwi, Kurpiowską Puszczę Zieloną, okolice Myszyńca i urokliwe tereny pod Ostrołęką. Każda z tych lokalizacji oferuje inny klimat i piękne, naturalne tło.",
-        },
-        {
-          question: "Czy znacie kurpiowskie tradycje weselne?",
-          answer:
-            "Tak! Mieliśmy przyjemność fotografować wesela z elementami kurpiowskiej tradycji. Znamy i szanujemy lokalne zwyczaje, a jednocześnie potrafimy uchwycić je w nowoczesny, artystyczny sposób.",
-        },
-        {
-          question: "Czy fotografujecie również w okolicznych miastach?",
-          answer:
-            "Oczywiście! Obsługujemy też Myszyniec, Przasnysz, Maków Mazowiecki, Wyszków, Pułtusk i inne miejscowości w regionie kurpiowskim i północnego Mazowsza.",
-        },
-      ],
-      localPlaces: [
-        "brzegi Narwi w Ostrołęce",
-        "Kurpiowska Puszcza Zielona",
-        "okolice Myszyńca",
-        "Pułtusk – Wenecja Podlaska",
-        "plenery regionu kurpiowskiego",
-      ],
-      highlights: [
-        "Doświadczenie z kurpiowskimi weselami",
-        "Dojazd wliczony w cenę pakietu",
-        "Znajomość plenerów nad Narwią",
-        "Elastyczne terminy na cały sezon",
-      ],
-      nearbyAreas: [
-        "Myszyniec",
-        "Przasnysz",
-        "Maków Mazowiecki",
-        "Wyszków",
-        "Pułtusk",
-      ],
-      heroImage:
-        "https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=1920&q=80",
-      gridImages: [
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80",
-        "https://images.unsplash.com/photo-1510076857177-7470076d4098?w=600&q=80",
-      ],
+      heroImage: warszawaHeroimg,
+      heroPosition: "object-[center_80%]",
+      gridImages: [warszawaGridImg1, warszawaGridImg2],
     },
   };
 
@@ -625,14 +232,9 @@ if (!city) {
 
 // Map city names to PSEO slugs for internal linking
 const citySlugMap: Record<string, string> = {
-  "Siedlce": "siedlce",
-  "Białystok": "bialystok",
-  "Warszawa": "warszawa",
-  "Lublin": "lublin",
-  "Radom": "radom",
-  "Łomża": "lomza",
-  "Biała Podlaska": "biala-podlaska",
-  "Ostrołęka": "ostroleka",
+  Siedlce: "siedlce",
+  Białystok: "bialystok",
+  Warszawa: "warszawa",
 };
 
 // Schema.org for Local Business
@@ -652,26 +254,16 @@ const schemaData = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: ({
+    latitude: {
       siedlce: 52.1676,
       bialystok: 53.1325,
       warszawa: 52.2297,
-      lublin: 51.2465,
-      radom: 51.4027,
-      lomza: 53.1781,
-      "biala-podlaska": 52.0324,
-      ostroleka: 53.0844,
-    })[miasto],
-    longitude: ({
+    }[miasto],
+    longitude: {
       siedlce: 22.2903,
       bialystok: 23.1688,
       warszawa: 21.0122,
-      lublin: 22.5684,
-      radom: 21.1471,
-      lomza: 22.0593,
-      "biala-podlaska": 23.1147,
-      ostroleka: 21.5745,
-    })[miasto],
+    }[miasto],
   },
   areaServed: {
     "@type": "City",
@@ -723,13 +315,28 @@ const faqSchema = {
     class="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden"
   >
     <div class="absolute inset-0">
-      <img
-        src={city.heroImage}
-        alt={`Fotograf ślubny w ${city.nameLocative} – sesja plenerowa`}
-        class="w-full h-full object-cover"
-        loading="eager"
-      />
-      <div class="hero-overlay"></div>
+      {
+        typeof city.heroImage === "string" ? (
+          <img
+            src={city.heroImage}
+            alt={`Fotograf ślubny w ${city.nameLocative} – sesja plenerowa`}
+            class={`w-full h-full object-cover ${(city as any).heroPosition || "object-center"}`}
+            loading="eager"
+          />
+        ) : (
+          <Image
+            src={city.heroImage}
+            alt={`Fotograf ślubny w ${city.nameLocative} – sesja plenerowa`}
+            class={`w-full h-full object-cover ${(city as any).heroPosition || "object-center"}`}
+            loading="eager"
+            quality={85}
+            format="webp"
+            widths={[600, 1200, 1920]}
+            sizes="100vw"
+          />
+        )
+      }
+      <div class="hero-overlay absolute inset-0 bg-black/40"></div>
     </div>
 
     <div class="relative z-10 text-center text-white px-6 reveal reveal-up">
@@ -746,8 +353,8 @@ const faqSchema = {
       <p
         class="mt-6 text-sm md:text-base text-white/80 max-w-xl mx-auto leading-relaxed"
       >
-        Naturalny reportaż ślubny, sesje narzeczeńskie i portrety. Duet
-        fotografów z pasją do uwieczniania emocji.
+        Naturalny reportaż ślubny, sesje narzeczeńskie i ślubne. Duet fotografów
+        z pasją do uwieczniania emocji.
       </p>
     </div>
   </section>
@@ -774,34 +381,56 @@ const faqSchema = {
             ))
           }
 
-          <!-- Highlights -->
-          <ul class="space-y-3 mb-8 mt-6">
-            {
-              city.highlights.map((highlight) => (
-                <li class="flex items-center gap-3 text-sm text-charcoal-light">
-                  <span class="w-2 h-2 bg-olive rounded-full flex-shrink-0" />
-                  {highlight}
-                </li>
-              ))
-            }
-          </ul>
+          <!-- Removed Highlights per user request -->
 
-          <a href="/kontakt" class="btn-primary"> Zapytaj o termin </a>
+          <a href="/kontakt" class="btn-primary mt-8 inline-block">
+            Zapytaj o termin
+          </a>
         </div>
 
         <div class="grid grid-cols-2 gap-4 reveal reveal-up reveal-d1">
-          <img
-            src={city.gridImages[0]}
-            alt={`Sesja ślubna w ${city.nameLocative} – para młoda`}
-            class="w-full h-64 object-cover rounded-sm"
-            loading="lazy"
-          />
-          <img
-            src={city.gridImages[1]}
-            alt={`Fotografia portretowa w ${city.nameLocative}`}
-            class="w-full h-64 object-cover mt-8 rounded-sm"
-            loading="lazy"
-          />
+          {
+            typeof city.gridImages[0] === "string" ? (
+              <img
+                src={city.gridImages[0]}
+                alt={`Sesja ślubna w ${city.nameLocative} – para młoda`}
+                class="w-full aspect-[2/3] object-cover rounded-sm"
+                loading="lazy"
+              />
+            ) : (
+              <Image
+                src={city.gridImages[0]}
+                alt={`Sesja ślubna w ${city.nameLocative} – para młoda`}
+                class="w-full aspect-[2/3] object-cover rounded-sm"
+                loading="lazy"
+                quality={80}
+                format="webp"
+                widths={[400, 800]}
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            )
+          }
+          {
+            typeof city.gridImages[1] === "string" ? (
+              <img
+                src={city.gridImages[1]}
+                alt={`Fotografia portretowa w ${city.nameLocative}`}
+                class="w-full aspect-[2/3] object-cover mt-8 rounded-sm"
+                loading="lazy"
+              />
+            ) : (
+              <Image
+                src={city.gridImages[1]}
+                alt={`Fotografia portretowa w ${city.nameLocative}`}
+                class="w-full aspect-[2/3] object-cover mt-8 rounded-sm"
+                loading="lazy"
+                quality={80}
+                format="webp"
+                widths={[400, 800]}
+                sizes="(max-width: 1024px) 50vw, 25vw"
+              />
+            )
+          }
         </div>
       </div>
     </div>
@@ -887,15 +516,22 @@ const faqSchema = {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="1"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.822 1.316z"
               ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"></path>
             </svg>
           </div>
-          <h3 class="font-serif text-lg tracking-[0.15em] uppercase mb-4">
-            Portrety
+          <h3
+            class="font-serif text-lg tracking-[0.15em] uppercase mb-4 leading-normal"
+          >
+            Sesje<br />poślubne
           </h3>
           <p class="text-charcoal-light text-sm leading-relaxed">
-            {city.serviceDescriptions.portrait}
+            {city.serviceDescriptions.postwedding}
           </p>
         </div>
       </div>
@@ -914,8 +550,8 @@ const faqSchema = {
           Popularne miejsca na sesje w {city.nameLocative}
         </h2>
         <p class="text-charcoal-light text-sm max-w-lg mx-auto mt-4">
-          Znamy {city.nameAdjective} plenery i lokalizacje, które sprawdzą się
-          idealnie na sesję ślubną, narzeczeńską lub portretową.
+          Znamy {city.nameAdjective} plenery i lokalizacje, które sprawdzą się idealnie
+          na sesję ślubną, narzeczeńską lub poślubną.
         </p>
       </div>
 
@@ -976,14 +612,12 @@ const faqSchema = {
           class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
           >Zasięg</span
         >
-        <h2
-          class="font-serif text-xl tracking-[0.15em] uppercase mb-4"
-        >
+        <h2 class="font-serif text-xl tracking-[0.15em] uppercase mb-4">
           Działamy również w okolicach {city.nameGenitive}
         </h2>
         <p class="text-charcoal-light text-sm mb-8">
-          Oprócz {city.nameGenitive} dojeżdżamy na sesje i śluby do okolicznych
-          miejscowości. Skontaktuj się z nami, a ustalimy szczegóły!
+          Oprócz {city.nameGenitive} dojeżdżamy na sesje i śluby do okolicznych miejscowości
+          oraz odległych miast w całym kraju. Skontaktuj się z nami, a ustalimy szczegóły!
         </p>
       </div>
       <div
@@ -993,7 +627,10 @@ const faqSchema = {
           city.nearbyAreas.map((area) => {
             const slug = citySlugMap[area];
             return slug ? (
-              <a href={`/fotograf-${slug}`} class="px-4 py-2 bg-cream-dark text-sm text-charcoal-light rounded-sm hover:bg-olive hover:text-white transition-colors">
+              <a
+                href={`/fotograf-${slug}`}
+                class="px-4 py-2 bg-cream-dark text-sm text-charcoal-light rounded-sm hover:bg-olive hover:text-white transition-colors"
+              >
                 {area}
               </a>
             ) : (
@@ -1022,8 +659,8 @@ const faqSchema = {
         class="text-white/80 text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto reveal reveal-up reveal-d1"
       >
         Opowiedzcie nam o swoich planach – chętnie pomożemy uwiecznić
-        najważniejsze chwile Waszego życia. Zadzwońcie, napiszcie lub wypełnijcie
-        formularz kontaktowy. Odpowiadamy w ciągu 24 godzin!
+        najważniejsze chwile Waszego życia. Zadzwońcie, napiszcie lub
+        wypełnijcie formularz kontaktowy. Odpowiadamy w ciągu 24 godzin!
       </p>
       <div
         class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-up reveal-d2"
