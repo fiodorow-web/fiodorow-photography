@@ -133,6 +133,17 @@ const breadcrumbSchema = breadcrumbs
         si.src = '/_vercel/speed-insights/script.js';
         si.defer = true;
         document.head.appendChild(si);
+        // Google Analytics 4
+        const ga = document.createElement('script');
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-YVBD3JPM7N';
+        ga.async = true;
+        document.head.appendChild(ga);
+        ga.onload = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YVBD3JPM7N');
+        };
       }
       if (localStorage.getItem('cookies-accepted')) {
         loadAnalytics();
