@@ -121,6 +121,18 @@ const breadcrumbSchema = breadcrumbs
   <body class="antialiased">
     <slot />
     <CookieBanner />
+    <!-- Google Consent Mode v2 — default denied before user consent -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500
+      });
+    </script>
     <script>
       function loadAnalytics() {
         if (document.querySelector('[data-analytics-loaded]')) return;
@@ -139,11 +151,16 @@ const breadcrumbSchema = breadcrumbs
         ga.async = true;
         document.head.appendChild(ga);
         ga.onload = () => {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-YVBD3JPM7N');
         };
+        // Update consent to granted
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted',
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
       }
       if (localStorage.getItem('cookies-accepted')) {
         loadAnalytics();
