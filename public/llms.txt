@@ -1,0 +1,37 @@
+# Fiodorow Photography
+
+## About
+Fiodorow Photography to duet fotografów ślubnych — Mateusz i Weronika — z siedzibą w Siedlcach. Specjalizujemy się w naturalnej fotografii ślubnej, sesjach narzeczeńskich i portretowych. Działamy głównie na Mazowszu, Podlasiu i Lubelszczyźnie.
+
+## Services
+- Fotografia ślubna (reportaż z przygotowań, ceremonii i wesela)
+- Sesje narzeczeńskie
+- Sesje poślubne
+- Portrety indywidualne i rodzinne
+- Fotobudka na wesele
+- Projektowanie albumów ślubnych
+
+## Service Area
+Siedlce, Białystok, Warszawa, Lublin, Radom, Łomża, Biała Podlaska, Ostrołęka oraz cała Polska.
+
+## Contact
+- Phone: +48 660 872 121
+- Email: fiodorowphotography@gmail.com
+- Website: https://fiodorowphotography.pl
+- Instagram: https://www.instagram.com/fiodorow_photography
+- Facebook: https://www.facebook.com/fiodorowphotography
+
+## Site Structure
+- / — Strona główna z portfolio
+- /o-nas — O nas, FAQ, dane kontaktowe
+- /portfolio — Galeria realizacji ślubnych
+- /blog — Artykuły o fotografii ślubnej
+- /kontakt — Formularz kontaktowy
+- /fotograf-siedlce — Fotograf ślubny Siedlce
+- /fotograf-bialystok — Fotograf ślubny Białystok
+- /fotograf-warszawa — Fotograf ślubny Warszawa
+- /fotograf-lublin — Fotograf ślubny Lublin
+- /fotograf-radom — Fotograf ślubny Radom
+- /fotograf-lomza — Fotograf ślubny Łomża
+- /fotograf-biala-podlaska — Fotograf ślubny Biała Podlaska
+- /fotograf-ostroleka — Fotograf ślubny Ostrołęka

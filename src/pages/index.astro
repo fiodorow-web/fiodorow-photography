@@ -52,6 +52,18 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   slug: item.slug,
   date: item.date
 })) : fallbackItems;
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Fiodorow Photography",
+  "url": "https://fiodorowphotography.pl",
+  "description": "Profesjonalna fotografia ślubna i portretowa — duet fotografów z Siedlec. Reportaże ślubne, sesje narzeczeńskie i plenerowe na Mazowszu, Podlasiu i Lubelszczyźnie.",
+  "publisher": {
+    "@type": "Photographer",
+    "@id": "https://fiodorowphotography.pl/#photographer"
+  }
+};
 ---
 
 <BaseLayout
@@ -60,7 +72,9 @@ const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
   breadcrumbs={[]}
 >
   <Header currentPath="/" />
-  
+
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
   <h1 class="sr-only">Fiodorow Photography — Fotograf Ślubny Siedlce, Białystok, Warszawa</h1>
 
   <!-- Hero Section -->

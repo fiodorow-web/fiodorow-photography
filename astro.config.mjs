@@ -7,7 +7,14 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://fiodorowphotography.pl',
   output: 'static',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !page.includes('/polityka-prywatnosci') &&
+        !page.includes('/studio'),
+      lastmod: new Date(),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()]
   }

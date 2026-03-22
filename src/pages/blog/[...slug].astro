@@ -30,10 +30,11 @@ const articleSchema = {
   "description": post.data.description,
   "image": `https://fiodorowphotography.pl${post.data.image.src}`,
   "datePublished": post.data.date,
+  "dateModified": post.data.date,
   "author": {
-    "@type": "Organization",
+    "@type": "Person",
     "name": post.data.author,
-    "url": "https://fiodorowphotography.pl"
+    "url": "https://fiodorowphotography.pl/o-nas"
   },
   "publisher": {
     "@type": "Organization",

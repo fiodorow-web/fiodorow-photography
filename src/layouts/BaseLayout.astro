@@ -31,12 +31,15 @@ const breadcrumbSchema = breadcrumbs
           name: "Strona główna",
           item: "https://fiodorowphotography.pl/",
         },
-        ...breadcrumbs.map((crumb, i) => ({
-          "@type": "ListItem",
-          position: i + 2,
-          name: crumb.name,
-          item: `https://fiodorowphotography.pl${crumb.href}`,
-        })),
+        ...breadcrumbs.map((crumb, i) => {
+          const isLast = i === breadcrumbs.length - 1;
+          return {
+            "@type": "ListItem",
+            position: i + 2,
+            name: crumb.name,
+            ...(isLast ? {} : { item: `https://fiodorowphotography.pl${crumb.href}` }),
+          };
+        }),
       ],
     }
   : null;
@@ -71,6 +74,9 @@ const breadcrumbSchema = breadcrumbs
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://cdn.sanity.io" />
+
     <!-- Fonts loaded locally via Fontsource -->
 
     <title>{title}</title>
@@ -82,9 +88,10 @@ const breadcrumbSchema = breadcrumbs
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
+        "@type": "Photographer",
+        "@id": "https://fiodorowphotography.pl/#photographer",
         name: "Fiodorow Photography",
-        image: image,
+        image: new URL(image, Astro.site).href,
         description: description,
         address: {
           "@type": "PostalAddress",

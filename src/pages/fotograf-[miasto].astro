@@ -623,6 +623,18 @@ if (!city) {
   return Astro.redirect("/");
 }
 
+// Map city names to PSEO slugs for internal linking
+const citySlugMap: Record<string, string> = {
+  "Siedlce": "siedlce",
+  "Białystok": "bialystok",
+  "Warszawa": "warszawa",
+  "Lublin": "lublin",
+  "Radom": "radom",
+  "Łomża": "lomza",
+  "Biała Podlaska": "biala-podlaska",
+  "Ostrołęka": "ostroleka",
+};
+
 // Schema.org for Local Business
 const schemaData = {
   "@context": "https://schema.org",
@@ -630,15 +642,40 @@ const schemaData = {
   name: `Fiodorow Photography - Fotograf ${city.name}`,
   image: "https://fiodorowphotography.pl/og-image.jpg",
   description: city.metaDescription,
+  "@id": "https://fiodorowphotography.pl/#photographer",
   address: {
     "@type": "PostalAddress",
-    addressLocality: city.name,
-    addressRegion: city.region,
-    postalCode: city.postalCode,
+    addressLocality: "Siedlce",
+    addressRegion: "Mazowieckie",
+    postalCode: "08-110",
     addressCountry: "PL",
   },
   geo: {
     "@type": "GeoCoordinates",
+    latitude: ({
+      siedlce: 52.1676,
+      bialystok: 53.1325,
+      warszawa: 52.2297,
+      lublin: 51.2465,
+      radom: 51.4027,
+      lomza: 53.1781,
+      "biala-podlaska": 52.0324,
+      ostroleka: 53.0844,
+    })[miasto],
+    longitude: ({
+      siedlce: 22.2903,
+      bialystok: 23.1688,
+      warszawa: 21.0122,
+      lublin: 22.5684,
+      radom: 21.1471,
+      lomza: 22.0593,
+      "biala-podlaska": 23.1147,
+      ostroleka: 21.5745,
+    })[miasto],
+  },
+  areaServed: {
+    "@type": "City",
+    name: city.name,
   },
   url: `https://fiodorowphotography.pl/fotograf-${miasto}`,
   telephone: "+48 660 872 121",
@@ -657,7 +694,6 @@ const schemaData = {
     opens: "09:00",
     closes: "20:00",
   },
-  areaServed: [city.name, ...city.nearbyAreas],
 };
 
 // FAQ Schema
@@ -954,11 +990,18 @@ const faqSchema = {
         class="flex flex-wrap justify-center gap-4 reveal reveal-fade reveal-d2"
       >
         {
-          city.nearbyAreas.map((area) => (
-            <span class="px-4 py-2 bg-cream-dark text-sm text-charcoal-light rounded-sm">
-              {area}
-            </span>
-          ))
+          city.nearbyAreas.map((area) => {
+            const slug = citySlugMap[area];
+            return slug ? (
+              <a href={`/fotograf-${slug}`} class="px-4 py-2 bg-cream-dark text-sm text-charcoal-light rounded-sm hover:bg-olive hover:text-white transition-colors">
+                {area}
+              </a>
+            ) : (
+              <span class="px-4 py-2 bg-cream-dark text-sm text-charcoal-light rounded-sm">
+                {area}
+              </span>
+            );
+          })
         }
         <span class="px-4 py-2 bg-olive text-sm text-white rounded-sm">
           Cała Polska

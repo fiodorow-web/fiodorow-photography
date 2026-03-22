@@ -230,6 +230,8 @@ if (!portfolio) {
                   alt={`${categoryLabels[portfolio.category] || portfolio.category} ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}, zdjęcie ${index + 1}`}
                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   loading={index < 5 ? "eager" : "lazy"}
+                  width="800"
+                  height="1200"
                 />
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
