@@ -12,7 +12,6 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/polityka-prywatnosci') &&
         !page.includes('/studio'),
-      lastmod: new Date(),
     }),
   ],
   vite: {

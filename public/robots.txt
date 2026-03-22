@@ -20,5 +20,11 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 # Sitemap
 Sitemap: https://fiodorowphotography.pl/sitemap-index.xml

@@ -73,9 +73,9 @@ const slides = [
           <!-- Content Overlay (Per Slide) -->
           <div class="relative z-20 h-full flex items-center justify-center text-center text-white px-6">
             <div class="hero-content">
-              <h2 class="font-serif font-light tracking-[0.2em] mb-6 text-5xl md:text-7xl lg:text-8xl">
+              <span class="font-serif font-light tracking-[0.15em] mb-6 block uppercase">
                 {slide.title}
-              </h2>
+              </span>
               <p class="font-sans text-sm md:text-base tracking-[0.15em] mb-10 max-w-md mx-auto">
                 {slide.subtitle}
               </p>
@@ -176,14 +176,14 @@ const slides = [
   }
   
   /* Initial hidden state */
-  .hero-content h2,
+  .hero-content > span,
   .hero-content p,
   .hero-content div {
     opacity: 0;
   }
 
   /* Animation classes applied when parent has .active-slide */
-  .active-slide .hero-content h2 {
+  .active-slide .hero-content > span {
     animation: cinematic-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: 0.3s;
   }

@@ -64,6 +64,31 @@ const websiteSchema = {
     "@id": "https://fiodorowphotography.pl/#photographer"
   }
 };
+
+const personSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mateusz Fiodorow",
+    "jobTitle": "Fotograf ślubny",
+    "worksFor": { "@id": "https://fiodorowphotography.pl/#photographer" },
+    "sameAs": [
+      "https://www.instagram.com/fiodorow_photography",
+      "https://www.facebook.com/fiodorowphotography"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Weronika Fiodorow",
+    "jobTitle": "Fotograf ślubny",
+    "worksFor": { "@id": "https://fiodorowphotography.pl/#photographer" },
+    "sameAs": [
+      "https://www.instagram.com/fiodorow_photography",
+      "https://www.facebook.com/fiodorowphotography"
+    ]
+  }
+];
 ---
 
 <BaseLayout
@@ -74,6 +99,9 @@ const websiteSchema = {
   <Header currentPath="/" />
 
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  {personSchemas.map(schema => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
 
   <h1 class="sr-only">Fiodorow Photography — Fotograf Ślubny Siedlce, Białystok, Warszawa</h1>
 
@@ -236,7 +264,7 @@ const websiteSchema = {
             Specjalizujemy się w reportażach ślubnych, sesjach plenerowych i lifestyle, ale z radością podejmujemy się też innych fotograficznych wyzwań, które nam powierzacie. Działamy głównie na terenie Mazowsza, Podlasia i Lubelszczyzny – choć z chęcią dojedziemy także dalej.
           </p>
           <p class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10">
-            Fiodorow Photography to nasza wspólna droga i pasja do uwieczniania prawdziwych emocji. Od pierwszych wspólnych sesji w Siedlcach, z każdym kolejnym zrealizowanym reportażem ślubnym wkładamy całe serce w to, aby opowiedzieć Waszą historię. Jako zgrany duet fotografów, dajemy Wam podwójną uważność — na miejscu jesteśmy zawsze we dwoje.
+            Fiodorow Photography to nasza wspólna droga i pasja do uwieczniania prawdziwych emocji. Od ponad 6 lat, z każdym kolejnym zrealizowanym reportażem ślubnym wkładamy całe serce w to, aby opowiedzieć Waszą historię. Jako zgrany duet fotografów, dajemy Wam podwójną uważność — na miejscu jesteśmy zawsze we dwoje.
           </p>
           <a href="/o-nas" class="btn-primary">
             Poznaj naszą historię
@@ -359,7 +387,7 @@ const websiteSchema = {
           </div>
           <h3 class="font-serif text-xl tracking-[0.1em] uppercase text-charcoal mb-2 group-hover:text-olive transition-colors">Reportaż Ślubny</h3>
           <p class="text-charcoal-light text-sm leading-relaxed">
-            Kompletny reportaż Waszego dnia. Działamy dyskretnie, łapiąc ulotne chwile i spojrzenia, których Wy w natłoku emocji możecie nawet nie zauważyć. Dwa aparaty, dwa spojrzenia — towarzyszymy Wam od przygotowań do zabawy weselnej.
+            Kompletny reportaż Waszego dnia — około 700 starannie obrobionych zdjęć. Działamy dyskretnie, łapiąc ulotne chwile i spojrzenia, których Wy w natłoku emocji możecie nawet nie zauważyć. Dwa aparaty, dwa spojrzenia — towarzyszymy Wam od przygotowań do zabawy weselnej.
           </p>
         </a>
         
@@ -400,6 +428,22 @@ const websiteSchema = {
         </p>
       </div>
       
+      <!-- Static testimonials (hidden visually, accessible to AI crawlers and screen readers) -->
+      <div class="sr-only">
+        <blockquote>
+          <p>„Jesteśmy bardzo zadowoleni ze współpracy z Weroniką i Mateuszem od początku do końca. Tworzą tak ciepłą i swobodną atmosferę, że można zachowywać się zupełnie naturalnie. Zdjęcia wyszły bardzo naturalne, pełne emocji i cudownie oddają atmosferę dnia."</p>
+          <footer>— Maria i Piotr</footer>
+        </blockquote>
+        <blockquote>
+          <p>„Przepiękne zdjęcia, świetna współpraca i pełen profesjonalizm. Weronika i Mateusz uchwycili magię naszego wesela w najpiękniejszy możliwy sposób. Zdecydowanie polecamy!"</p>
+          <footer>— Dominika i Szymon</footer>
+        </blockquote>
+        <blockquote>
+          <p>„Całym sercem polecamy Weronikę i Mateusza, zdecydowanie najlepszy duet fotografów. Od pierwszego spotkania wiedzieliśmy, że to będzie strzał w dziesiątkę — zdjęcia wyszły po prostu magicznie."</p>
+          <footer>— Amelia i Damian</footer>
+        </blockquote>
+      </div>
+
       <!-- Elfsight Google Reviews Widget (lazy-loaded) -->
       <div class="elfsight-reviews-container reveal reveal-up reveal-d2" id="elfsight-container">
         <div class="elfsight-app-11d18e3f-c547-4cab-adfc-247a1b196ee8" data-elfsight-app-lazy></div>

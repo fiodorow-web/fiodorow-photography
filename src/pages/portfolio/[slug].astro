@@ -17,9 +17,9 @@ export async function getStaticPaths() {
         venueUrl: "https://maps.google.com/?q=Siedlce",
       },
       images: [
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90",
-        "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90",
-        "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90",
+        { src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80 400w, https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85 800w, https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90 1400w" },
+        { src: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=80 400w, https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=85 800w, https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90 1400w" },
+        { src: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=400&q=80 400w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=800&q=85 800w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90 1400w" },
       ],
     },
     "natalia-michal": {
@@ -31,8 +31,8 @@ export async function getStaticPaths() {
         venueUrl: "https://maps.google.com/?q=Bialystok",
       },
       images: [
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90",
-        "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90",
+        { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&q=80 400w, https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=85 800w, https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90 1400w" },
+        { src: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=400&q=80 400w, https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=85 800w, https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90 1400w" },
       ],
     },
     "amelia-damian": {
@@ -44,8 +44,8 @@ export async function getStaticPaths() {
         venueUrl: "https://maps.google.com/?q=Warszawa",
       },
       images: [
-        "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90",
-        "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90",
+        { src: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&q=80 400w, https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=85 800w, https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90 1400w" },
+        { src: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=400&q=80 400w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=800&q=85 800w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90 1400w" },
       ],
     },
   };
@@ -77,9 +77,10 @@ export async function getStaticPaths() {
           ? urlFor(item.coverImage).width(1400).quality(90).url()
           : null,
         images: item.images
-          ? item.images.map((img: any) =>
-              urlFor(img).width(1400).quality(90).url(),
-            )
+          ? item.images.map((img: any) => ({
+              src: urlFor(img).width(1400).quality(90).url(),
+              srcset: `${urlFor(img).width(400).quality(80).url()} 400w, ${urlFor(img).width(800).quality(85).url()} 800w, ${urlFor(img).width(1400).quality(90).url()} 1400w`,
+            }))
           : [],
       },
     },
@@ -220,13 +221,15 @@ if (!portfolio) {
         <!-- Image Grid - Masonry Style (Row-ordered via JS) -->
         <div id="gallery-grid" class="columns-1 md:columns-2 gap-4 space-y-4">
           {
-            portfolio.images.map((image: string, index: number) => (
+            portfolio.images.map((image: any, index: number) => (
               <div
                 class="break-inside-avoid overflow-hidden cursor-pointer gallery-item relative group"
                 data-index={index}
               >
                 <img
-                  src={image}
+                  src={image.src}
+                  srcset={image.srcset}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   alt={`${categoryLabels[portfolio.category] || portfolio.category} ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}, zdjęcie ${index + 1}`}
                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   loading={index < 5 ? "eager" : "lazy"}
@@ -397,7 +400,7 @@ if (!portfolio) {
     <Footer />
   </section>
 
-  <script define:vars={{ images: portfolio.images }}>
+  <script define:vars={{ images: portfolio.images.map((img: any) => img.src) }}>
     var galleryItems = document.querySelectorAll(".gallery-item");
     var lightbox = document.getElementById("lightbox");
     var imgA = document.getElementById("lightbox-img-a");

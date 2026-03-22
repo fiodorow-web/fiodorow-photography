@@ -55,6 +55,9 @@ const portfolioItems =
         image: item.coverImage
           ? urlFor(item.coverImage).width(800).quality(80).url()
           : fallbackItems[0].image,
+        srcset: item.coverImage
+          ? `${urlFor(item.coverImage).width(400).quality(75).url()} 400w, ${urlFor(item.coverImage).width(800).quality(80).url()} 800w`
+          : undefined,
         category: item.category,
         title: item.title,
         slug: item.slug,
@@ -87,9 +90,9 @@ const categories = [
         >
           Nasze <i class="font-light italic text-olive">Portfolio</i>
         </h1>
-        <p class="text-charcoal-light text-sm md:text-base max-w-md mx-auto">
-          Każda para to inna historia. <br>
-          Zajrzyjcie do środka i zobaczcie, jak je opowiadamy.
+        <p class="text-charcoal-light text-sm md:text-base max-w-lg mx-auto">
+          Każda para to inna historia — a my opowiadamy je przez obiektyw.
+          Poniżej znajdziecie wybrane reportaże ślubne, sesje narzeczeńskie i poślubne zrealizowane przez Fiodorow Photography na terenie Mazowsza, Podlasia i nie tylko.
         </p>
       </div>
 
@@ -130,6 +133,8 @@ const categories = [
               <div class="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={item.image}
+                  srcset={item.srcset}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt={`${categoryLabels[item.category] || item.category} ${item.title} — fotograf Siedlce`}
                   class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   loading={index < 3 ? "eager" : "lazy"}
