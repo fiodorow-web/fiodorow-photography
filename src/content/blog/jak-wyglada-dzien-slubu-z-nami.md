@@ -15,7 +15,7 @@ Aby nieco zapoznać Was z naszym stylem działania i pokazać, że naprawdę nie
 
 ## Przygotowania Pana Młodego — spokojne wejście w dzień
 
-Naszą wspólną przygodę rozpoczynamy około trzy godziny przed ceremonią. Zazwyczaj pierwszym celem są przygotowania Pana Młodego. Ten etap reportażu zajmuje zwykle do godziny. To moment na zdjęcia detali i tych małych elementów, które budują klimat całego dnia — spinki, mucha albo krawat, perfumy czy zegarek. Jeśli macie ochotę, znajdojemy też chwilę na kilka luźnych kadrów ze świadkiem, czasem przy symbolicznej szklance whisky. Tymczasem my chwytamy spontaniczne uśmiechy, a na koniec wykonujemy kilka klasycznych portretów.
+Naszą wspólną przygodę rozpoczynamy około trzy godziny przed ceremonią. Zazwyczaj pierwszym celem są przygotowania Pana Młodego. Ten etap reportażu zajmuje zwykle do godziny. To moment na zdjęcia detali i tych małych elementów, które budują klimat całego dnia — spinki, mucha albo krawat, perfumy czy zegarek. Jeśli macie ochotę, znajdujemy też chwilę na kilka luźnych kadrów ze świadkiem, czasem przy symbolicznej szklance whisky. Tymczasem my chwytamy spontaniczne uśmiechy, a na koniec wykonujemy kilka klasycznych portretów.
 
 ![Przygotowania pana młodego — spinki, perfumy i detale ślubne](../../assets/blog/jak-wyglada-dzien-slubu/przygotowania-pana-mlodego-detale.jpg)
 
