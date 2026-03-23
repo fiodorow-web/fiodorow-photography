@@ -13,10 +13,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, phone, date, service, message } = req.body;
+    const { firstName, lastName, email, phone, eventDate, eventType, message } = req.body;
+    const name = `${firstName || ''} ${lastName || ''}`.trim();
+    const date = eventDate;
+    const service = eventType;
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!firstName || !email || !message) {
       return res.status(400).json({ error: 'Wymagane pola: imię, email i wiadomość' });
     }
 
