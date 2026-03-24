@@ -44,66 +44,108 @@ export default async function handler(req, res) {
         subject: `Nowe zapytanie od ${name} - Fiodorow Photography`,
         html: `<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;background:#f0ece6;font-family:Georgia,serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0ece6;padding:40px 20px;">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#faf8f5;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#faf8f5;padding:48px 20px;">
     <tr><td align="center">
-      <table width="580" cellpadding="0" cellspacing="0" style="max-width:580px;width:100%;">
+      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
-        <!-- Header -->
+        <!-- Logo -->
         <tr>
-          <td style="background:#2d2d2d;padding:32px 40px;text-align:center;">
-            <p style="margin:0;color:#8b9a7a;font-size:10px;letter-spacing:4px;text-transform:uppercase;">Fiodorow Photography</p>
-            <p style="margin:8px 0 0;color:#f0ece6;font-size:22px;font-weight:normal;letter-spacing:2px;">Nowe zapytanie</p>
+          <td style="padding:0 0 32px;text-align:center;">
+            <img src="https://fiodorowphotography.pl/logo-dark.png" alt="Fiodorow Photography" width="200" style="display:inline-block;width:200px;height:auto;" />
           </td>
         </tr>
 
-        <!-- Body -->
+        <!-- Divider thin olive -->
         <tr>
-          <td style="background:#ffffff;padding:36px 40px;">
+          <td style="padding:0 0 32px;text-align:center;">
+            <table cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>
+              <td style="width:60px;height:1px;background:#8b9a7a;"></td>
+            </tr></table>
+          </td>
+        </tr>
 
-            <!-- Details -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+        <!-- Title -->
+        <tr>
+          <td style="padding:0 0 8px;text-align:center;">
+            <p style="margin:0;color:#8b9a7a;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Nowe zapytanie ze strony</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 40px;text-align:center;">
+            <h1 style="margin:0;color:#2d2d2d;font-size:26px;font-weight:300;letter-spacing:1px;font-family:'Cormorant Garamond',Georgia,serif;">${name}</h1>
+          </td>
+        </tr>
+
+        <!-- Card -->
+        <tr>
+          <td style="background:#ffffff;padding:0;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+            <table width="100%" cellpadding="0" cellspacing="0">
+
+              <!-- Details Section -->
               <tr>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;width:40%;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Imię i nazwisko</td>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#2d2d2d;font-size:14px;">${name}</td>
+                <td style="padding:32px 36px 24px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="padding:14px 0;border-bottom:1px solid #f5f0eb;">
+                        <p style="margin:0 0 3px;color:#aaa;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Email</p>
+                        <a href="mailto:${email}" style="color:#8b9a7a;text-decoration:none;font-size:15px;font-family:'Cormorant Garamond',Georgia,serif;">${email}</a>
+                      </td>
+                    </tr>
+                    ${phone ? `<tr>
+                      <td style="padding:14px 0;border-bottom:1px solid #f5f0eb;">
+                        <p style="margin:0 0 3px;color:#aaa;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Telefon</p>
+                        <a href="tel:${phone}" style="color:#2d2d2d;text-decoration:none;font-size:15px;font-family:'Cormorant Garamond',Georgia,serif;">${phone}</a>
+                      </td>
+                    </tr>` : ''}
+                    ${service ? `<tr>
+                      <td style="padding:14px 0;border-bottom:1px solid #f5f0eb;">
+                        <p style="margin:0 0 3px;color:#aaa;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Rodzaj sesji</p>
+                        <p style="margin:0;color:#2d2d2d;font-size:15px;font-family:'Cormorant Garamond',Georgia,serif;">${service}</p>
+                      </td>
+                    </tr>` : ''}
+                    ${date ? `<tr>
+                      <td style="padding:14px 0;border-bottom:1px solid #f5f0eb;">
+                        <p style="margin:0 0 3px;color:#aaa;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Planowana data</p>
+                        <p style="margin:0;color:#2d2d2d;font-size:15px;font-family:'Cormorant Garamond',Georgia,serif;">${date}</p>
+                      </td>
+                    </tr>` : ''}
+                  </table>
+                </td>
               </tr>
+
+              <!-- Message Section -->
               <tr>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Email</td>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;"><a href="mailto:${email}" style="color:#8b9a7a;text-decoration:none;font-size:14px;">${email}</a></td>
+                <td style="padding:0 36px 32px;">
+                  <div style="background:#faf8f5;padding:24px 28px;border-radius:2px;margin-top:8px;">
+                    <p style="margin:0 0 10px;color:#aaa;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;">Wiadomość</p>
+                    <p style="margin:0;color:#2d2d2d;font-size:15px;line-height:1.8;white-space:pre-wrap;font-family:'Cormorant Garamond',Georgia,serif;">${message}</p>
+                  </div>
+                </td>
               </tr>
-              ${phone ? `<tr>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Telefon</td>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;"><a href="tel:${phone}" style="color:#8b9a7a;text-decoration:none;font-size:14px;">${phone}</a></td>
-              </tr>` : ''}
-              ${date ? `<tr>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Planowana data</td>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#2d2d2d;font-size:14px;">${date}</td>
-              </tr>` : ''}
-              ${service ? `<tr>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Rodzaj sesji</td>
-                <td style="padding:12px 0;border-bottom:1px solid #f0ece6;color:#2d2d2d;font-size:14px;">${service}</td>
-              </tr>` : ''}
+
+              <!-- Reply Button -->
+              <tr>
+                <td style="padding:0 36px 36px;text-align:center;">
+                  <a href="mailto:${email}" style="display:inline-block;background:#2d2d2d;color:#ffffff;text-decoration:none;padding:14px 40px;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;border-radius:1px;">Odpowiedz</a>
+                </td>
+              </tr>
+
             </table>
-
-            <!-- Message -->
-            <p style="margin:0 0 10px;color:#999;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;">Wiadomość</p>
-            <div style="background:#f9f7f4;border-left:3px solid #8b9a7a;padding:20px 24px;border-radius:2px;">
-              <p style="margin:0;color:#2d2d2d;font-size:14px;line-height:1.8;white-space:pre-wrap;">${message}</p>
-            </div>
-
-            <!-- Reply CTA -->
-            <div style="margin-top:32px;text-align:center;">
-              <a href="mailto:${email}" style="display:inline-block;background:#2d2d2d;color:#ffffff;text-decoration:none;padding:12px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:Arial,sans-serif;">Odpowiedz</a>
-            </div>
-
           </td>
         </tr>
 
         <!-- Footer -->
         <tr>
-          <td style="padding:20px 40px;text-align:center;">
-            <p style="margin:0;color:#aaa;font-size:11px;font-family:Arial,sans-serif;">fiodorowphotography.pl</p>
+          <td style="padding:36px 0 0;text-align:center;">
+            <table cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr>
+              <td style="width:40px;height:1px;background:#ddd;"></td>
+            </tr></table>
+            <p style="margin:0 0 4px;color:#bbb;font-size:10px;letter-spacing:1px;font-family:'Montserrat',Arial,sans-serif;">
+              <a href="https://fiodorowphotography.pl" style="color:#8b9a7a;text-decoration:none;">fiodorowphotography.pl</a>
+            </p>
+            <p style="margin:0;color:#ccc;font-size:9px;font-family:'Montserrat',Arial,sans-serif;">Formularz kontaktowy</p>
           </td>
         </tr>
 
