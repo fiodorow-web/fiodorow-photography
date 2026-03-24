@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'Fiodorow Photography <onboarding@resend.dev>',
+        from: 'Fiodorow Photography <kontakt@fiodorowphotography.pl>',
         to: ['fiodorowphotography@gmail.com'],
         reply_to: email,
         subject: `Nowe zapytanie od ${name} - Fiodorow Photography`,
