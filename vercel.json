@@ -1,4 +1,28 @@
 {
+  "redirects": [
+    { "source": "/portfolio-item/:path*", "destination": "/portfolio", "permanent": true },
+    { "source": "/strona-glowna/:path*", "destination": "/", "permanent": true },
+    { "source": "/category/:path*", "destination": "/portfolio", "permanent": true },
+    { "source": "/tag/:path*", "destination": "/portfolio", "permanent": true },
+    { "source": "/proofing-gallery/:path*", "destination": "/portfolio", "permanent": true },
+    { "source": "/wedding-flowers", "destination": "/blog", "permanent": true },
+    { "source": "/bridal-bouquet", "destination": "/blog", "permanent": true },
+    { "source": "/wedding-picture", "destination": "/blog", "permanent": true },
+    { "source": "/love-shades", "destination": "/blog", "permanent": true },
+    { "source": "/love-songs", "destination": "/blog", "permanent": true },
+    { "source": "/tender-love", "destination": "/blog", "permanent": true },
+    { "source": "/true-solulmates", "destination": "/blog", "permanent": true },
+    { "source": "/vanilla-sky", "destination": "/blog", "permanent": true },
+    { "source": "/into-the-woods", "destination": "/blog", "permanent": true },
+    { "source": "/8-gifts-for-the-groomsmen-that-will-never-forget", "destination": "/blog", "permanent": true },
+    { "source": "/8-gifts-for-the-groomsmen-that-will-never-forget-2", "destination": "/blog", "permanent": true },
+    { "source": "/2025/:path*", "destination": "/blog", "permanent": true },
+    { "source": "/2024/:path*", "destination": "/blog", "permanent": true },
+    { "source": "/2023/:path*", "destination": "/blog", "permanent": true },
+    { "source": "/wp-content/:path*", "destination": "/", "permanent": true },
+    { "source": "/wp-admin/:path*", "destination": "/", "permanent": true },
+    { "source": "/wp-includes/:path*", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
