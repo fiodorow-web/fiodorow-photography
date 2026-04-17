@@ -83,27 +83,67 @@ const breadcrumbSchema = breadcrumbs
 
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Schema.org for Photographer -->
+    <!-- Schema.org for Photographer / LocalBusiness -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Photographer",
+        "@type": ["Photographer", "LocalBusiness"],
         "@id": "https://fiodorowphotography.pl/#photographer",
-        name: "Fiodorow Photography",
+        name: "Fiodorow Photography | Fotografia Ślubna",
         image: new URL(image, Astro.site).href,
+        logo: "https://fiodorowphotography.pl/logo-dark.webp",
         description: description,
         address: {
           "@type": "PostalAddress",
+          streetAddress: "Prymasa Stefana Wyszyńskiego",
           addressLocality: "Siedlce",
           addressRegion: "Mazowieckie",
           postalCode: "08-110",
           addressCountry: "PL",
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 52.1676,
+          longitude: 22.2903,
+        },
         priceRange: "$$",
         telephone: "+48 660 872 121",
         url: "https://fiodorowphotography.pl",
+        hasMap: "https://maps.google.com/?cid=1555365222895602722",
+        areaServed: [
+          { "@type": "City", name: "Siedlce" },
+          { "@type": "City", name: "Warszawa" },
+          { "@type": "City", name: "Białystok" },
+          { "@type": "City", name: "Łuków" },
+          { "@type": "City", name: "Mińsk Mazowiecki" },
+          { "@type": "City", name: "Sokołów Podlaski" },
+          { "@type": "City", name: "Węgrów" },
+          { "@type": "City", name: "Garwolin" },
+        ],
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "00:00",
+          closes: "23:59",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "5.0",
+          reviewCount: "53",
+          bestRating: "5",
+          worstRating: "1",
+        },
         sameAs: [
+          "https://maps.google.com/?cid=1555365222895602722",
           "https://www.instagram.com/fiodorow_photography",
           "https://www.facebook.com/fiodorowphotography",
         ],
