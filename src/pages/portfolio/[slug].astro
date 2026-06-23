@@ -106,17 +106,60 @@ const { portfolio } = Astro.props;
 if (!portfolio) {
   return Astro.redirect("/portfolio");
 }
+
+const catLabel = categoryLabels[portfolio.category] || portfolio.category;
+const venue = portfolio.venue?.venueName;
+
+const seoTitle = venue
+  ? `${catLabel} ${venue} — ${portfolio.title} | Fiodorow`
+  : `${catLabel} — ${portfolio.title} | Fiodorow Photography`;
+
+const seoDescription = venue
+  ? `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""} w ${venue}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`
+  : `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`;
+
+const imageGallerySchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  name: `${catLabel} — ${portfolio.title}`,
+  description: seoDescription,
+  url: `https://fiodorowphotography.pl/portfolio/${Astro.params.slug}`,
+  ...(venue && {
+    contentLocation: {
+      "@type": "Place",
+      name: venue,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: venue,
+        addressCountry: "PL",
+      },
+    },
+  }),
+  ...(portfolio.date && { datePublished: portfolio.date }),
+  author: {
+    "@type": "Organization",
+    name: "Fiodorow Photography",
+    url: "https://fiodorowphotography.pl",
+  },
+  image: portfolio.images.map((img: any) => img.src),
+};
 ---
 
 <BaseLayout
-  title={`${portfolio.title} — ${categoryLabels[portfolio.category] || portfolio.category} | Fiodorow Photography`}
-  description={`${categoryLabels[portfolio.category] || portfolio.category}: ${portfolio.title}${portfolio.venue?.venueName ? ` — ${portfolio.venue.venueName}` : ""}. Zobacz galerię zdjęć | Fiodorow Photography, fotograf ślubny Siedlce.`}
+  title={seoTitle}
+  description={seoDescription}
   image={portfolio.coverImage || "/og-image.jpg"}
   breadcrumbs={[
     { name: "Portfolio", href: "/portfolio" },
     { name: portfolio.title, href: `/portfolio/${Astro.params.slug}` },
   ]}
 >
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(imageGallerySchema)}
+  />
+
   <Header currentPath="/portfolio" />
 
   <!-- Portfolio Detail -->

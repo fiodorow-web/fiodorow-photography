@@ -1,6 +1,10 @@
 export default async function handler(req, res) {
   // Handle CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const allowedOrigins = ['https://fiodorowphotography.pl', 'https://www.fiodorowphotography.pl'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -13,7 +17,46 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { firstName, lastName, email, phone, eventDate, eventType, message } = req.body;
+    const { firstName, lastName, email, phone, eventDate, eventType, message, website, formTimestamp } = req.body;
+
+    // --- Anti-spam checks ---
+
+    // 1. Honeypot: if the hidden "website" field is filled, it's a bot
+    if (website) {
+      // Return 200 to not tip off the bot
+      return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+    }
+
+    // 2. Timing: reject if form was submitted in under 3 seconds
+    if (formTimestamp) {
+      const elapsed = Date.now() - parseInt(formTimestamp, 10);
+      if (elapsed < 3000) {
+        return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+      }
+    }
+
+    // 3. Content validation: reject gibberish names (no vowels or excessive length)
+    const hasVowels = /[aeiouyąęó]/i;
+    if (firstName && firstName.length > 2 && !hasVowels.test(firstName)) {
+      return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+    }
+    if (lastName && lastName.length > 2 && !hasVowels.test(lastName)) {
+      return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+    }
+
+    // 4. Reject if name or message is excessively long random text
+    if ((firstName && firstName.length > 50) || (lastName && lastName.length > 50)) {
+      return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+    }
+
+    // 5. Reject common spam patterns in email
+    const spamEmailPatterns = /(.)\1{4,}|^[a-z]\.[a-z]\.[a-z]/i;
+    if (email && spamEmailPatterns.test(email.split('@')[0])) {
+      return res.status(200).json({ success: true, message: 'Wiadomość została wysłana' });
+    }
+
+    // --- End anti-spam checks ---
+
     const name = `${firstName || ''} ${lastName || ''}`.trim();
     const date = eventDate;
     const service = eventType;
