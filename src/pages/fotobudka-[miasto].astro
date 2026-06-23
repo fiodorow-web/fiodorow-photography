@@ -1,0 +1,474 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+import {
+  fotobudkaMiasta,
+  fotobudkaMiastaOrder,
+  faqCena,
+  faqWcenie,
+  faqRezerwacja,
+  faqCzas,
+} from "../data/fotobudka-miasta";
+import heroImg from "../assets/fotobudka/fotobudka-siedlce-drewniana.jpg";
+import detailImg from "../assets/fotobudka/fotobudka-siedlce-detal.jpg";
+import wesele1 from "../assets/fotobudka/fotobudka-wesele-goscie-okulary.jpg";
+import wesele2 from "../assets/fotobudka/fotobudka-wesele-panna-mloda-gosc.jpg";
+import wesele3 from "../assets/fotobudka/fotobudka-wesele-para-mloda-okulary.jpg";
+
+export function getStaticPaths() {
+  return Object.entries(fotobudkaMiasta).map(([slug, city]) => ({
+    params: { miasto: slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+
+const title = `Fotobudka ${city.nom} — wynajem na wesele | Fiodorow Photography`;
+const description = `${city.lead} Nielimitowane wydruki, galeria online i obsługa w cenie.`;
+const canonical = `https://fiodorowphotography.pl/${city.slug}`;
+
+const offerCards = [
+  {
+    title: "Brak limitów wydruków",
+    body: "Drukujecie tyle zdjęć, ile dusza zapragnie. Każdy gość wychodzi z gotową odbitką w dłoni — bez dopłat i limitów.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.83c-.24.03-.48.06-.72.1m.72-.1a42.4 42.4 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.17c.24.03.48.06.72.1m-.72-.1L17.66 18m0 0 .23 2.52a1.13 1.13 0 0 1-1.12 1.23H7.23c-.66 0-1.18-.57-1.12-1.23L6.34 18m11.32 0h1.09A2.25 2.25 0 0 0 21 15.75V9.46c0-1.08-.77-2.02-1.84-2.18a48 48 0 0 0-1.91-.24M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.46c0-1.08.77-2.02 1.84-2.18a48 48 0 0 1 1.91-.24m10.5 0a48.5 48.5 0 0 0-10.5 0m10.5 0V3.38c0-.62-.5-1.13-1.13-1.13h-8.25c-.62 0-1.12.5-1.12 1.13v3.66"/></svg>`,
+  },
+  {
+    title: "Twoja własna galeria",
+    body: "Wszystkie ujęcia trafiają do galerii online, dostępnej krótko po imprezie — gotowe do pobrania i udostępnienia bliskim.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.16-5.16a2.25 2.25 0 0 1 3.18 0l5.16 5.16m-1.5-1.5 1.41-1.41a2.25 2.25 0 0 1 3.18 0l2.91 2.91m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.01v.01h-.01V8.25Z"/></svg>`,
+  },
+  {
+    title: "Personalizacja wydruków",
+    body: "Dowolny napis, data czy motyw na każdym wydruku — dopasowane do Waszego wydarzenia i stylu przyjęcia.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M16.86 4.49 19.5 7.13m-1.34-3.97a1.87 1.87 0 1 1 2.65 2.65L7.6 18.66a4.5 4.5 0 0 1-1.9 1.13l-2.69.79.79-2.69a4.5 4.5 0 0 1 1.13-1.9L16.16 4.16Z"/></svg>`,
+  },
+  {
+    title: "Format do wyboru",
+    body: "Klasyczne paski czy eleganckie pocztówki — to Wy decydujecie, jak wyglądają pamiątki, które zabiorą Wasi goście.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25A2.25 2.25 0 0 1 8.25 10.5H6a2.25 2.25 0 0 1-2.25-2.25V6Zm0 9.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25Zm9.75-9.75A2.25 2.25 0 0 1 15.75 3.75H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6Zm0 9.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/></svg>`,
+  },
+  {
+    title: "Klimatyczne gadżety",
+    body: "Wyselekcjonowane rekwizyty, które podkręcą każdą stylizację i rozkręcą zabawę — okulary, tabliczki, kapelusze i więcej.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.81 15.9 9 18.75l-.81-2.85a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.85-.81a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.81 2.85a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.85.81a4.5 4.5 0 0 0-3.09 3.09ZM18.26 8.72 18 9.75l-.26-1.03a3.38 3.38 0 0 0-2.45-2.46L14.25 6l1.04-.26a3.38 3.38 0 0 0 2.45-2.45L18 2.25l.26 1.04a3.38 3.38 0 0 0 2.46 2.45L21.75 6l-1.03.26a3.38 3.38 0 0 0-2.46 2.46Z"/></svg>`,
+  },
+  {
+    title: "Profesjonalne światło",
+    body: "Lampa pierścieniowa Godox sprawia, że każde zdjęcie wygląda jak małe studio — równe, miękkie i pochlebne dla każdej twarzy.",
+    icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.36.39-1.59 1.59M21 12h-2.25m-.39 6.36-1.59-1.59M12 18.75V21m-4.77-4.23-1.59 1.59M5.25 12H3m4.23-4.77L5.64 5.64M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>`,
+  },
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "Rezerwacja",
+    body: "Wybierzcie termin i napiszcie do nas. Potwierdzamy dostępność i rezerwujemy Waszą datę.",
+  },
+  {
+    n: "2",
+    title: "Dostawa i montaż",
+    body: `Przyjeżdżamy do ${city.gen}, ustawiamy i konfigurujemy fotobudkę. Wy nie robicie nic.`,
+  },
+  {
+    n: "3",
+    title: "Zabawa i zdjęcia",
+    body: "Goście bawią się przez całą imprezę, a wydruki lądują od razu w ich rękach.",
+  },
+  {
+    n: "4",
+    title: "Pamiątki",
+    body: "Po wszystkim dostajecie galerię online ze wszystkimi zdjęciami z wydarzenia.",
+  },
+];
+
+const faq = [
+  { q: `Czy dojeżdżacie z fotobudką do ${city.gen}?`, a: city.dojazd },
+  { q: `Ile kosztuje wynajem fotobudki w ${city.loc}?`, a: faqCena(city) },
+  { q: "Na jak długo wynajmuje się fotobudkę?", a: faqCzas },
+  { q: "Co znajdę w cenie wynajmu?", a: faqWcenie(city) },
+  { q: `Jak zarezerwować fotobudkę na wesele w ${city.loc}?`, a: faqRezerwacja(city) },
+];
+
+const cities = fotobudkaMiastaOrder
+  .map((slug) => fotobudkaMiasta[slug])
+  .filter((item) => item.slug !== city.slug)
+  .map((item) => ({ name: item.nom, slug: item.slug }));
+
+const gallery = [
+  {
+    src: wesele1,
+    alt: `Goście w okularach pozują przy drewnianej fotobudce retro na weselu w ${city.loc}`,
+  },
+  {
+    src: wesele2,
+    alt: `Panna młoda z gościem korzystają z fotobudki retro podczas wesela w ${city.loc}`,
+  },
+  {
+    src: wesele3,
+    alt: `Para młoda w okularach pozuje przy drewnianej fotobudce na weselu w ${city.loc}`,
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: `Wynajem fotobudki ${city.nom}`,
+      serviceType: "Wynajem fotobudki",
+      provider: {
+        "@type": "LocalBusiness",
+        name: "Fiodorow Photography",
+        telephone: "+48660872121",
+        email: "fiodorowphotography@gmail.com",
+        url: canonical,
+      },
+      areaServed: { "@type": "City", name: city.nom },
+      description,
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  breadcrumbs={[
+    { name: "Fotobudka", href: "/fotobudka" },
+    { name: `Fotobudka ${city.nom}`, href: `/${city.slug}` },
+  ]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <Header currentPath="/fotobudka" />
+
+  <!-- HERO -->
+  <section class="bg-cream pt-[150px] pb-[clamp(56px,8vw,104px)] px-6">
+    <div class="max-w-[1240px] mx-auto flex flex-wrap items-center gap-[clamp(40px,6vw,76px)]">
+      <div class="reveal reveal-up flex-[1_1_380px] max-w-[560px]">
+        <span class="block font-sans text-xs font-bold tracking-[.24em] uppercase text-olive mb-[22px]">
+          Wynajem · {city.nom}
+        </span>
+        <h1 class="font-serif font-light uppercase tracking-[.08em] text-charcoal text-[clamp(40px,6.4vw,86px)] leading-[1.02] mb-[26px]">
+          Fotobudka<br />
+          <span style="font-style:italic;text-transform:uppercase;letter-spacing:.02em;color:var(--color-olive)">{city.nom}</span>
+        </h1>
+        <p class="font-sans font-light text-charcoal-light text-[17px] leading-[1.8] max-w-[470px]">
+          {city.lead} Nasza drewniana fotobudka łączy klasyczny design z nowoczesną technologią —
+          stylowy element, który wpisze się w dekorację każdego przyjęcia.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-9">
+          <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
+          <a href="#pakiet" class="btn-secondary">Co zawiera wynajem</a>
+        </div>
+        <p class="mt-8 font-sans text-xs tracking-[.12em] uppercase text-olive">
+          Nielimitowane wydruki · Galeria online · Obsługa w cenie
+        </p>
+      </div>
+
+      <div class="reveal reveal-up reveal-d2 flex-[1_1_340px] flex justify-center">
+        <div class="relative max-w-[420px] w-full">
+          <div
+            class="absolute top-[8%] left-1/2 -translate-x-1/2 w-[78%] aspect-square rounded-full z-0 pointer-events-none"
+            style="background:radial-gradient(circle,rgba(255,236,200,.95) 0%,rgba(255,236,200,0) 68%);animation:fbGlow 4s ease-in-out infinite"
+          ></div>
+          <div class="absolute top-5 -right-5 w-full h-full border border-olive/40 rounded-[2px] z-0"></div>
+          <Image
+            src={heroImg}
+            alt={`Drewniana fotobudka retro na statywie — wynajem w ${city.loc}`}
+            class="relative z-10 w-full h-auto rounded-[2px] block"
+            style="box-shadow:0 26px 56px rgba(45,40,30,.2)"
+            width={420}
+            height={746}
+            loading="eager"
+            fetchpriority="high"
+            format="webp"
+            quality={82}
+            widths={[320, 420, 640, 840]}
+            sizes="(max-width: 640px) calc(100vw - 48px), 420px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DREWNIANA FOTOBUDKA Z DUSZĄ -->
+  <section class="bg-white py-[clamp(64px,9vw,120px)] px-6">
+    <div class="max-w-[1180px] mx-auto flex flex-wrap-reverse items-center gap-[clamp(40px,6vw,72px)]">
+      <div class="reveal reveal-up flex-[1_1_320px] flex justify-center">
+        <div class="relative max-w-[400px] w-full">
+          <div class="absolute -bottom-[18px] -left-[18px] w-full h-full border border-charcoal/10 rounded-[2px] z-0"></div>
+          <Image
+            src={detailImg}
+            alt={`Drewniana fotobudka na wesele w ${city.loc} — detal`}
+            class="relative z-10 w-full h-auto rounded-[2px] block"
+            style="box-shadow:0 24px 50px rgba(45,40,30,.18)"
+            width={400}
+            height={711}
+            loading="lazy"
+            format="webp"
+            quality={80}
+            widths={[320, 400, 640, 800]}
+            sizes="(max-width: 640px) calc(100vw - 48px), 400px"
+          />
+        </div>
+      </div>
+
+      <div class="reveal reveal-up reveal-d1 flex-[1_1_380px] max-w-[540px]">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          Fotobudka {city.nom}
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.1em] text-charcoal text-[clamp(28px,3.8vw,44px)] leading-[1.15] mb-[26px]">
+          Drewniana fotobudka<br />
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">z duszą</span>
+        </h2>
+        <p class="font-sans font-light text-charcoal-light text-[16px] leading-[1.85] mb-[18px]">
+          {city.intro1}
+        </p>
+        <p class="font-sans font-light text-charcoal-light text-[16px] leading-[1.85]">
+          {city.intro2}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- W CENIE KAŻDEGO WYNAJMU -->
+  <section class="bg-cream-dark py-[clamp(64px,9vw,120px)] px-6">
+    <div class="max-w-[1180px] mx-auto">
+      <div class="reveal reveal-up text-center max-w-[620px] mx-auto mb-14">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          Oferta
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.12em] text-charcoal text-[clamp(28px,3.8vw,42px)] leading-[1.15]">
+          W cenie każdego
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">wynajmu</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        {
+          offerCards.map((card, i) => (
+            <div
+              class:list={[
+                "reveal reveal-up bg-white p-[38px_32px] border border-charcoal/[.07] rounded-[2px]",
+                i % 3 === 1 ? "reveal-d1" : i % 3 === 2 ? "reveal-d2" : "",
+              ]}
+            >
+              <div class="text-olive mb-5" set:html={card.icon} />
+              <h3 class="font-serif font-medium uppercase tracking-[.07em] text-charcoal text-[20px] mb-3">
+                {card.title}
+              </h3>
+              <p class="font-sans font-light text-charcoal-light text-[14.5px] leading-[1.7]">
+                {card.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- JAK TO DZIAŁA -->
+  <section class="bg-white py-[clamp(64px,9vw,120px)] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="reveal reveal-up text-center max-w-[600px] mx-auto mb-14">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          Proces
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.12em] text-charcoal text-[clamp(28px,3.8vw,42px)] leading-[1.15] mb-4">
+          Jak to
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">działa</span>
+        </h2>
+        <p class="font-sans font-light text-charcoal-light text-[15px] leading-[1.7]">
+          Od rezerwacji terminu do gotowej galerii — wszystkim zajmujemy się my.
+        </p>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-9">
+        {
+          steps.map((step, i) => (
+            <div
+              class:list={[
+                "reveal reveal-up text-center",
+                i === 1 ? "reveal-d1" : i === 2 ? "reveal-d2" : i === 3 ? "reveal-d3" : "",
+              ]}
+            >
+              <div class="w-[62px] h-[62px] mx-auto mb-[22px] rounded-full border border-olive/40 flex items-center justify-center">
+                <span class="font-serif text-[22px] text-olive">{step.n}</span>
+              </div>
+              <h3 class="font-serif font-medium uppercase tracking-[.1em] text-charcoal text-[18px] mb-3">
+                {step.title}
+              </h3>
+              <p class="font-sans font-light text-charcoal-light text-[14px] leading-[1.7]">
+                {step.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="bg-cream py-[clamp(64px,9vw,120px)] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="reveal reveal-up text-center max-w-[600px] mx-auto mb-12">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          Galeria
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.12em] text-charcoal text-[clamp(28px,3.8vw,42px)] leading-[1.15] mb-[14px]">
+          Fotobudka
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">w akcji</span>
+        </h2>
+        <p class="font-sans font-light text-charcoal-light text-[15px] leading-[1.7]">
+          Zdjęcia i wydruki z prawdziwych imprez — Wasze chwile, nasze kadry.
+        </p>
+      </div>
+      <div class="reveal reveal-up reveal-d1 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+        {
+          gallery.map((img) => (
+            <Image
+              src={img.src}
+              alt={img.alt}
+              class="w-full rounded-[2px] block object-cover aspect-[3/2]"
+              style="box-shadow:0 14px 30px rgba(45,40,30,.1)"
+              width={500}
+              height={333}
+              loading="lazy"
+              format="webp"
+              quality={78}
+              widths={[320, 480, 700, 1000]}
+              sizes="(max-width: 700px) calc(100vw - 48px), (max-width: 1100px) 33vw, 350px"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WSZYSTKO W JEDNYM PAKIECIE -->
+  <section id="pakiet" class="bg-cream-dark py-[clamp(64px,9vw,120px)] px-6">
+    <div class="reveal reveal-up max-w-[760px] mx-auto bg-white border border-charcoal/[.08] rounded-[2px] p-[clamp(36px,5vw,64px)] text-center">
+      <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+        Wynajem
+      </span>
+      <h2 class="font-serif font-normal uppercase tracking-[.1em] text-charcoal text-[clamp(26px,3.6vw,40px)] leading-[1.15] mb-[22px]">
+        Wszystko w jednym
+        <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">pakiecie</span>
+      </h2>
+      <p class="font-sans font-light text-charcoal-light text-[16px] leading-[1.8] max-w-[520px] mx-auto mb-8">
+        {city.coverage} Wycenę ustalamy indywidualnie — zależnie od terminu, długości wynajmu i miejsca wydarzenia.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        {
+          ["Dostawa i montaż w cenie", "Obsługa przez całą imprezę", "Nielimitowane wydruki", "Galeria online"].map(
+            (chip) => (
+              <span class="px-5 py-[11px] bg-cream border border-charcoal/[.08] rounded-[2px] font-sans font-light text-[13px] tracking-[.04em] text-charcoal-light">
+                {chip}
+              </span>
+            )
+          )
+        }
+      </div>
+      <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zapytaj o wycenę</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white py-[clamp(64px,9vw,120px)] px-6">
+    <div class="max-w-[820px] mx-auto">
+      <div class="reveal reveal-up text-center mx-auto mb-[52px]">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          FAQ
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.12em] text-charcoal text-[clamp(28px,3.8vw,42px)] leading-[1.15]">
+          Najczęstsze
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">pytania</span>
+        </h2>
+      </div>
+      <div class="reveal reveal-up reveal-d1 flex flex-col gap-[14px]">
+        {
+          faq.map((item) => (
+            <details class="bg-white border border-charcoal/10 rounded-[2px] px-7 py-6 group">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <h3 class="font-serif font-medium text-[18px] text-charcoal m-0">{item.q}</h3>
+                <span class="text-olive text-[24px] font-light flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p class="font-sans font-light text-charcoal-light text-[14.5px] leading-[1.75] mt-4 pt-4 border-t border-charcoal/10">
+                {item.a}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTOBUDKA W TWOIM MIEŚCIE -->
+  <section class="bg-cream py-[clamp(64px,9vw,110px)] px-6">
+    <div class="max-w-[1000px] mx-auto">
+      <div class="reveal reveal-up text-center max-w-[600px] mx-auto mb-11">
+        <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
+          Lokalnie
+        </span>
+        <h2 class="font-serif font-normal uppercase tracking-[.1em] text-charcoal text-[clamp(26px,3.6vw,40px)] leading-[1.15] mb-4">
+          Fotobudka w
+          <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">Twoim mieście</span>
+        </h2>
+        <p class="font-sans font-light text-charcoal-light text-[15px] leading-[1.7]">
+          Działamy w całym regionie. Sprawdźcie stronę dla swojej okolicy —
+          znajdziecie tam wszystko o wynajmie fotobudki na miejscu.
+        </p>
+      </div>
+      <div class="reveal reveal-up reveal-d1 grid grid-cols-[repeat(auto-fit,minmax(196px,1fr))] gap-[18px]">
+        {
+          cities.map((item) => (
+            <a
+              href={`/${item.slug}`}
+              class="block bg-white border border-charcoal/10 rounded-[2px] p-[30px_26px] no-underline group transition-colors duration-[400ms] hover:border-olive"
+            >
+              <span class="block font-serif text-[24px] tracking-[.06em] uppercase text-charcoal mb-2 transition-colors duration-300 group-hover:text-olive">
+                {item.name}
+              </span>
+              <span class="font-sans text-[12.5px] tracking-[.05em] text-charcoal-light">
+                Fotobudka {item.name} →
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA OLIVE -->
+  <section class="bg-olive py-[clamp(64px,9vw,104px)] px-6">
+    <div class="reveal reveal-up max-w-[720px] mx-auto text-center">
+      <h2 class="font-serif font-normal uppercase tracking-[.1em] text-white text-[clamp(26px,3.6vw,38px)] leading-[1.2] mb-[22px]">
+        Zarezerwujcie fotobudkę<br />w {city.loc}
+      </h2>
+      <p class="font-sans font-light text-white/85 text-[16px] leading-[1.8] max-w-[520px] mx-auto mb-[38px]">
+        Sprawdźcie dostępność terminu i porozmawiajmy o szczegółach.
+        Odpowiadamy zwykle w ciągu kilku godzin.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="tel:+48660872121" class="btn-on-accent">+48 660 872 121</a>
+        <a href="/kontakt?usluga=fotobudka" class="btn-on-accent">Napisz do nas</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

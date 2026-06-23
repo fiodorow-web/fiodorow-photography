@@ -158,6 +158,50 @@ a {
     color: var(--color-white);
   }
 
+  /* Secondary button (faint border) */
+  .btn-secondary {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(45, 45, 45, 0.25);
+    color: var(--color-charcoal-light);
+    background-color: transparent;
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-charcoal);
+    color: var(--color-charcoal);
+  }
+
+  /* Button on olive/accent background */
+  .btn-on-accent {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    cursor: pointer;
+  }
+
+  .btn-on-accent:hover {
+    background-color: #fff;
+    color: var(--color-charcoal);
+  }
+
   /* Card with hover effect */
   .portfolio-card {
     position: relative;
@@ -216,149 +260,144 @@ a {
     animation: shimmer 1.5s infinite;
   }
 
-  /* ===================================
-     SCROLL-REVEAL ANIMATION SYSTEM
-     Mobile-first, elegant, accessible
-     =================================== */
-
-  /* Base reveal class — hidden by default */
-  .reveal {
-    opacity: 0;
-    will-change: opacity, transform;
-    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-      transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  }
-
-  /* Active state — triggered by IntersectionObserver */
-  .reveal.active {
-    opacity: 1 !important;
-    transform: translate(0, 0) scale(1) !important;
-  }
-
-  /* === Direction variants (mobile-first: subtle) === */
-
-  /* Slide up */
-  .reveal-up {
-    transform: translateY(20px);
-  }
-
-  /* Slide from left */
-  .reveal-left {
-    transform: translateX(-20px);
-  }
-
-  /* Slide from right */
-  .reveal-right {
-    transform: translateX(20px);
-  }
-
-  /* Dramatic slide from left */
-  .reveal-slide-left-heavy {
-    transform: translateX(-80px);
-  }
-
-  /* Dramatic slide from right */
-  .reveal-slide-right-heavy {
-    transform: translateX(80px);
-  }
-
-  /* Scale in */
-  .reveal-scale {
-    transform: scale(0.96);
-  }
-
-  /* Fade only (no transform) */
-  .reveal-fade {
-    transform: none;
-  }
-
-  /* === Desktop: fuller motion === */
-  @media (min-width: 768px) {
-    .reveal-up {
-      transform: translateY(40px);
-    }
-
-    .reveal-left {
-      transform: translateX(-40px);
-    }
-
-    .reveal-right {
-      transform: translateX(40px);
-    }
-
-    .reveal-slide-left-heavy {
-      transform: translateX(-150px);
-    }
-
-    .reveal-slide-right-heavy {
-      transform: translateX(150px);
-    }
-
-    .reveal-scale {
-      transform: scale(0.93);
-    }
-
-    .reveal {
-      transition-duration: 1s;
-    }
-  }
-
-  /* === Delay utilities === */
-  .reveal-d1 {
-    transition-delay: 100ms;
-  }
-
-  .reveal-d2 {
-    transition-delay: 200ms;
-  }
-
-  .reveal-d3 {
-    transition-delay: 300ms;
-  }
-
-  .reveal-d4 {
-    transition-delay: 400ms;
-  }
-
-  .reveal-d5 {
-    transition-delay: 500ms;
-  }
-
-  /* === Stagger for grid children === */
-  .reveal-stagger>.reveal:nth-child(1) {
-    transition-delay: 0ms;
-  }
-
-  .reveal-stagger>.reveal:nth-child(2) {
-    transition-delay: 120ms;
-  }
-
-  .reveal-stagger>.reveal:nth-child(3) {
-    transition-delay: 240ms;
-  }
-
-  .reveal-stagger>.reveal:nth-child(4) {
-    transition-delay: 360ms;
-  }
-
-  .reveal-stagger>.reveal:nth-child(5) {
-    transition-delay: 480ms;
-  }
-
-  .reveal-stagger>.reveal:nth-child(6) {
-    transition-delay: 600ms;
-  }
-
-  /* === Accessibility: respect reduced motion === */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-  }
-
 }
+
+/* ===================================
+   SCROLL-REVEAL ANIMATION SYSTEM
+   Outside @layer so Tailwind always emits it
+   =================================== */
+
+.reveal:not(.active) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.reveal {
+  will-change: opacity, transform;
+  transition:
+    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 1.2s !important;
+}
+
+.reveal.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate(0, 0) scale(1) !important;
+  transition:
+    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s !important;
+}
+
+.reveal-up,
+.reveal-soft {
+  transform: translateY(44px);
+}
+
+.reveal-left {
+  transform: translateX(-44px);
+}
+
+.reveal-right {
+  transform: translateX(44px);
+}
+
+.reveal-slide-left-heavy {
+  transform: translateX(-96px);
+}
+
+.reveal-slide-right-heavy {
+  transform: translateX(96px);
+}
+
+.reveal-scale {
+  transform: scale(0.94);
+}
+
+.reveal-fade {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .reveal-up {
+    transform: translateY(72px);
+  }
+
+  .reveal-soft {
+    transform: translateY(14px);
+  }
+
+  .reveal-left {
+    transform: translateX(-72px);
+  }
+
+  .reveal-right {
+    transform: translateX(72px);
+  }
+
+  .reveal-slide-left-heavy {
+    transform: translateX(-180px);
+  }
+
+  .reveal-slide-right-heavy {
+    transform: translateX(180px);
+  }
+
+  .reveal-scale {
+    transform: scale(0.92);
+  }
+
+  .reveal,
+  .reveal.active {
+    transition-duration: 1.25s;
+  }
+}
+
+.reveal-d1 {
+  transition-delay: 100ms;
+}
+
+.reveal-d2 {
+  transition-delay: 200ms;
+}
+
+.reveal-d3 {
+  transition-delay: 300ms;
+}
+
+.reveal-d4 {
+  transition-delay: 400ms;
+}
+
+.reveal-d5 {
+  transition-delay: 500ms;
+}
+
+.reveal-stagger>.reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.reveal-stagger>.reveal:nth-child(2) {
+  transition-delay: 120ms;
+}
+
+.reveal-stagger>.reveal:nth-child(3) {
+  transition-delay: 240ms;
+}
+
+.reveal-stagger>.reveal:nth-child(4) {
+  transition-delay: 360ms;
+}
+
+.reveal-stagger>.reveal:nth-child(5) {
+  transition-delay: 480ms;
+}
+
+.reveal-stagger>.reveal:nth-child(n+6) {
+  transition-delay: 600ms;
+}
+
 
 /* Blog card title - override global heading uppercase */
 .blog-card-title {
@@ -532,6 +571,12 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-olive-dark);
+}
+
+/* Fotobudka hero glow pulse */
+@keyframes fbGlow {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 0.8; }
 }
 
 /* Selection color */

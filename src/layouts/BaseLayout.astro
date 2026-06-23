@@ -84,6 +84,8 @@ const breadcrumbSchema = breadcrumbs
 
     <meta name="generator" content={Astro.generator} />
 
+    <slot name="head" />
+
     <!-- Schema.org for Photographer (subtype of LocalBusiness) -->
     <script
       type="application/ld+json"
@@ -212,39 +214,50 @@ const breadcrumbSchema = breadcrumbs
     <!-- Global Scroll-Reveal Animation Observer -->
     <script>
       const initRevealObserver = () => {
-        const revealElements = document.querySelectorAll(".reveal");
+        const revealElements = Array.from(document.querySelectorAll(".reveal"));
         if (!revealElements.length) return;
 
-        // Respect reduced motion preference
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          revealElements.forEach((el) => el.classList.add("active"));
-          return;
-        }
+        let ticking = false;
 
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            root: null,
-            rootMargin: "0px 0px -40px 0px",
-            threshold: 0.1,
-          },
-        );
+        const revealVisibleElements = () => {
+          const triggerLine = window.innerHeight * 0.82;
 
-        revealElements.forEach((el) => observer.observe(el));
+          revealElements.forEach((el) => {
+            if (el.classList.contains("active")) return;
+
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= triggerLine) {
+              el.classList.add("active");
+            }
+          });
+
+          ticking = false;
+        };
+
+        const requestReveal = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(revealVisibleElements);
+        };
+
+        requestReveal();
+        window.addEventListener("scroll", requestReveal, { passive: true });
+        window.addEventListener("resize", requestReveal);
+      };
+
+      const scheduleRevealObserver = () => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.setTimeout(initRevealObserver, 80);
+          });
+        });
       };
 
       // Run on initial load
-      document.addEventListener("DOMContentLoaded", initRevealObserver);
+      document.addEventListener("DOMContentLoaded", scheduleRevealObserver);
 
       // Re-run on Astro page navigation (View Transitions)
-      document.addEventListener("astro:page-load", initRevealObserver);
+      document.addEventListener("astro:page-load", scheduleRevealObserver);
     </script>
   </body>
 </html>

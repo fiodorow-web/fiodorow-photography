@@ -10,6 +10,7 @@ const eventTypes = [
   "Sesja narzeczeńska",
   "Reportaż chrztu",
   "Sesja plenerowa",
+  "Fotobudka",
   "Inne",
 ];
 
@@ -463,6 +464,15 @@ const localBusinessSchema = {
   // Set timestamp when page loads (bots won't have realistic timing)
   if (formTsInput) {
     formTsInput.value = Date.now().toString();
+  }
+
+  // Preselect event type when arriving from /fotobudka (?usluga=fotobudka)
+  const usluga = new URLSearchParams(window.location.search).get("usluga");
+  if (usluga === "fotobudka") {
+    const eventTypeSelect = document.getElementById(
+      "eventType",
+    ) as HTMLSelectElement | null;
+    if (eventTypeSelect) eventTypeSelect.value = "Fotobudka";
   }
 
   form?.addEventListener("submit", async (e) => {
