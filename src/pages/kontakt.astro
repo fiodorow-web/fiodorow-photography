@@ -513,6 +513,15 @@ const localBusinessSchema = {
           "border-olive/20",
         );
         form.reset();
+        // GA4: konwersja — realne zapytanie wysłane przez formularz kontaktowy.
+        // Consent Mode zadba o to, by nie wysłać przy braku zgody.
+        if (typeof (window as any).gtag === "function") {
+          (window as any).gtag("event", "generate_lead", {
+            method: "formularz_kontaktowy",
+            value: 1,
+            currency: "PLN",
+          });
+        }
       } else {
         throw new Error(result.error || "Failed to send");
       }
