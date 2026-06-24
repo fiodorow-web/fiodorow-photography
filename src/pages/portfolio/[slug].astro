@@ -110,9 +110,7 @@ if (!portfolio) {
 const catLabel = categoryLabels[portfolio.category] || portfolio.category;
 const venue = portfolio.venue?.venueName;
 
-const seoTitle = venue
-  ? `${catLabel} ${venue} — ${portfolio.title} | Fiodorow`
-  : `${catLabel} — ${portfolio.title} | Fiodorow Photography`;
+const seoTitle = `${catLabel} — ${portfolio.title} | Fiodorow Photography`;
 
 const seoDescription = venue
   ? `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""} w ${venue}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`

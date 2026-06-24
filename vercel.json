@@ -1,5 +1,12 @@
 {
   "redirects": [
+    { "source": "/portfolio-item/amelia-damian/:path*", "destination": "/portfolio/amelia-damian", "permanent": true },
+    { "source": "/portfolio-item/anna-pawel/:path*", "destination": "/portfolio/anna-pawel", "permanent": true },
+    { "source": "/portfolio-item/joanna-darek/:path*", "destination": "/portfolio/joanna-darek", "permanent": true },
+    { "source": "/portfolio-item/karolina-piotr/:path*", "destination": "/portfolio/karolina-piotr", "permanent": true },
+    { "source": "/portfolio-item/maria-piotr/:path*", "destination": "/portfolio/maria-piotr", "permanent": true },
+    { "source": "/portfolio-item/natalia-michal/:path*", "destination": "/portfolio/natalia-michal", "permanent": true },
+    { "source": "/portfolio-item/wiktoria-adam/:path*", "destination": "/portfolio/wiktoria-adam", "permanent": true },
     { "source": "/portfolio-item/:path*", "destination": "/portfolio", "permanent": true },
     { "source": "/strona-glowna/:path*", "destination": "/", "permanent": true },
     { "source": "/category/:path*", "destination": "/portfolio", "permanent": true },

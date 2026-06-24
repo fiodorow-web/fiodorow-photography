@@ -92,7 +92,7 @@ const personSchemas = [
 ---
 
 <BaseLayout
-  title="Fotograf Ślubny Siedlce, Warszawa | Fiodorow Photography"
+  title="Fotograf Ślubny Siedlce, Białystok | Fiodorow Photography"
   description="Naturalny reportaż ślubny i sesje narzeczeńskie. Duet fotografów z Siedlec — obsługujemy Siedlce, Warszawę i Białystok. Odpiszemy w 6 godzin."
   breadcrumbs={[]}
 >
@@ -140,7 +140,8 @@ const personSchemas = [
                   src={portfolioItems[0].image}
                   alt={`${categoryLabels[portfolioItems[0].category] || portfolioItems[0].category} — ${portfolioItems[0].title}, fotograf ślubny Siedlce`}
                   class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
                 
                 <!-- Always-visible bottom gradient -->
