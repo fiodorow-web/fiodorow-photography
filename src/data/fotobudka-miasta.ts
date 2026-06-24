@@ -25,7 +25,7 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     nearby: ["Mordy", "Skórzec", "Zbuczyn", "Kotuń", "Mokobody"],
     lead: "Drewniana fotobudka retro na wesela, urodziny i eventy w Siedlcach oraz całym powiecie siedleckim.",
     intro1:
-      "Siedlce to miasto, które znamy najlepiej — to tutaj zaczęła się nasza przygoda z fotografią. Jeśli organizujesz wesele, osiemnastkę albo jubileusz w jednej z siedleckich sal, nasza drewniana fotobudka będzie atrakcją, o której goście będą mówić jeszcze długo po imprezie.",
+      "Siedlce to miasto, które znamy najlepiej — to tutaj zaczęła się nasza przygoda z fotografią. Jeśli organizujesz wesele, osiemnastkę albo jubileusz w jednej z siedleckich sal, nasza drewniana fotobudka będzie świetną atrakcją.   ",
     intro2:
       "Dostarczamy, składamy i obsługujemy fotobudkę na miejscu, a Wy zajmujecie się tylko dobrą zabawą. Każdy gość wychodzi z gotowym wydrukiem w dłoni, a po wszystkim otrzymujecie galerię online ze wszystkimi kadrami.",
     coverage:
@@ -57,13 +57,13 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     nearby: ["Kosów Lacki", "Sterdyń", "Bielany", "Repki", "Ceranów"],
     lead: "Fotobudka retro do wynajęcia na wesela i eventy w Sokołowie Podlaskim i najbliższej okolicy.",
     intro1:
-      "Szukasz atrakcji na wesele w Sokołowie Podlaskim? Nasza ręcznie wykonana, drewniana fotobudka łączy ponadczasowy, retro wygląd z najnowszą technologią. To rozwiązanie dla par, które chcą czegoś z klasą — bez plastikowego kiczu i krzykliwych kolorów.",
+      "Szukasz atrakcji na wesele w Sokołowie Podlaskim? Nasza ręcznie wykonana, drewniana fotobudka łączy ponadczasowy, retro wygląd z najnowszą technologią. To rozwiązanie dla par, które szukają atrakcji z klasą.",
     intro2:
       "Obsługa, montaż, nielimitowane wydruki i galeria online są w cenie. Wystarczy, że wskażecie nam termin i salę — resztą zajmiemy się my, a Wasi goście zyskają pamiątki, które zabiorą do domu jeszcze tego samego wieczoru.",
     coverage:
-      "Sokołów Podlaski znajduje się w centrum obszaru, który obsługujemy na co dzień — pomiędzy Siedlcami a Węgrowem. Dojazd do miasta i okolicznych miejscowości nie stanowi dla nas żadnego problemu.",
+      "Sokołów Podlaski znajduje się w obszarze który obsługujemy na co dzień. Dojazd do miasta i okolicznych miejscowości nie stanowi dla nas żadnego problemu. Wycenę ustalamy indywidualnie — zależnie od terminu, długości wynajmu i miejsca wydarzenia.",
     dojazd:
-      "Tak, regularnie obsługujemy Sokołów Podlaski i okoliczne gminy. Leżycie w dogodnej dla nas odległości, więc dojazd jest prosty, a jego koszt — jeśli w ogóle wystąpi — symboliczny.",
+      "Tak, regularnie obsługujemy Sokołów Podlaski i okoliczne gminy. Leżycie w dogodnej dla nas odległości, więc dojazd nie stanowi problemu.",
   },
   losice: {
     slug: "fotobudka-losice",
@@ -127,4 +127,4 @@ export function faqRezerwacja(city: FotobudkaCity): string {
 
 // Stały FAQ czas (bez miasta).
 export const faqCzas =
-  "Standardowo fotobudka działa przez 3–4 godziny ciągłej zabawy, zwykle w godzinach największego ruchu na parkiecie. Czas możemy wydłużyć — wystarczy ustalić to przy rezerwacji.";
+  "Standardowo fotobudka działa przez 2 godziny ciągłej zabawy, zwykle w godzinach największego ruchu na parkiecie. Czas możemy wydłużyć — wystarczy ustalić to przy rezerwacji.";

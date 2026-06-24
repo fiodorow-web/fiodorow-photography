@@ -53,12 +53,12 @@ const offerCards = [
   },
   {
     title: "Klimatyczne gadżety",
-    body: "Wyselekcjonowane rekwizyty, które podkręcą każdą stylizację i rozkręcą zabawę — okulary, tabliczki, kapelusze i więcej.",
+    body: "Rekwizyty, które podkręcą każdą stylizację i rozkręcą zabawę — okulary i tabliczki.",
     icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.81 15.9 9 18.75l-.81-2.85a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.85-.81a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.81 2.85a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.85.81a4.5 4.5 0 0 0-3.09 3.09ZM18.26 8.72 18 9.75l-.26-1.03a3.38 3.38 0 0 0-2.45-2.46L14.25 6l1.04-.26a3.38 3.38 0 0 0 2.45-2.45L18 2.25l.26 1.04a3.38 3.38 0 0 0 2.46 2.45L21.75 6l-1.03.26a3.38 3.38 0 0 0-2.46 2.46Z"/></svg>`,
   },
   {
     title: "Profesjonalne światło",
-    body: "Lampa pierścieniowa Godox sprawia, że każde zdjęcie wygląda jak małe studio — równe, miękkie i pochlebne dla każdej twarzy.",
+    body: "Lampa typu beauty dish sprawia, że miejsce do zdjęć wygląda jak małe, dobrze oświetlone studio.",
     icon: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.36.39-1.59 1.59M21 12h-2.25m-.39 6.36-1.59-1.59M12 18.75V21m-4.77-4.23-1.59 1.59M5.25 12H3m4.23-4.77L5.64 5.64M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>`,
   },
 ];
@@ -72,12 +72,12 @@ const steps = [
   {
     n: "2",
     title: "Dostawa i montaż",
-    body: `Przyjeżdżamy do ${city.gen}, ustawiamy i konfigurujemy fotobudkę. Wy nie robicie nic.`,
+    body: `Przyjeżdżamy do ${city.gen}, ustawiamy i konfigurujemy fotobudkę.`,
   },
   {
     n: "3",
     title: "Zabawa i zdjęcia",
-    body: "Goście bawią się przez całą imprezę, a wydruki lądują od razu w ich rękach.",
+    body: "Goście korzystają z fotobudki w dowolnym momencie, a wydruki lądują od razu w ich rękach.",
   },
   {
     n: "4",
@@ -331,9 +331,6 @@ const schema = {
           Fotobudka
           <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">w akcji</span>
         </h2>
-        <p class="font-sans font-light text-charcoal-light text-[15px] leading-[1.7]">
-          Zdjęcia i wydruki z prawdziwych imprez — Wasze chwile, nasze kadry.
-        </p>
       </div>
       <div class="reveal reveal-up reveal-d1 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
         {
