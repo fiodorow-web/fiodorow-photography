@@ -175,9 +175,31 @@ const breadcrumbSchema = breadcrumbs
         'ad_personalization': 'denied',
         'wait_for_update': 500
       });
+
+      // Consent Mode v2 (advanced): load GA4 on every page so it can send
+      // cookieless pings for modeling even before the user accepts. No cookies
+      // are stored until consent is granted (RODO/GDPR compliant).
+      (function () {
+        var ga = document.createElement('script');
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-YVBD3JPM7N';
+        ga.async = true;
+        document.head.appendChild(ga);
+        gtag('js', new Date());
+        gtag('config', 'G-YVBD3JPM7N');
+      })();
+
+      // Returning visitor who already consented → restore granted state.
+      if (localStorage.getItem('cookies-accepted')) {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted',
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
     </script>
     <script>
-      function loadAnalytics() {
+      function loadVercelAnalytics() {
         if (document.querySelector('[data-analytics-loaded]')) return;
         const va = document.createElement('script');
         va.src = '/_vercel/insights/script.js';
@@ -188,27 +210,21 @@ const breadcrumbSchema = breadcrumbs
         si.src = '/_vercel/speed-insights/script.js';
         si.defer = true;
         document.head.appendChild(si);
-        // Google Analytics 4
-        const ga = document.createElement('script');
-        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-YVBD3JPM7N';
-        ga.async = true;
-        document.head.appendChild(ga);
-        ga.onload = () => {
-          gtag('js', new Date());
-          gtag('config', 'G-YVBD3JPM7N');
-        };
-        // Update consent to granted
+      }
+      // Update consent to granted once the user accepts cookies.
+      function grantConsent() {
         gtag('consent', 'update', {
           'analytics_storage': 'granted',
           'ad_storage': 'granted',
           'ad_user_data': 'granted',
           'ad_personalization': 'granted'
         });
+        loadVercelAnalytics();
       }
       if (localStorage.getItem('cookies-accepted')) {
-        loadAnalytics();
+        loadVercelAnalytics();
       }
-      document.addEventListener('cookies-accepted', loadAnalytics);
+      document.addEventListener('cookies-accepted', grantConsent);
     </script>
 
     <!-- Global Scroll-Reveal Animation Observer -->
