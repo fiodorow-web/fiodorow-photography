@@ -10,6 +10,7 @@ export interface FotobudkaCity {
   gen: string; // dopełniacz — "Siedlec"
   nearby: string[];
   lead: string;
+  metaDescription: string; // tylko <meta description> — niezależny od lead (lead jest widoczny na stronie)
   intro1: string;
   intro2: string;
   coverage: string;
@@ -24,6 +25,8 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     gen: "Siedlec",
     nearby: ["Mordy", "Skórzec", "Zbuczyn", "Kotuń", "Mokobody"],
     lead: "Drewniana fotobudka retro na wesela, urodziny i eventy w Siedlcach oraz całym powiecie siedleckim.",
+    metaDescription:
+      "Wynajem drewnianej fotobudki retro na wesele w Siedlcach 📸 Od 800 zł — nielimitowane wydruki, gadżety i obsługa w cenie. Sprawdź wolne terminy!",
     intro1:
       "Siedlce to miasto, które znamy najlepiej — to tutaj zaczęła się nasza przygoda z fotografią. Jeśli organizujesz wesele, osiemnastkę albo jubileusz w jednej z siedleckich sal, nasza drewniana fotobudka będzie świetną atrakcją.   ",
     intro2:
@@ -40,6 +43,8 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     gen: "Łukowa",
     nearby: ["Stoczek Łukowski", "Adamów", "Krzywda", "Trzebieszów", "Wojcieszków"],
     lead: "Wynajem retro fotobudki na wesela i imprezy okolicznościowe w Łukowie i całym powiecie łukowskim.",
+    metaDescription:
+      "Fotobudka retro na wesela i imprezy w Łukowie 📸 Od 800 zł z nielimitowanymi wydrukami, rekwizytami i galerią online. Zarezerwuj swój termin!",
     intro1:
       "Planujesz przyjęcie w Łukowie? Nasza drewniana fotobudka to coś więcej niż gadżet — to element dekoracji, który wpasuje się w klimat każdej sali i da Twoim gościom mnóstwo radości. Zamiast nudy między kolejnymi daniami, ustawiają się w kolejce po pamiątkowe zdjęcia.",
     intro2:
@@ -56,6 +61,8 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     gen: "Sokołowa Podlaskiego",
     nearby: ["Kosów Lacki", "Sterdyń", "Bielany", "Repki", "Ceranów"],
     lead: "Fotobudka retro do wynajęcia na wesela i eventy w Sokołowie Podlaskim i najbliższej okolicy.",
+    metaDescription:
+      "Wynajem fotobudki retro na wesele w Sokołowie Podlaskim 📸 Od 800 zł — wydruki bez limitu, gadżety i obsługa w cenie. Sprawdź dostępne daty!",
     intro1:
       "Szukasz atrakcji na wesele w Sokołowie Podlaskim? Nasza ręcznie wykonana, drewniana fotobudka łączy ponadczasowy, retro wygląd z najnowszą technologią. To rozwiązanie dla par, które szukają atrakcji z klasą.",
     intro2:
@@ -72,6 +79,8 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     gen: "Łosic",
     nearby: ["Sarnaki", "Huszlew", "Olszanka", "Stara Kornica", "Platerów"],
     lead: "Drewniana fotobudka na wynajem — wesela, urodziny i imprezy w Łosicach i powiecie łosickim.",
+    metaDescription:
+      "Drewniana fotobudka na wesela i imprezy w Łosicach 📸 Od 800 zł, nielimitowane wydruki, rekwizyty i galeria online w cenie. Zapytaj o termin!",
     intro1:
       "Organizujesz przyjęcie w Łosicach lub okolicy? Nasza fotobudka retro to gwarancja świetnej zabawy i wyjątkowych pamiątek. Goście w każdym wieku — od babci po najmłodszych — uwielbiają pozować z rekwizytami i odbierać świeżo wydrukowane zdjęcia.",
     intro2:
@@ -88,6 +97,8 @@ export const fotobudkaMiasta: Record<string, FotobudkaCity> = {
     gen: "Węgrowa",
     nearby: ["Łochów", "Liw", "Stoczek", "Sadowne", "Miedzna"],
     lead: "Wynajem fotobudki retro na wesela i eventy w Węgrowie i malowniczej okolicy nad Liwcem.",
+    metaDescription:
+      "Fotobudka retro na wesele i event w Węgrowie 📸 Od 800 zł — nielimitowane wydruki, komplet gadżetów i obsługa w cenie. Sprawdź wolne terminy!",
     intro1:
       "Wesele albo jubileusz w Węgrowie? Nasza drewniana fotobudka doda Waszemu przyjęciu niepowtarzalnego, retro charakteru. To nie tylko atrakcja dla gości, ale też piękny element wystroju sali — ciepłe drewno i klasyczny statyw pasują do eleganckich i kameralnych wnętrz.",
     intro2:
