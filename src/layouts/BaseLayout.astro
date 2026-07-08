@@ -218,15 +218,18 @@ const breadcrumbSchema = breadcrumbs
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-        // RODO: wstrzymaj wysyłkę zanim użytkownik wyrazi zgodę.
+        // RODO: domyślnie wstrzymaj wysyłkę zanim użytkownik wyrazi zgodę.
         fbq('consent', 'revoke');
         fbq('init', window.META_PIXEL.id);
-        fbq('track', 'PageView');
 
-        // Powracający gość, który już zaakceptował → odblokuj.
+        // Gość, który już zaakceptował → odblokuj i policz odsłonę.
+        // WAŻNE: PageView musi lecieć PO 'grant', inaczej Meta go nie zliczy.
         if (localStorage.getItem('cookies-accepted')) {
           fbq('consent', 'grant');
+          fbq('track', 'PageView');
         }
+        // Jeśli jeszcze nie zaakceptował — PageView poleci w grantConsent()
+        // (poniżej), zaraz po kliknięciu „Akceptuję".
       }
     </script>
     <script>
@@ -250,9 +253,13 @@ const breadcrumbSchema = breadcrumbs
           'ad_user_data': 'granted',
           'ad_personalization': 'granted'
         });
-        // Meta Pixel — odblokuj wysyłkę po zgodzie użytkownika.
+        // Meta Pixel — odblokuj i policz odsłonę po zgodzie użytkownika.
+        // PageView PO 'grant' (pierwsza wizyta: klik „Akceptuję").
         const fbq = (window as any).fbq;
-        if (typeof fbq === 'function') fbq('consent', 'grant');
+        if (typeof fbq === 'function') {
+          fbq('consent', 'grant');
+          fbq('track', 'PageView');
+        }
         loadVercelAnalytics();
       }
       if (localStorage.getItem('cookies-accepted')) {
