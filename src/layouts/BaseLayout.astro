@@ -181,11 +181,12 @@ const breadcrumbSchema = breadcrumbs
         gtag('config', 'G-YVBD3JPM7N');
       })();
 
-      // Google Ads — śledzenie konwersji reklamowych.
-      // Aby AKTYWOWAĆ: wpisz id (AW-XXXXXXXXX) oraz etykietę konwersji leada
-      // (label) z panelu Google Ads → Cele → Konwersje → akcja konwersji.
-      // Puste = nieaktywne (żadne żądania nie lecą). Consent Mode pilnuje zgód.
-      window.GOOGLE_ADS = { id: "", leadLabel: "" };
+      // Google Ads — tag remarketingu + atrybucji (AW-...).
+      // id ustawiony = ładuje tag Google Ads (remarketing, atrybucja).
+      // leadLabel PUSTY celowo — konwersje idą przez import z GA4, więc
+      // natywnego eventu conversion NIE wysyłamy (uniknięcie podwójnego liczenia).
+      // Consent Mode pilnuje zgód (ad_storage itd.).
+      window.GOOGLE_ADS = { id: "AW-18308982086", leadLabel: "" };
       if (window.GOOGLE_ADS.id) {
         gtag('config', window.GOOGLE_ADS.id);
       }
