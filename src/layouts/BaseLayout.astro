@@ -229,6 +229,24 @@ const breadcrumbSchema = breadcrumbs
       document.addEventListener('cookies-accepted', grantConsent);
     </script>
 
+    <!-- klik_kontakt — kliknięcie w numer telefonu lub e-mail (dowolne miejsce) -->
+    <script is:inline>
+      (function () {
+        if (window.__klikKontaktBound) return;
+        window.__klikKontaktBound = true;
+        document.addEventListener('click', function (e) {
+          var link = e.target && e.target.closest
+            ? e.target.closest('a[href^="tel:"], a[href^="mailto:"]')
+            : null;
+          if (!link || typeof window.gtag !== 'function') return;
+          var href = link.getAttribute('href') || '';
+          window.gtag('event', 'klik_kontakt', {
+            method: href.indexOf('tel:') === 0 ? 'telefon' : 'email',
+          });
+        });
+      })();
+    </script>
+
     <!-- Global Scroll-Reveal Animation Observer -->
     <script>
       const initRevealObserver = () => {
