@@ -218,14 +218,12 @@ const breadcrumbSchema = breadcrumbs
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-        // RODO: domyślnie wstrzymaj wysyłkę zanim użytkownik wyrazi zgodę.
-        fbq('consent', 'revoke');
+        // Ustaw zgodę RAZ, na podstawie znanego stanu (bez revoke→grant w jednym
+        // ticku, co myli Meta Pixel Helper). RODO: brak zgody = 'revoke'.
+        var accepted = !!localStorage.getItem('cookies-accepted');
+        fbq('consent', accepted ? 'grant' : 'revoke');
         fbq('init', window.META_PIXEL.id);
-
-        // Gość, który już zaakceptował → odblokuj i policz odsłonę.
-        // WAŻNE: PageView musi lecieć PO 'grant', inaczej Meta go nie zliczy.
-        if (localStorage.getItem('cookies-accepted')) {
-          fbq('consent', 'grant');
+        if (accepted) {
           fbq('track', 'PageView');
         }
         // Jeśli jeszcze nie zaakceptował — PageView poleci w grantConsent()
