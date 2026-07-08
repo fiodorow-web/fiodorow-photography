@@ -532,6 +532,16 @@ const localBusinessSchema = {
             });
           }
         }
+        // Meta Pixel: standardowe zdarzenie Lead (wysłany formularz).
+        // Aktywne tylko gdy ustawiono Pixel ID w BaseLayout → window.META_PIXEL.
+        const fbq = (window as any).fbq;
+        if (typeof fbq === "function") {
+          fbq("track", "Lead", {
+            content_name: "formularz_kontaktowy",
+            value: 1,
+            currency: "PLN",
+          });
+        }
       } else {
         throw new Error(result.error || "Failed to send");
       }
