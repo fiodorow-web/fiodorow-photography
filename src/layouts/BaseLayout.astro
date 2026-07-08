@@ -181,6 +181,15 @@ const breadcrumbSchema = breadcrumbs
         gtag('config', 'G-YVBD3JPM7N');
       })();
 
+      // Google Ads — śledzenie konwersji reklamowych.
+      // Aby AKTYWOWAĆ: wpisz id (AW-XXXXXXXXX) oraz etykietę konwersji leada
+      // (label) z panelu Google Ads → Cele → Konwersje → akcja konwersji.
+      // Puste = nieaktywne (żadne żądania nie lecą). Consent Mode pilnuje zgód.
+      window.GOOGLE_ADS = { id: "", leadLabel: "" };
+      if (window.GOOGLE_ADS.id) {
+        gtag('config', window.GOOGLE_ADS.id);
+      }
+
       // Returning visitor who already consented → restore granted state.
       if (localStorage.getItem('cookies-accepted')) {
         gtag('consent', 'update', {

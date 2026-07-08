@@ -521,6 +521,16 @@ const localBusinessSchema = {
             value: 1,
             currency: "PLN",
           });
+          // Google Ads: konwersja (aktywna tylko gdy skonfigurowano id + label
+          // w BaseLayout → window.GOOGLE_ADS). Consent Mode pilnuje zgód.
+          const gads = (window as any).GOOGLE_ADS;
+          if (gads && gads.id && gads.leadLabel) {
+            (window as any).gtag("event", "conversion", {
+              send_to: `${gads.id}/${gads.leadLabel}`,
+              value: 1,
+              currency: "PLN",
+            });
+          }
         }
       } else {
         throw new Error(result.error || "Failed to send");
