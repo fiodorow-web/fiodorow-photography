@@ -1,41 +1,45 @@
 # Fiodorow Photography
 
-## About
-Fiodorow Photography to duet fotografów ślubnych — Mateusz i Weronika — z siedzibą w Siedlcach. Specjalizujemy się w naturalnej fotografii ślubnej, sesjach narzeczeńskich i portretowych. Działamy głównie na Mazowszu, Podlasiu i Lubelszczyźnie.
+> Duet fotografów ślubnych — Mateusz i Weronika Fiodorow — z Siedlec. Naturalna, reportażowa fotografia ślubna, sesje narzeczeńskie i portretowe oraz wynajem drewnianej fotobudki retro. Działamy na Mazowszu, Podlasiu i Lubelszczyźnie.
 
-## Services
+## O nas
+- Duet fotografów: Mateusz i Weronika Fiodorow — zawsze pracujemy we dwoje (dwa aparaty, dwa spojrzenia)
+- Doświadczenie: ponad 6 lat w fotografii ślubnej
+- Styl: naturalny, reportażowy, bez sztucznych póz
+- Reportaż ślubny: ok. 700 obrobionych zdjęć; sesja narzeczeńska: ok. 40 zdjęć
+- Czas dostarczenia galerii: do 3 miesięcy
+- Baza: Siedlce; obszar: Mazowsze, Podlasie, Lubelszczyzna, cała Polska
+
+## Strony główne
+- [Strona główna](https://fiodorowphotography.pl/): portfolio i przegląd usług
+- [O nas](https://fiodorowphotography.pl/o-nas): duet, FAQ, dane kontaktowe
+- [Portfolio](https://fiodorowphotography.pl/portfolio): galeria realizacji ślubnych
+- [Blog](https://fiodorowphotography.pl/blog): artykuły o fotografii ślubnej
+- [Kontakt](https://fiodorowphotography.pl/kontakt): formularz i dane kontaktowe
+
+## Fotografia ślubna (wg miast)
+- [Fotograf ślubny Siedlce](https://fiodorowphotography.pl/fotograf-siedlce): reportaż ślubny w Siedlcach i okolicy
+- [Fotograf ślubny Białystok](https://fiodorowphotography.pl/fotograf-bialystok): reportaż ślubny na Podlasiu
+- [Fotograf ślubny Warszawa](https://fiodorowphotography.pl/fotograf-warszawa): reportaż ślubny w Warszawie
+
+## Fotobudka na wesele (od 800 zł)
+- [Fotobudka — oferta](https://fiodorowphotography.pl/fotobudka): wynajem drewnianej fotobudki retro na wesela i eventy
+- [Fotobudka Siedlce](https://fiodorowphotography.pl/fotobudka-siedlce): wynajem fotobudki w Siedlcach
+- [Fotobudka Łuków](https://fiodorowphotography.pl/fotobudka-lukow): wynajem fotobudki w Łukowie
+- [Fotobudka Sokołów Podlaski](https://fiodorowphotography.pl/fotobudka-sokolow-podlaski): wynajem fotobudki w Sokołowie Podlaskim
+- [Fotobudka Łosice](https://fiodorowphotography.pl/fotobudka-losice): wynajem fotobudki w Łosicach
+- [Fotobudka Węgrów](https://fiodorowphotography.pl/fotobudka-wegrow): wynajem fotobudki w Węgrowie
+
+## Usługi
 - Fotografia ślubna (reportaż z przygotowań, ceremonii i wesela)
 - Sesje narzeczeńskie
 - Sesje poślubne
 - Portrety indywidualne i rodzinne
-- Fotobudka na wesele
+- Wynajem fotobudki na wesele (nielimitowane wydruki, gadżety, obsługa)
 - Projektowanie albumów ślubnych
 
-## Service Area
-Siedlce (baza), Białystok (drugi dom), Warszawa oraz cała Polska.
-
-## Key Facts
-- Duet fotografów: Mateusz i Weronika Fiodorow
-- Doświadczenie: ponad 6 lat w fotografii ślubnej
-- Reportaż ślubny: około 700 profesjonalnie obrobionych zdjęć
-- Sesja narzeczeńska: około 40 zdjęć
-- Czas dostarczenia galerii: do 3 miesięcy
-- Styl: naturalny, reportażowy, bez sztucznych póz
-- Zawsze pracujemy we dwoje — dwa aparaty, dwa spojrzenia
-
-## Contact
-- Phone: +48 660 872 121
-- Email: fiodorowphotography@gmail.com
-- Website: https://fiodorowphotography.pl
-- Instagram: https://www.instagram.com/fiodorow_photography
-- Facebook: https://www.facebook.com/fiodorowphotography
-
-## Site Structure
-- / — Strona główna z portfolio
-- /o-nas — O nas, FAQ, dane kontaktowe
-- /portfolio — Galeria realizacji ślubnych
-- /blog — Artykuły o fotografii ślubnej
-- /kontakt — Formularz kontaktowy
-- /fotograf-siedlce — Fotograf ślubny Siedlce
-- /fotograf-bialystok — Fotograf ślubny Białystok
-- /fotograf-warszawa — Fotograf ślubny Warszawa
+## Kontakt
+- Telefon: [+48 660 872 121](tel:+48660872121)
+- E-mail: [fiodorowphotography@gmail.com](mailto:fiodorowphotography@gmail.com)
+- Instagram: [@fiodorow_photography](https://www.instagram.com/fiodorow_photography)
+- Facebook: [fiodorowphotography](https://www.facebook.com/fiodorowphotography)
