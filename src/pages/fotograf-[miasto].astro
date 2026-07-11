@@ -360,6 +360,45 @@ const faqSchema = {
         Naturalny reportaż ślubny, sesje narzeczeńskie i ślubne. Duet fotografów
         z pasją do uwieczniania emocji.
       </p>
+      <div
+        class="mt-8 flex flex-col sm:flex-row gap-4 justify-center reveal reveal-up reveal-d1"
+      >
+        <a
+          href="/kontakt"
+          class="btn-primary border-white text-white hover:bg-white hover:text-charcoal"
+        >
+          Zapytaj o termin
+        </a>
+        <a
+          href="tel:+48660872121"
+          class="btn-primary border-white text-white hover:bg-white hover:text-charcoal"
+        >
+          Zadzwoń: +48 660 872 121
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="bg-cream border-b border-charcoal/10">
+    <div
+      class="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center"
+    >
+      <span class="text-xs md:text-sm text-charcoal-light tracking-wide"
+        >Duet fotografów — dwa aparaty</span
+      >
+      <span class="text-olive/40 hidden sm:inline">•</span>
+      <span class="text-xs md:text-sm text-charcoal-light tracking-wide"
+        >Ponad 6 lat doświadczenia</span
+      >
+      <span class="text-olive/40 hidden sm:inline">•</span>
+      <span class="text-xs md:text-sm text-charcoal-light tracking-wide"
+        >Dojazd wliczony w cenie</span
+      >
+      <span class="text-olive/40 hidden sm:inline">•</span>
+      <span class="text-xs md:text-sm text-charcoal-light tracking-wide"
+        >Galeria ok. 700 zdjęć</span
+      >
     </div>
   </section>
 
@@ -691,7 +730,28 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Odstęp pod sticky pasek (tylko mobile) -->
+  <div class="h-14 md:hidden"></div>
+
   <Footer />
+
+  <!-- Sticky CTA (tylko mobile) — telefon liczy się jako event Contact -->
+  <div
+    class="fixed bottom-0 inset-x-0 z-40 flex md:hidden border-t border-charcoal/10 bg-white/95 backdrop-blur"
+  >
+    <a
+      href="tel:+48660872121"
+      class="flex-1 py-4 text-center text-sm tracking-[0.15em] uppercase text-charcoal border-r border-charcoal/10"
+    >
+      Zadzwoń
+    </a>
+    <a
+      href="/kontakt"
+      class="flex-1 py-4 text-center text-sm tracking-[0.15em] uppercase text-white bg-olive"
+    >
+      Napisz
+    </a>
+  </div>
 
   <!-- Schema.org -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

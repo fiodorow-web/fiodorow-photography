@@ -516,6 +516,21 @@ const localBusinessSchema = {
         // GA4: konwersja — realne zapytanie wysłane przez formularz kontaktowy.
         // Consent Mode zadba o to, by nie wysłać przy braku zgody.
         if (typeof (window as any).gtag === "function") {
+          // Enhanced Conversions — przekaż dane z formularza do dopasowania.
+          // Google hashuje (SHA-256) po stronie klienta. Wymaga włączenia
+          // „Konwersje rozszerzone" w Google Ads (metoda: tag Google/gtag).
+          const ecEmail = (data.email || "").toString().trim().toLowerCase();
+          let ecPhone = (data.phone || "").toString().replace(/[^\d+]/g, "");
+          if (ecPhone && ecPhone.indexOf("+") !== 0) {
+            const digits = ecPhone.replace(/\D/g, "");
+            ecPhone = digits.length === 9 ? "+48" + digits : "+" + digits;
+          }
+          const userData: Record<string, string> = {};
+          if (ecEmail) userData.email = ecEmail;
+          if (ecPhone) userData.phone_number = ecPhone;
+          if (Object.keys(userData).length) {
+            (window as any).gtag("set", "user_data", userData);
+          }
           (window as any).gtag("event", "generate_lead", {
             method: "formularz_kontaktowy",
             value: 1,
