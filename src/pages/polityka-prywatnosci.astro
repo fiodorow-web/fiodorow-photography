@@ -37,7 +37,9 @@ import Footer from '../components/Footer.astro';
           <p>Zbieramy dane wyłącznie w zakresie niezbędnym do realizacji usług:</p>
           <ul class="list-disc pl-6 mt-3 space-y-2">
             <li><strong class="text-charcoal">Formularz kontaktowy</strong> — imię, nazwisko, email, numer telefonu (opcjonalnie), rodzaj wydarzenia, data, treść wiadomości.</li>
-            <li><strong class="text-charcoal">Cookies analityczne</strong> — anonimowe dane o sposobie korzystania ze strony (Vercel Analytics).</li>
+            <li><strong class="text-charcoal">Cookies i dane analityczne</strong> — anonimowe dane o sposobie korzystania ze strony (Google Analytics 4, Vercel Analytics).</li>
+            <li><strong class="text-charcoal">Cookies i dane marketingowe</strong> — dane o wyświetleniach reklam i interakcjach, wykorzystywane do pomiaru skuteczności reklam i remarketingu (Google Ads, Meta Pixel — Facebook i Instagram). Uruchamiane wyłącznie po wyrażeniu zgody w banerze cookies.</li>
+            <li><strong class="text-charcoal">Dane do dopasowania konwersji reklamowych</strong> — po wysłaniu formularza Twój adres e-mail i numer telefonu mogą zostać przekazane do Google i Meta w postaci <strong class="text-charcoal">zaszyfrowanej (skrót SHA-256)</strong>, wyłącznie w celu przypisania konwersji reklamowej (Enhanced Conversions / dopasowanie zaawansowane). Przekazujemy nieodwracalne skróty, nie dane w postaci jawnej.</li>
             <li><strong class="text-charcoal">Widget opinii</strong> — dane przetwarzane przez Elfsight (Google Reviews) zgodnie z ich własną polityką prywatności.</li>
           </ul>
         </section>
@@ -49,6 +51,7 @@ import Footer from '../components/Footer.astro';
             <li>Odpowiedzi na zapytania przesłane przez formularz kontaktowy.</li>
             <li>Przygotowania i realizacji usługi fotograficznej.</li>
             <li>Analizy ruchu na stronie w celu poprawy jej funkcjonalności.</li>
+            <li>Pomiaru skuteczności reklam i prowadzenia działań remarketingowych w Google oraz Meta (Facebook, Instagram) — na podstawie Twojej zgody.</li>
           </ul>
         </section>
 
@@ -86,13 +89,17 @@ import Footer from '../components/Footer.astro';
 
         <section>
           <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">7. Pliki cookies</h2>
-          <p>
-            Strona wykorzystuje pliki cookies w celu analizy ruchu (Vercel Analytics) oraz 
-            wyświetlania widgetu opinii Google (Elfsight). Cookies analityczne nie zawierają danych osobowych.
-          </p>
-          <p class="mt-2">
-            Możecie zarządzać ustawieniami cookies w przeglądarce. Wyłączenie cookies może wpłynąć 
-            na poprawne działanie niektórych elementów strony.
+          <p>Strona wykorzystuje pliki cookies i podobne technologie:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li><strong class="text-charcoal">Analityczne</strong> — Google Analytics 4 oraz Vercel Analytics (statystyki ruchu, poprawa funkcjonalności).</li>
+            <li><strong class="text-charcoal">Marketingowe</strong> — Google Ads oraz Meta Pixel (Facebook, Instagram) do pomiaru skuteczności reklam i remarketingu.</li>
+            <li><strong class="text-charcoal">Widget opinii</strong> — Elfsight (Google Reviews).</li>
+          </ul>
+          <p class="mt-3">
+            Przy pierwszej wizycie wyświetlamy <strong class="text-charcoal">baner cookies</strong>. Do czasu kliknięcia „Akceptuję"
+            nie zapisujemy cookies analitycznych ani marketingowych — działa <strong class="text-charcoal">Google Consent Mode v2</strong>,
+            a piksel Meta pozostaje nieaktywny do momentu wyrażenia zgody. Zgodę możesz w każdej chwili cofnąć,
+            usuwając pliki cookies w ustawieniach przeglądarki. Wyłączenie cookies może wpłynąć na działanie niektórych elementów strony.
           </p>
         </section>
 
@@ -101,9 +108,16 @@ import Footer from '../components/Footer.astro';
           <p>Wasze dane mogą być przekazywane:</p>
           <ul class="list-disc pl-6 mt-3 space-y-2">
             <li><strong class="text-charcoal">Vercel Inc.</strong> — hosting i analityka strony.</li>
+            <li><strong class="text-charcoal">Google Ireland Ltd / Google LLC</strong> — analityka (Google Analytics) oraz reklama i pomiar konwersji (Google Ads).</li>
+            <li><strong class="text-charcoal">Meta Platforms Ireland Ltd</strong> — reklama i pomiar (Meta Pixel, Facebook, Instagram).</li>
             <li><strong class="text-charcoal">Elfsight</strong> — widget opinii Google.</li>
             <li><strong class="text-charcoal">Sanity.io</strong> — system zarządzania treścią (CMS).</li>
           </ul>
+          <p class="mt-3">
+            <strong class="text-charcoal">Transfer poza EOG:</strong> część danych (Google, Meta, Vercel) może być przetwarzana
+            poza Europejskim Obszarem Gospodarczym, m.in. w USA. Odbywa się to na podstawie standardowych klauzul umownych (SCC)
+            oraz programu EU–US Data Privacy Framework zapewniających odpowiedni poziom ochrony.
+          </p>
         </section>
 
         <section>
@@ -115,7 +129,7 @@ import Footer from '../components/Footer.astro';
         </section>
 
         <p class="text-xs text-charcoal-light/60 pt-8 border-t border-charcoal/10">
-          Ostatnia aktualizacja: marzec 2026
+          Ostatnia aktualizacja: lipiec 2026
         </p>
       </div>
     </div>
