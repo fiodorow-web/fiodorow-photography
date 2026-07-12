@@ -479,6 +479,41 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Opinie — PLACEHOLDER. Podmień na PRAWDZIWE opinie (np. z Google).
+       Nie publikujemy zmyślonych opinii — wklej realne cytaty + imiona. -->
+  <section class="py-20 md:py-32 section-cream">
+    <div class="max-w-5xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-12 reveal reveal-up">
+        <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
+          Opinie
+        </span>
+        <h2 class="section-title">Co mówią pary, które nam zaufały</h2>
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal reveal-up reveal-d1"
+      >
+        {
+          Array.from({ length: 3 }).map(() => (
+            <div class="bg-white p-8 rounded-sm border border-charcoal/10">
+              <div class="flex gap-1 text-olive mb-4">
+                {Array.from({ length: 5 }).map(() => (
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 00-.364 1.118l1.287 3.958c.3.922-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.176 0l-3.366 2.446c-.784.57-1.838-.196-1.539-1.118l1.287-3.958a1 1 0 00-.364-1.118L2.98 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.958z" />
+                  </svg>
+                ))}
+              </div>
+              <p class="text-charcoal-light text-sm leading-relaxed italic mb-6">
+                „[Tutaj wklej prawdziwą opinię pary — np. z Google.]"
+              </p>
+              <p class="text-charcoal text-sm font-medium">Imię P.</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- Portfolio Gallery — PLACEHOLDER. Podmień kafelki na zdjęcia:
        1) wklej pliki do src/assets/pseo/<miasto>/
        2) zaimportuj je u góry pliku i wstaw <Image .../> w miejsce <div class="...">
@@ -496,12 +531,16 @@ const faqSchema = {
         </p>
       </div>
 
-      <div
-        class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 reveal reveal-up reveal-d1"
-      >
+      <!-- Justified grid: każdy kafelek dostaje aspect ratio (ar); rzędy
+           wypełniają się do końca (flex-grow). Podmieniając na zdjęcia, ustaw
+           flex-basis/flex-grow wg realnego ar zdjęcia (szerokość/wysokość). -->
+      <div class="flex flex-wrap gap-3 md:gap-4 reveal reveal-up reveal-d1">
         {
-          Array.from({ length: 8 }).map(() => (
-            <div class="aspect-[4/5] overflow-hidden rounded-sm bg-cream-dark flex items-center justify-center">
+          [1.5, 0.75, 1.3, 1.0, 1.6, 0.8, 1.2, 1.7, 0.85, 1.4].map((ar) => (
+            <div
+              class="relative h-40 md:h-52 overflow-hidden rounded-sm bg-cream-dark flex items-center justify-center"
+              style={`flex-grow:${ar}; flex-basis:${ar * 13}rem;`}
+            >
               <svg
                 class="w-10 h-10 text-olive/40"
                 fill="none"
@@ -661,41 +700,6 @@ const faqSchema = {
             <span class="px-5 py-3 bg-cream text-sm text-charcoal border border-charcoal/10 rounded-sm">
               {place}
             </span>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Opinie — PLACEHOLDER. Podmień na PRAWDZIWE opinie (np. z Google).
-       Nie publikujemy zmyślonych opinii — wklej realne cytaty + imiona. -->
-  <section class="py-20 md:py-32 bg-white">
-    <div class="max-w-5xl mx-auto px-6 md:px-12">
-      <div class="text-center mb-12 reveal reveal-up">
-        <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
-          Opinie
-        </span>
-        <h2 class="section-title">Co mówią pary, które nam zaufały</h2>
-      </div>
-
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal reveal-up reveal-d1"
-      >
-        {
-          Array.from({ length: 3 }).map(() => (
-            <div class="bg-cream p-8 rounded-sm border border-charcoal/10">
-              <div class="flex gap-1 text-olive mb-4">
-                {Array.from({ length: 5 }).map(() => (
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 00-.364 1.118l1.287 3.958c.3.922-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.176 0l-3.366 2.446c-.784.57-1.838-.196-1.539-1.118l1.287-3.958a1 1 0 00-.364-1.118L2.98 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.958z" />
-                  </svg>
-                ))}
-              </div>
-              <p class="text-charcoal-light text-sm leading-relaxed italic mb-6">
-                „[Tutaj wklej prawdziwą opinię pary — np. z Google.]"
-              </p>
-              <p class="text-charcoal text-sm font-medium">Imię P.</p>
-            </div>
           ))
         }
       </div>
