@@ -90,6 +90,25 @@ export async function getLatestPortfolio(count: number = 3): Promise<PortfolioIt
   `)
 }
 
+// Galeria na landingi ślubne — okładki + kilka kadrów z wyróżnionych realizacji.
+// Zwraca płaską listę zdjęć z proporcjami (do justified grid).
+export async function getLandingGallery(limit: number = 12): Promise<{ image: any; ar: number }[]> {
+  const items = await sanityClient.fetch(`
+    *[_type == "portfolio"] | order(featured desc, order asc) {
+      "cover": coverImage{ ..., "ar": asset->metadata.dimensions.aspectRatio },
+      "gallery": images[0...3]{ ..., "ar": asset->metadata.dimensions.aspectRatio }
+    }
+  `)
+  const flat: { image: any; ar: number }[] = []
+  for (const it of items || []) {
+    if (it?.cover?.asset) flat.push({ image: it.cover, ar: it.cover.ar || 1 })
+    for (const img of it?.gallery || []) {
+      if (img?.asset) flat.push({ image: img, ar: img.ar || 1 })
+    }
+  }
+  return flat.slice(0, limit)
+}
+
 // Category labels in Polish
 export const categoryLabels: Record<string, string> = {
   'reportaz-slubny': 'Reportaż ślubny',
