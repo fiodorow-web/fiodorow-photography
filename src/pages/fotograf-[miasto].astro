@@ -479,6 +479,61 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Portfolio Gallery — PLACEHOLDER. Podmień kafelki na zdjęcia:
+       1) wklej pliki do src/assets/pseo/<miasto>/
+       2) zaimportuj je u góry pliku i wstaw <Image .../> w miejsce <div class="...">
+       (patrz jak zrobione są heroImage / gridImages) -->
+  <section class="py-20 md:py-32 bg-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-12 reveal reveal-up">
+        <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
+          Portfolio
+        </span>
+        <h2 class="section-title">Ostatnie realizacje</h2>
+        <p class="text-charcoal-light text-sm max-w-lg mx-auto mt-4">
+          Zobaczcie kadry z prawdziwych ślubów — naturalne emocje, światło i
+          chwile, które zostają na zawsze.
+        </p>
+      </div>
+
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 reveal reveal-up reveal-d1"
+      >
+        {
+          Array.from({ length: 8 }).map(() => (
+            <div class="aspect-[4/5] overflow-hidden rounded-sm bg-cream-dark flex items-center justify-center">
+              <svg
+                class="w-10 h-10 text-olive/40"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.822 1.316z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"
+                />
+              </svg>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-12 reveal reveal-up">
+        <a href="/portfolio" class="btn-primary inline-block">
+          Zobacz całe portfolio
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Services Section -->
   <section class="py-20 md:py-32 section-cream">
     <div class="max-w-6xl mx-auto px-6 md:px-12">
@@ -606,6 +661,41 @@ const faqSchema = {
             <span class="px-5 py-3 bg-cream text-sm text-charcoal border border-charcoal/10 rounded-sm">
               {place}
             </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Opinie — PLACEHOLDER. Podmień na PRAWDZIWE opinie (np. z Google).
+       Nie publikujemy zmyślonych opinii — wklej realne cytaty + imiona. -->
+  <section class="py-20 md:py-32 bg-white">
+    <div class="max-w-5xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-12 reveal reveal-up">
+        <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
+          Opinie
+        </span>
+        <h2 class="section-title">Co mówią pary, które nam zaufały</h2>
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal reveal-up reveal-d1"
+      >
+        {
+          Array.from({ length: 3 }).map(() => (
+            <div class="bg-cream p-8 rounded-sm border border-charcoal/10">
+              <div class="flex gap-1 text-olive mb-4">
+                {Array.from({ length: 5 }).map(() => (
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 00-.364 1.118l1.287 3.958c.3.922-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.176 0l-3.366 2.446c-.784.57-1.838-.196-1.539-1.118l1.287-3.958a1 1 0 00-.364-1.118L2.98 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.958z" />
+                  </svg>
+                ))}
+              </div>
+              <p class="text-charcoal-light text-sm leading-relaxed italic mb-6">
+                „[Tutaj wklej prawdziwą opinię pary — np. z Google.]"
+              </p>
+              <p class="text-charcoal text-sm font-medium">Imię P.</p>
+            </div>
           ))
         }
       </div>
