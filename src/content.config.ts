@@ -12,6 +12,7 @@ const blog = defineCollection({
     imageAlt: z.string(),
     tags: z.array(z.string()).default([]),
     readingTime: z.string().default('5 min'),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 

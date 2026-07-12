@@ -1,0 +1,17 @@
+ZDJĘCIA DO WPISU: "Sesja narzeczeńska — dlaczego warto?"
+(src/content/blog/dlaczego-warto-zrobic-sesje-narzeczenska.md)
+
+!!! UWAGA: obecnie w folderze są ZDJĘCIA ZASTĘPCZE (placeholdery) !!!
+Wgrane tymczasowo istniejące zdjęcia plenerowe z repo, żeby wpis się zbudował
+i dało się go podejrzeć na dev. PODMIEŃ je na prawdziwe zdjęcia z sesji
+narzeczeńskiej — zachowaj DOKŁADNIE te same nazwy plików (są pod SEO):
+
+1. sesja-narzeczenska-siedlce-para-w-plenerze.jpg      ← ZDJĘCIE GŁÓWNE (hero, 16:9)
+2. sesja-narzeczenska-oswojenie-z-aparatem-emocje.jpg
+3. sesja-narzeczenska-fotograf-prowadzi-pare.jpg
+4. sesja-narzeczenska-zdjecia-na-zaproszenia-slubne.jpg
+5. sesja-narzeczenska-podlasie-bialystok-zloty-plener.jpg
+6. sesja-zareczynowa-para-o-zachodzie-slonca.jpg
+
+Format .jpg, poziome (16:9 dla hero działa najlepiej), ok. 1400 px szerokości.
+Po podmianie ten plik (NAZWY-ZDJEC.txt) możesz usunąć.
