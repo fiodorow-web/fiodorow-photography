@@ -94,9 +94,9 @@ export async function getLatestPortfolio(count: number = 3): Promise<PortfolioIt
 // Zwraca płaską listę zdjęć z proporcjami (do justified grid).
 export async function getLandingGallery(limit: number = 12): Promise<{ image: any; ar: number }[]> {
   const items = await sanityClient.fetch(`
-    *[_type == "portfolio"] | order(featured desc, order asc) {
+    *[_type == "portfolio"] {
       "cover": coverImage{ ..., "ar": asset->metadata.dimensions.aspectRatio },
-      "gallery": images[0...3]{ ..., "ar": asset->metadata.dimensions.aspectRatio }
+      "gallery": images[0...12]{ ..., "ar": asset->metadata.dimensions.aspectRatio }
     }
   `)
   const flat: { image: any; ar: number }[] = []
@@ -105,6 +105,11 @@ export async function getLandingGallery(limit: number = 12): Promise<{ image: an
     for (const img of it?.gallery || []) {
       if (img?.asset) flat.push({ image: img, ar: img.ar || 1 })
     }
+  }
+  // Losowa kolejność (Fisher-Yates) → inny zestaw przy każdym buildzie i na każdym mieście
+  for (let i = flat.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[flat[i], flat[j]] = [flat[j], flat[i]]
   }
   return flat.slice(0, limit)
 }
