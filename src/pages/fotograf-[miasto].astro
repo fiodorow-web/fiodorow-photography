@@ -243,6 +243,28 @@ try {
   galleryImages = [];
 }
 
+// Justified grid: grupuj w rzędy o sumie proporcji ~TARGET_ROW_AR — każdy
+// pełny rząd wypełnia 100% szerokości (flex-grow ∝ ar), wysokość w rzędzie
+// równa, zdjęcia w oryginalnych proporcjach (zero kadrowania).
+const TARGET_ROW_AR = 3.2;
+function buildJustifiedRows(items: { ar: number; [k: string]: any }[]) {
+  const rows: { items: typeof items; full: boolean }[] = [];
+  let current: typeof items = [];
+  let sum = 0;
+  for (const it of items) {
+    current.push(it);
+    sum += it.ar;
+    if (sum >= TARGET_ROW_AR) {
+      rows.push({ items: current, full: true });
+      current = [];
+      sum = 0;
+    }
+  }
+  if (current.length) rows.push({ items: current, full: false });
+  return rows;
+}
+const galleryRows = buildJustifiedRows(galleryImages);
+
 // Map city names to PSEO slugs for internal linking
 const citySlugMap: Record<string, string> = {
   Siedlce: "siedlce",
@@ -592,37 +614,56 @@ const reviewSchema = {
         </p>
       </div>
 
-      <!-- Masonry: kolumny o równej szerokości → równy układ za każdym razem,
-           bez kadrowania (pełne proporcje, aspect-ratio z Sanity). -->
+      <!-- Justified grid: pełne rzędy wypełniają 100% szerokości (flex-grow ∝
+           proporcje), równa wysokość w rzędzie, zero kadrowania. Ostatni
+           niepełny rząd trzyma skalę pełnych rzędów i jest wyśrodkowany. -->
       {
         galleryImages.length > 0 ? (
-          <div class="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 reveal reveal-up reveal-d1">
-            {galleryImages.map((g) => (
-              <a
-                href="/portfolio"
-                class="block mb-3 md:mb-4 break-inside-avoid overflow-hidden rounded-sm bg-cream-dark transition-opacity duration-300 hover:opacity-90"
-              >
-                <img
-                  src={urlFor(g.image).width(600).quality(72).url()}
-                  alt={`Fotografia ślubna ${city.nameLocative} — realizacja`}
-                  loading="lazy"
-                  style={`aspect-ratio:${g.ar};`}
-                  class="w-full h-auto"
-                />
-              </a>
+          <div class="flex flex-col gap-3 md:gap-4 reveal reveal-up reveal-d1">
+            {galleryRows.map((row) => (
+              <div class={`flex gap-3 md:gap-4 ${row.full ? "" : "justify-center"}`}>
+                {row.items.map((g) => (
+                  <a
+                    href="/portfolio"
+                    class="block overflow-hidden rounded-sm bg-cream-dark transition-opacity duration-300 hover:opacity-90"
+                    style={
+                      row.full
+                        ? `flex-grow:${g.ar}; flex-basis:0; aspect-ratio:${g.ar};`
+                        : `width:${((g.ar / TARGET_ROW_AR) * 100).toFixed(2)}%; aspect-ratio:${g.ar};`
+                    }
+                  >
+                    <img
+                      src={urlFor(g.image).width(800).quality(72).url()}
+                      alt={`Fotografia ślubna ${city.nameLocative} — realizacja`}
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  </a>
+                ))}
+              </div>
             ))}
           </div>
         ) : (
-          <div class="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 reveal reveal-up reveal-d1">
-            {[1.5, 0.75, 1.3, 1.0, 1.6, 0.8, 1.2, 1.7, 0.85, 1.4, 1.1, 0.9].map((ar) => (
-              <div
-                class="mb-3 md:mb-4 break-inside-avoid rounded-sm bg-cream-dark flex items-center justify-center"
-                style={`aspect-ratio:${ar};`}
-              >
-                <svg class="w-10 h-10 text-olive/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.822 1.316z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
-                </svg>
+          <div class="flex flex-col gap-3 md:gap-4 reveal reveal-up reveal-d1">
+            {buildJustifiedRows(
+              [1.5, 0.75, 1.3, 1.0, 1.6, 0.8, 1.2, 1.7, 0.85, 1.4, 1.1, 0.9].map((ar) => ({ ar }))
+            ).map((row) => (
+              <div class={`flex gap-3 md:gap-4 ${row.full ? "" : "justify-center"}`}>
+                {row.items.map((g) => (
+                  <div
+                    class="rounded-sm bg-cream-dark flex items-center justify-center"
+                    style={
+                      row.full
+                        ? `flex-grow:${g.ar}; flex-basis:0; aspect-ratio:${g.ar};`
+                        : `width:${((g.ar / TARGET_ROW_AR) * 100).toFixed(2)}%; aspect-ratio:${g.ar};`
+                    }
+                  >
+                    <svg class="w-10 h-10 text-olive/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.822 1.316z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+                    </svg>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
