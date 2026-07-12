@@ -408,6 +408,7 @@ const reviewSchema = {
             alt={`Fotograf ślubny w ${city.nameLocative} – sesja plenerowa`}
             class={`w-full h-full object-cover ${(city as any).heroPosition || "object-center"}`}
             loading="eager"
+            fetchpriority="high"
           />
         ) : (
           <Image
@@ -415,6 +416,7 @@ const reviewSchema = {
             alt={`Fotograf ślubny w ${city.nameLocative} – sesja plenerowa`}
             class={`w-full h-full object-cover ${(city as any).heroPosition || "object-center"}`}
             loading="eager"
+            fetchpriority="high"
             quality={85}
             format="webp"
             widths={[600, 1200, 1920]}
