@@ -305,6 +305,36 @@ const faqSchema = {
     },
   })),
 };
+
+// Opinie par (te same dla wszystkich miast — prawdziwe recenzje klientów)
+const reviews = [
+  {
+    quote:
+      "Całym sercem polecamy Weronikę i Mateusza, zdecydowanie najlepszy duet fotografów 🩷 Kontakt od początku do końca oceniamy bardzo pozytywnie — od pierwszego spotkania wiedzieliśmy, że to będzie strzał w 10, a zdjęcia wyszły po prostu magicznie. Serdecznie polecamy!",
+    author: "Amelia & Damian",
+    date: "26.04.2025",
+  },
+  {
+    quote:
+      "Mateusz z Weroniką to bardzo zgrana para, która potrafi w odpowiednim momencie uwiecznić w kadrze najważniejsze chwile. Kontakt był bardzo rzetelny, a szczegóły ustalane na bieżąco aż do dnia ceremonii. Jako fotograf z innej branży przyznam, że mają bardzo klimatyczny styl obróbki i profesjonalny sprzęt. Jedni z nielicznych, którzy nie idą w ilość, tylko stawiają na jakość. Polecam! 🙏🏻",
+    author: "Karolina & Piotr",
+  },
+  {
+    quote:
+      "Bardzo polecam! Fantastyczna, zgrana para fotografów — widać, że robią to z pasją. Zdjęcia wyszły przepiękne, pełne emocji i naturalności. Album przygotowany przez nich to prawdziwe arcydzieło, do którego na pewno będziemy często wracać. Naprawdę ekstra współpraca!",
+    author: "Ewa",
+  },
+  {
+    quote:
+      "Dałam 5 gwiazdek, bo to max, ale w rzeczywistości powinno być 6/5 😁 Dzięki Weronice i Mateuszowi mamy przepiękne zdjęcia i wspaniałą pamiątkę ze ślubu ❤️ Wszystko bez spiny, na pełnym luzie — jesteśmy bardzo zadowoleni! Na pewno jeszcze skorzystamy 🥰",
+    author: "Karolina & Marcin",
+  },
+  {
+    quote:
+      "Jesteśmy bardzo zadowoleni ze współpracy z Weroniką i Mateuszem od początku do końca. Niezwykle mili, serdeczni ludzie, przy których nie czuć żadnego skrępowania — tworzą tak ciepłą atmosferę, że można zachowywać się zupełnie naturalnie. Pracowali z ogromnym wyczuciem i dyskrecją. Zdjęcia wyszły naturalne i pełne emocji. Gorąco polecamy!",
+    author: "Maria & Piotr",
+  },
+];
 ---
 
 <BaseLayout
@@ -479,10 +509,9 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Opinie — PLACEHOLDER. Podmień na PRAWDZIWE opinie (np. z Google).
-       Nie publikujemy zmyślonych opinii — wklej realne cytaty + imiona. -->
+  <!-- Opinie par (prawdziwe recenzje klientów) -->
   <section class="py-20 md:py-32 section-cream">
-    <div class="max-w-5xl mx-auto px-6 md:px-12">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
       <div class="text-center mb-12 reveal reveal-up">
         <span class="text-olive text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
           Opinie
@@ -491,10 +520,10 @@ const faqSchema = {
       </div>
 
       <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal reveal-up reveal-d1"
+        class="columns-1 md:columns-2 lg:columns-3 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid reveal reveal-up reveal-d1"
       >
         {
-          Array.from({ length: 3 }).map(() => (
+          reviews.map((review) => (
             <div class="bg-white p-8 rounded-sm border border-charcoal/10">
               <div class="flex gap-1 text-olive mb-4">
                 {Array.from({ length: 5 }).map(() => (
@@ -504,9 +533,14 @@ const faqSchema = {
                 ))}
               </div>
               <p class="text-charcoal-light text-sm leading-relaxed italic mb-6">
-                „[Tutaj wklej prawdziwą opinię pary — np. z Google.]"
+                „{review.quote}"
               </p>
-              <p class="text-charcoal text-sm font-medium">Imię P.</p>
+              <p class="text-charcoal text-sm font-medium">
+                {review.author}
+                {review.date && (
+                  <span class="text-charcoal-light font-normal"> · {review.date}</span>
+                )}
+              </p>
             </div>
           ))
         }
