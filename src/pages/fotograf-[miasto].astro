@@ -27,6 +27,8 @@ export function getStaticPaths() {
       // — jest na pozycji 2,4, ten landing na 44,6. Canonical oddaje jej sygnały,
       // zamiast konkurować z własnym serwisem. Landing dalej działa pod Google Ads.
       canonicalPath: "/",
+      // Link kontekstowy do fotobudki w tym samym mieście (tylko gdzie istnieje).
+      fotobudkaSlug: "fotobudka-siedlce",
       metaDescription:
         "Fotograf ślubny w Siedlcach ✦ Naturalna fotografia ślubna, sesje narzeczeńskie i poślubne. Duet fotografów z Siedlec. Zadzwoń: +48 660 872 121",
       aboutParagraphs: [
@@ -784,6 +786,21 @@ const reviewSchema = {
           </p>
         </div>
       </div>
+
+      {
+        city.fotobudkaSlug && (
+          <p class="mt-12 text-center text-charcoal-light text-sm leading-relaxed reveal reveal-up">
+            Na wesele oferujemy też{" "}
+            <a
+              href={`/${city.fotobudkaSlug}`}
+              class="text-olive underline underline-offset-4 hover:text-olive-dark transition-colors"
+            >
+              wynajem drewnianej fotobudki w {city.nameLocative}
+            </a>{" "}
+            — nielimitowane wydruki, rekwizyty i obsługa w cenie.
+          </p>
+        )
+      }
     </div>
   </section>
 

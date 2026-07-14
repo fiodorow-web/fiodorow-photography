@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
+import { CENA_BAZOWA, CENA_GODZINA } from "../data/fotobudka-miasta";
 import heroImg from "../assets/fotobudka/fotobudka-siedlce-drewniana.jpg";
 import detailImg from "../assets/fotobudka/fotobudka-siedlce-detal.jpg";
 import wesele1 from "../assets/fotobudka/fotobudka-wesele-goscie-okulary.jpg";
@@ -30,10 +31,35 @@ const schema = {
       areaServed: { "@type": "Country", name: "Polska" },
       description:
         "Drewniana, retro fotobudka do wynajęcia na wesela, urodziny i eventy. Nielimitowane wydruki, profesjonalne światło, obsługa i galeria online.",
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "PLN",
+        price: CENA_BAZOWA,
+        description: `${CENA_BAZOWA} zł za 2 godziny wynajmu, każda dodatkowa godzina ${CENA_GODZINA} zł. Dostawa, montaż, obsługa, nielimitowane wydruki i galeria online w cenie.`,
+        availability: "https://schema.org/InStock",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          priceCurrency: "PLN",
+          price: CENA_BAZOWA,
+          referenceQuantity: {
+            "@type": "QuantitativeValue",
+            value: 2,
+            unitCode: "HUR",
+          },
+        },
+      },
     },
     {
       "@type": "FAQPage",
       mainEntity: [
+        {
+          "@type": "Question",
+          name: "Ile kosztuje wynajem fotobudki?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `Wynajem fotobudki kosztuje ${CENA_BAZOWA} zł za 2 godziny, a każda dodatkowa godzina to ${CENA_GODZINA} zł. W tej cenie macie dostawę, montaż i demontaż, obsługę, nielimitowane wydruki, komplet rekwizytów oraz galerię online. Nie doliczamy opłat za liczbę zdjęć ani za gości.`,
+          },
+        },
         {
           "@type": "Question",
           name: "Co zawiera wynajem fotobudki?",
@@ -145,12 +171,16 @@ const steps = [
 
 const faq = [
   {
+    q: "Ile kosztuje wynajem fotobudki?",
+    a: `Wynajem fotobudki kosztuje ${CENA_BAZOWA} zł za 2 godziny, a każda dodatkowa godzina to ${CENA_GODZINA} zł. W tej cenie macie dostawę, montaż i demontaż, obsługę, nielimitowane wydruki, komplet rekwizytów oraz galerię online. Nie doliczamy opłat za liczbę zdjęć ani za gości.`,
+  },
+  {
     q: "Co zawiera wynajem fotobudki?",
     a: "Standardowy wynajem obejmuje dostawę, montaż i demontaż, obsługę przez całą imprezę, nielimitowane wydruki, zestaw rekwizytów oraz galerię online ze wszystkimi zdjęciami. Wszystko w jednej, przejrzystej cenie.",
   },
   {
     q: "Na jak długo wynajmuje się fotobudkę?",
-    a: "Standardowo na 3–4 godziny ciągłej zabawy, z możliwością wydłużenia. Przy weselach najczęściej działamy w godzinach największej zabawy — po tortach i pierwszym tańcu.",
+    a: `Standardowo na 2 godziny ciągłej zabawy, z możliwością wydłużenia o kolejne godziny (${CENA_GODZINA} zł za każdą). Przy weselach najczęściej działamy w godzinach największej zabawy — po torcie i pierwszym tańcu.`,
   },
   {
     q: "Ile miejsca zajmuje fotobudka?",
@@ -307,8 +337,8 @@ const gallery = [
     </div>
   </section>
 
-  <!-- W CENIE KAŻDEGO WYNAJMU -->
-  <section class="bg-cream-dark py-[clamp(64px,9vw,120px)] px-6">
+  <!-- W CENIE KAŻDEGO WYNAJMU — id="pakiet" jest celem przycisku w hero. -->
+  <section id="pakiet" class="bg-cream-dark py-[clamp(64px,9vw,120px)] px-6">
     <div class="max-w-[1180px] mx-auto">
       <div class="reveal reveal-up text-center max-w-[620px] mx-auto mb-14">
         <span class="block font-sans text-xs font-bold tracking-[.22em] uppercase text-olive mb-[18px]">
@@ -318,6 +348,16 @@ const gallery = [
           W cenie każdego
           <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">wynajmu</span>
         </h2>
+        <div class="flex flex-wrap items-stretch justify-center mt-9 border border-charcoal/[.08] rounded-[2px] overflow-hidden max-w-[440px] mx-auto">
+          <div class="flex-1 min-w-[160px] px-6 py-7 bg-white">
+            <span class="block font-serif text-[clamp(28px,4vw,38px)] text-charcoal leading-none mb-2">{CENA_BAZOWA} zł</span>
+            <span class="block font-sans text-[11px] tracking-[.16em] uppercase text-charcoal-light">za 2 godziny</span>
+          </div>
+          <div class="flex-1 min-w-[160px] px-6 py-7 bg-white border-l border-charcoal/[.08]">
+            <span class="block font-serif text-[clamp(28px,4vw,38px)] text-charcoal leading-none mb-2">{CENA_GODZINA} zł</span>
+            <span class="block font-sans text-[11px] tracking-[.16em] uppercase text-charcoal-light">każda dodatkowa godzina</span>
+          </div>
+        </div>
       </div>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
         {

@@ -124,12 +124,16 @@ export function whyLocal(city: FotobudkaCity): string {
   return `Działamy lokalnie — znamy sale weselne i restauracje w ${city.loc} oraz okolicy. Dzięki temu wiemy, gdzie najlepiej ustawić fotobudkę, by była w centrum zabawy.`;
 }
 
+// Cennik jest jeden dla wszystkich miast — różni się tylko dojazd (patrz city.dojazd).
+export const CENA_BAZOWA = 800; // zł za 2 godziny
+export const CENA_GODZINA = 200; // zł za każdą dodatkową godzinę
+
 export function faqCena(city: FotobudkaCity): string {
-  return `Cenę wynajmu w ${city.loc} ustalamy indywidualnie — zależy od terminu, długości działania fotobudki i lokalizacji sali. Napiszcie do nas z datą i miejscem, a przygotujemy konkretną wycenę dla Waszego wydarzenia.`;
+  return `Wynajem fotobudki w ${city.loc} kosztuje ${CENA_BAZOWA} zł za 2 godziny, a każda dodatkowa godzina to ${CENA_GODZINA} zł. W tej cenie macie wszystko: dostawę, montaż i demontaż, obsługę, nielimitowane wydruki, komplet rekwizytów i galerię online. Nie doliczamy opłat za liczbę zdjęć ani za gości.`;
 }
 
 export function faqWcenie(city: FotobudkaCity): string {
-  return `W ${city.loc} i okolicy wynajem obejmuje dostawę, montaż i demontaż, obsługę przez całą imprezę, nielimitowane wydruki, komplet rekwizytów oraz galerię online ze wszystkimi zdjęciami.`;
+  return `W ${city.loc} i okolicy wynajem obejmuje dostawę, montaż i demontaż, obsługę przez całą imprezę, nielimitowane wydruki, komplet rekwizytów oraz galerię online ze wszystkimi zdjęciami. Każdy wydruk możemy spersonalizować dowolnym napisem i datą, a format wybieracie sami — klasyczne paski albo pocztówki.`;
 }
 
 export function faqRezerwacja(city: FotobudkaCity): string {

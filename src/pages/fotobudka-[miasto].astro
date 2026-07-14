@@ -10,6 +10,8 @@ import {
   faqWcenie,
   faqRezerwacja,
   faqCzas,
+  CENA_BAZOWA,
+  CENA_GODZINA,
 } from "../data/fotobudka-miasta";
 import heroImg from "../assets/fotobudka/fotobudka-siedlce-drewniana.jpg";
 import detailImg from "../assets/fotobudka/fotobudka-siedlce-detal.jpg";
@@ -130,6 +132,23 @@ const schema = {
       },
       areaServed: { "@type": "City", name: city.nom },
       description,
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "PLN",
+        price: CENA_BAZOWA,
+        description: `${CENA_BAZOWA} zł za 2 godziny wynajmu, każda dodatkowa godzina ${CENA_GODZINA} zł. Dostawa, montaż, obsługa, nielimitowane wydruki i galeria online w cenie.`,
+        availability: "https://schema.org/InStock",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          priceCurrency: "PLN",
+          price: CENA_BAZOWA,
+          referenceQuantity: {
+            "@type": "QuantitativeValue",
+            value: 2,
+            unitCode: "HUR",
+          },
+        },
+      },
     },
     {
       "@type": "FAQPage",
@@ -366,8 +385,23 @@ const schema = {
         <span style="font-style:italic;font-weight:300;color:var(--color-olive);text-transform:uppercase;letter-spacing:.02em">pakiecie</span>
       </h2>
       <p class="font-sans font-light text-charcoal-light text-[16px] leading-[1.8] max-w-[520px] mx-auto mb-8">
-        {city.coverage} Wycenę ustalamy indywidualnie — zależnie od terminu, długości wynajmu i miejsca wydarzenia.
+        {city.coverage}
       </p>
+
+      <!-- Konkretna cena zamiast „wycena indywidualna" — „ile kosztuje fotobudka"
+           to fraza, której ludzie realnie szukają, a meta description i tak
+           obiecywał „od 800 zł". -->
+      <div class="flex flex-wrap items-stretch justify-center gap-0 mb-8 border border-charcoal/[.08] rounded-[2px] overflow-hidden max-w-[440px] mx-auto">
+        <div class="flex-1 min-w-[160px] px-6 py-7 bg-cream">
+          <span class="block font-serif text-[clamp(28px,4vw,38px)] text-charcoal leading-none mb-2">800 zł</span>
+          <span class="block font-sans text-[11px] tracking-[.16em] uppercase text-charcoal-light">za 2 godziny</span>
+        </div>
+        <div class="flex-1 min-w-[160px] px-6 py-7 bg-cream border-l border-charcoal/[.08]">
+          <span class="block font-serif text-[clamp(28px,4vw,38px)] text-charcoal leading-none mb-2">200 zł</span>
+          <span class="block font-sans text-[11px] tracking-[.16em] uppercase text-charcoal-light">każda dodatkowa godzina</span>
+        </div>
+      </div>
+
       <div class="flex flex-wrap justify-center gap-3 mb-10">
         {
           ["Dostawa i montaż w cenie", "Obsługa przez całą imprezę", "Nielimitowane wydruki", "Galeria online"].map(
@@ -379,7 +413,7 @@ const schema = {
           )
         }
       </div>
-      <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zapytaj o wycenę</a>
+      <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
     </div>
   </section>
 
