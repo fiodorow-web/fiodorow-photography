@@ -1,17 +1,41 @@
 ---
-title: "Jak wygląda dzień ślubu z nami?"
-description: "Jeśli zastanawiacie się jak wygląda reportaż ślubny z naszej perspektywy — ten przewodnik rozwieje Wasze wątpliwości. Od przygotowań po zabawę weselną."
+title: "Jak wygląda reportaż ślubny? Plan dnia godzina po godzinie"
+description: "Fotograf przyjeżdża około 3 godziny przed ceremonią i zostaje do ok. 1:00 w nocy. Sprawdźcie, jak wygląda reportaż ślubny krok po kroku — od przygotowań, przez ceremonię i mini plener, po zabawę weselną."
 date: "2026-03-21"
 author: "Fiodorow Photography"
 image: "../../assets/blog/jak-wyglada-dzien-slubu/reportaz-slubny-dzien-slubu.jpg"
 imageAlt: "Reportaż ślubny — para młoda w dniu ślubu, fotograf ślubny Siedlce"
-tags: ["reportaż ślubny", "dzień ślubu", "poradnik", "fotograf ślubny"]
-readingTime: "5 min"
+tags: ["reportaż ślubny", "harmonogram dnia ślubu", "dzień ślubu", "poradnik", "fotograf ślubny"]
+readingTime: "6 min"
+faq:
+  - q: "O której godzinie fotograf przyjeżdża w dniu ślubu?"
+    a: "Zaczynamy zwykle około trzech godzin przed ceremonią. Pierwszym punktem są przygotowania Pana Młodego (do godziny), potem przenosimy się do Panny Młodej, gdzie spędzamy do około dwóch godzin."
+  - q: "Ile godzin trwa reportaż ślubny?"
+    a: "Od przygotowań, czyli mniej więcej trzy godziny przed ceremonią, aż do około godziny 1:00 w nocy. To zwykle kilkanaście godzin pracy — a po powrocie do domu zgrywamy jeszcze wszystkie pliki, żeby Wasze zdjęcia były bezpieczne."
+  - q: "Czy w czasie reportażu trzeba dużo pozować?"
+    a: "Nie. Pracujemy reportażowo — szukamy niepozowanych, szczerych kadrów i staramy się nie zakłócać przebiegu dnia. Jedyny wyraźnie „ustawiony” moment to mini plener, który trwa do piętnastu minut, oraz kilka klasycznych portretów przy przygotowaniach."
+  - q: "Czym jest first look?"
+    a: "To moment, w którym widzicie się po raz pierwszy w ślubnych strojach bez tłumu gości wokół — najczęściej w ogrodzie lub cichym zakątku domu. Jesteśmy wtedy nieco dalej, dając Wam przestrzeń. Zaraz po nim następuje błogosławieństwo w gronie rodzinnym."
+  - q: "Czy trzeba robić osobną sesję plenerową?"
+    a: "Nie musicie. W trakcie reportażu zawsze staramy się znaleźć moment na mini plener trwający do piętnastu minut — wystarczy kawałek zieleni za domem, ogród przy kościele albo łąka obok sali. Kilka z tych zdjęć często obrabiamy i drukujemy jeszcze tego samego dnia."
 ---
 
 Jeśli jesteście przed swoim ślubem, to bardzo możliwe, że oprócz ekscytacji pojawia się też stres. To zupełnie normalne. Wiele par zastanawia się, jak właściwie wygląda dzień reportażu ślubnego, kiedy przyjeżdżamy, co robimy, czy będzie dużo pozowania i czy w tym wszystkim znajdzie się jeszcze przestrzeń, żeby po prostu przeżyć ten dzień po swojemu.
 
 Aby nieco zapoznać Was z naszym stylem działania i pokazać, że naprawdę nie ma się czym stresować, przygotowaliśmy krótki przewodnik po tym, jak zazwyczaj wygląda nasza praca. Oczywiście każdy ślub jest inny, potraktujcie to jako pogląd, który pomoże Wam przygotować się do reportażu.
+
+## Reportaż ślubny w skrócie — plan dnia
+
+Jeśli szukacie szybkiej odpowiedzi, oto jak zwykle rozkłada się nasz dzień z Wami:
+
+- **ok. 3 godziny przed ceremonią** — zaczynamy od przygotowań Pana Młodego (do godziny)
+- **do 2 godzin** — przygotowania Panny Młodej: makijaż, suknia, spotkania z najbliższymi
+- **tuż przed wyjazdem** — first look i błogosławieństwo w gronie rodzinnym
+- **ceremonia** — fotografujemy z dwóch perspektyw, nie zakłócając przebiegu
+- **do 15 minut** — mini plener we dwoje, bez potrzeby osobnej sesji w innym terminie
+- **wesele** — od pierwszego tańca po parkiet; zostajemy zwykle do około 1:00
+
+Poniżej rozpisujemy każdy z tych etapów.
 
 ## Przygotowania Pana Młodego — spokojne wejście w dzień
 
