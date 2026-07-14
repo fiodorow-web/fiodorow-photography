@@ -8,6 +8,9 @@ interface Props {
   image?: string;
   breadcrumbs?: { name: string; href: string }[];
   noindex?: boolean;
+  /** Ścieżka innej strony, która ma przejąć sygnały SEO tej strony (np. "/").
+   *  Używane dla landingów reklamowych, żeby nie konkurowały w Google z główną. */
+  canonicalPath?: string;
 }
 
 const {
@@ -16,9 +19,10 @@ const {
   image = "/og-image.jpg",
   breadcrumbs,
   noindex = false,
+  canonicalPath,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 
 const breadcrumbSchema = breadcrumbs
   ? {

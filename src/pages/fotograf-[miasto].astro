@@ -23,6 +23,10 @@ export function getStaticPaths() {
       nameAdjective: "siedlecki",
       region: "Mazowieckie",
       postalCode: "08-110",
+      // Strona główna celuje w te same frazy ("fotograf ślubny Siedlce") i wygrywa
+      // — jest na pozycji 2,4, ten landing na 44,6. Canonical oddaje jej sygnały,
+      // zamiast konkurować z własnym serwisem. Landing dalej działa pod Google Ads.
+      canonicalPath: "/",
       metaDescription:
         "Fotograf ślubny w Siedlcach ✦ Naturalna fotografia ślubna, sesje narzeczeńskie i poślubne. Duet fotografów z Siedlec. Zadzwoń: +48 660 872 121",
       aboutParagraphs: [
@@ -393,6 +397,7 @@ const reviewSchema = {
   title={`Fotograf ślubny ${city.name} | Fiodorow Photography`}
   description={city.metaDescription}
   breadcrumbs={[{ name: `Fotograf ${city.name}`, href: `/fotograf-${miasto}` }]}
+  canonicalPath={city.canonicalPath}
 >
   <Header />
 
