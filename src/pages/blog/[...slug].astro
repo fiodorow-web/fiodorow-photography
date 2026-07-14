@@ -6,7 +6,7 @@ import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -17,7 +17,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 // Get other posts for "Read more" section
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const otherPosts = allPosts
   .filter(p => p.id !== post.id)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())

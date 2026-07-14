@@ -12,6 +12,9 @@ const blog = defineCollection({
     imageAlt: z.string(),
     tags: z.array(z.string()).default([]),
     readingTime: z.string().default('5 min'),
+    // draft: true — wpis zostaje w repo, ale nie buduje się strona, nie ma go
+    // na liście bloga ani w sitemapie.
+    draft: z.boolean().default(false),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });

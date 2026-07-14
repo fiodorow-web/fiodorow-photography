@@ -7,6 +7,7 @@ image: "../../assets/blog/sesja-narzeczenska/sesja-narzeczenska-siedlce-para-w-p
 imageAlt: "Sesja narzeczeńska w plenerze — zakochana para, fotograf ślubny Siedlce"
 tags: ["sesja narzeczeńska", "sesja zaręczynowa", "poradnik", "fotograf ślubny", "przed ślubem"]
 readingTime: "6 min"
+draft: true
 faq:
   - q: "Kiedy najlepiej zrobić sesję narzeczeńską?"
     a: "Zwykle na 2–6 miesięcy przed ślubem. Dzięki temu zdążycie wykorzystać zdjęcia na zaproszenia czy dekoracje, a jednocześnie nie „przeleżą się\" one zbyt długo. Najładniejsze światło jest o wschodzie i tuż przed zachodem słońca i to właśnie te pory najczęściej proponujemy."
