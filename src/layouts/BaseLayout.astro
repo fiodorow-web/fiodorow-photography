@@ -162,6 +162,31 @@ const breadcrumbSchema = breadcrumbs
   <body class="antialiased">
     <slot />
     <CookieBanner />
+
+    <!-- Ruch wewnętrzny — wyłącznik analityki.
+         GA4 ma w panelu filtr ruchu wewnętrznego po IP, ale API go nie wystawia,
+         a filtr po IP i tak nie działa na danych komórkowych. Robimy to tutaj:
+
+         • podgląd (localhost, *.vercel.app) NIGDY nie wysyła zdarzeń,
+         • własne urządzenie wyłączasz raz: fiodorowphotography.pl/?ga-off=1
+           (z powrotem: /?ga-on=1). Flaga siedzi w localStorage danej przeglądarki,
+           więc zrób to na każdym urządzeniu, z którego testujesz stronę. -->
+    <script is:inline>
+      (function () {
+        try {
+          var params = new URLSearchParams(location.search);
+          if (params.has('ga-off')) localStorage.setItem('analytics-opt-out', '1');
+          if (params.has('ga-on')) localStorage.removeItem('analytics-opt-out');
+          var host = location.hostname;
+          var isProd = host === 'fiodorowphotography.pl' || host === 'www.fiodorowphotography.pl';
+          window.__NO_ANALYTICS =
+            !isProd || localStorage.getItem('analytics-opt-out') === '1';
+        } catch (e) {
+          window.__NO_ANALYTICS = false; // awaria localStorage nie może zabić pomiaru
+        }
+      })();
+    </script>
+
     <!-- Google Consent Mode v2 — default denied before user consent -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -177,7 +202,9 @@ const breadcrumbSchema = breadcrumbs
       // Consent Mode v2 (advanced): load GA4 on every page so it can send
       // cookieless pings for modeling even before the user accepts. No cookies
       // are stored until consent is granted (RODO/GDPR compliant).
-      (function () {
+      // Pomijane dla ruchu wewnętrznego — gtag() zostaje zdefiniowany jako
+      // kolejka do dataLayer, więc późniejsze wywołania są nieszkodliwe.
+      if (!window.__NO_ANALYTICS) (function () {
         var ga = document.createElement('script');
         ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-YVBD3JPM7N';
         ga.async = true;
@@ -192,7 +219,7 @@ const breadcrumbSchema = breadcrumbs
       // natywnego eventu conversion NIE wysyłamy (uniknięcie podwójnego liczenia).
       // Consent Mode pilnuje zgód (ad_storage itd.).
       window.GOOGLE_ADS = { id: "AW-18308982086", leadLabel: "" };
-      if (window.GOOGLE_ADS.id) {
+      if (window.GOOGLE_ADS.id && !window.__NO_ANALYTICS) {
         gtag('config', window.GOOGLE_ADS.id);
       }
 
@@ -213,7 +240,7 @@ const breadcrumbSchema = breadcrumbs
          Wklej poniżej w id: "..." i to wszystko — reszta działa sama. -->
     <script is:inline>
       window.META_PIXEL = { id: "1340303074209336" }; // Piksel „fiodorow strona" (własność konta rekl. 151668474985954)
-      if (window.META_PIXEL.id) {
+      if (window.META_PIXEL.id && !window.__NO_ANALYTICS) {
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -241,6 +268,7 @@ const breadcrumbSchema = breadcrumbs
       // dotyczy i nie wymaga zgody. Ładujemy zawsze — to jedyne rzetelne źródło
       // liczby wejść (GA4 raportuje wyłącznie użytkowników, którzy zaakceptowali).
       function loadVercelAnalytics() {
+        if ((window as any).__NO_ANALYTICS) return;
         if (document.querySelector('[data-analytics-loaded]')) return;
         const va = document.createElement('script');
         va.src = '/_vercel/insights/script.js';

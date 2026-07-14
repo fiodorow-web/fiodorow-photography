@@ -37,7 +37,8 @@ import Footer from '../components/Footer.astro';
           <p>Zbieramy dane wyłącznie w zakresie niezbędnym do realizacji usług:</p>
           <ul class="list-disc pl-6 mt-3 space-y-2">
             <li><strong class="text-charcoal">Formularz kontaktowy</strong> — imię, nazwisko, email, numer telefonu (opcjonalnie), rodzaj wydarzenia, data, treść wiadomości.</li>
-            <li><strong class="text-charcoal">Cookies i dane analityczne</strong> — anonimowe dane o sposobie korzystania ze strony (Google Analytics 4, Vercel Analytics).</li>
+            <li><strong class="text-charcoal">Cookies analityczne</strong> — anonimowe dane o sposobie korzystania ze strony (Google Analytics 4). Uruchamiane wyłącznie po wyrażeniu zgody w banerze cookies.</li>
+            <li><strong class="text-charcoal">Statystyki bez plików cookies</strong> — Vercel Analytics zlicza odsłony stron, <strong class="text-charcoal">nie zapisując żadnych informacji na Twoim urządzeniu</strong> (brak cookies, brak identyfikatorów). Odwiedzający rozpoznawany jest wyłącznie przez nieodwracalny skrót wyliczany z zapytania po stronie serwera, kasowany po 24 godzinach. Dane są zbiorcze i nie pozwalają Cię zidentyfikować, dlatego — zgodnie z art. 5 ust. 3 dyrektywy ePrivacy — narzędzie to nie wymaga zgody i działa niezależnie od banera cookies.</li>
             <li><strong class="text-charcoal">Cookies i dane marketingowe</strong> — dane o wyświetleniach reklam i interakcjach, wykorzystywane do pomiaru skuteczności reklam i remarketingu (Google Ads, Meta Pixel — Facebook i Instagram). Uruchamiane wyłącznie po wyrażeniu zgody w banerze cookies.</li>
             <li><strong class="text-charcoal">Dane do dopasowania konwersji reklamowych</strong> — po wysłaniu formularza Twój adres e-mail i numer telefonu mogą zostać przekazane do Google i Meta w postaci <strong class="text-charcoal">zaszyfrowanej (skrót SHA-256)</strong>, wyłącznie w celu przypisania konwersji reklamowej (Enhanced Conversions / dopasowanie zaawansowane). Przekazujemy nieodwracalne skróty, nie dane w postaci jawnej.</li>
             <li><strong class="text-charcoal">Widget opinii</strong> — dane przetwarzane przez Elfsight (Google Reviews) zgodnie z ich własną polityką prywatności.</li>
@@ -58,10 +59,13 @@ import Footer from '../components/Footer.astro';
         <section>
           <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">4. Podstawa prawna</h2>
           <p>
-            Dane przetwarzamy na podstawie: zgody (art. 6 ust. 1 lit. a RODO) przy wysłaniu formularza, 
-            realizacji umowy (art. 6 ust. 1 lit. b RODO) przy świadczeniu usług, 
-            oraz prawnie uzasadnionego interesu (art. 6 ust. 1 lit. f RODO) przy analizie ruchu.
+            Dane przetwarzamy na podstawie:
           </p>
+          <ul class="list-disc pl-6 mt-3 space-y-2">
+            <li><strong class="text-charcoal">Zgody</strong> (art. 6 ust. 1 lit. a RODO) — przy wysłaniu formularza kontaktowego oraz przy cookies analitycznych i marketingowych (Google Analytics 4, Google Ads, Meta Pixel).</li>
+            <li><strong class="text-charcoal">Realizacji umowy</strong> (art. 6 ust. 1 lit. b RODO) — przy świadczeniu usług fotograficznych.</li>
+            <li><strong class="text-charcoal">Prawnie uzasadnionego interesu</strong> (art. 6 ust. 1 lit. f RODO) — przy statystykach bez plików cookies (Vercel Analytics), których celem jest poznanie liczby odwiedzin i poprawa działania strony. Dane są zbiorcze i anonimowe.</li>
+          </ul>
         </section>
 
         <section>
@@ -91,15 +95,21 @@ import Footer from '../components/Footer.astro';
           <h2 class="font-serif text-lg tracking-[0.1em] uppercase text-charcoal mb-4">7. Pliki cookies</h2>
           <p>Strona wykorzystuje pliki cookies i podobne technologie:</p>
           <ul class="list-disc pl-6 mt-3 space-y-2">
-            <li><strong class="text-charcoal">Analityczne</strong> — Google Analytics 4 oraz Vercel Analytics (statystyki ruchu, poprawa funkcjonalności).</li>
-            <li><strong class="text-charcoal">Marketingowe</strong> — Google Ads oraz Meta Pixel (Facebook, Instagram) do pomiaru skuteczności reklam i remarketingu.</li>
+            <li><strong class="text-charcoal">Analityczne</strong> — Google Analytics 4 (statystyki ruchu, poprawa funkcjonalności). Tylko za zgodą.</li>
+            <li><strong class="text-charcoal">Marketingowe</strong> — Google Ads oraz Meta Pixel (Facebook, Instagram) do pomiaru skuteczności reklam i remarketingu. Tylko za zgodą.</li>
             <li><strong class="text-charcoal">Widget opinii</strong> — Elfsight (Google Reviews).</li>
           </ul>
           <p class="mt-3">
-            Przy pierwszej wizycie wyświetlamy <strong class="text-charcoal">baner cookies</strong>. Do czasu kliknięcia „Akceptuję"
-            nie zapisujemy cookies analitycznych ani marketingowych — działa <strong class="text-charcoal">Google Consent Mode v2</strong>,
-            a piksel Meta pozostaje nieaktywny do momentu wyrażenia zgody. Zgodę możesz w każdej chwili cofnąć,
-            usuwając pliki cookies w ustawieniach przeglądarki. Wyłączenie cookies może wpłynąć na działanie niektórych elementów strony.
+            Przy pierwszej wizycie wyświetlamy <strong class="text-charcoal">baner cookies</strong> z równorzędnymi przyciskami
+            „Akceptuję" i „Odrzucam". Do czasu wyrażenia zgody nie zapisujemy cookies analitycznych ani marketingowych — działa
+            <strong class="text-charcoal">Google Consent Mode v2</strong>, a piksel Meta pozostaje nieaktywny. Zgodę możesz w każdej
+            chwili cofnąć, usuwając pliki cookies w ustawieniach przeglądarki. Wyłączenie cookies może wpłynąć na działanie
+            niektórych elementów strony.
+          </p>
+          <p class="mt-3">
+            Osobno działa <strong class="text-charcoal">Vercel Analytics</strong> — narzędzie, które <strong class="text-charcoal">nie
+            używa plików cookies</strong> i nie zapisuje niczego w Twojej przeglądarce. Zlicza wyłącznie zbiorcze odsłony stron, dlatego
+            nie podlega obowiązkowi zgody i działa niezależnie od Twojego wyboru w banerze. Szczegóły w punkcie 2 i 4.
           </p>
         </section>
 
