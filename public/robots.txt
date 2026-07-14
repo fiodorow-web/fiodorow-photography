@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /studio
-Disallow: /polityka-prywatnosci
 
 # AI Crawlers
 User-agent: GPTBot

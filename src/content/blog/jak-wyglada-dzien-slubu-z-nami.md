@@ -1,6 +1,6 @@
 ---
 title: "Jak wygląda reportaż ślubny? Plan dnia godzina po godzinie"
-description: "Fotograf przyjeżdża około 3 godziny przed ceremonią i zostaje do ok. 1:00 w nocy. Sprawdźcie, jak wygląda reportaż ślubny krok po kroku — od przygotowań, przez ceremonię i mini plener, po zabawę weselną."
+description: "Fotograf przyjeżdża ok. 3 godziny przed ceremonią i zostaje do ok. 1:00. Zobaczcie plan dnia krok po kroku — przygotowania, ceremonia, mini plener, wesele."
 date: "2026-03-21"
 author: "Fiodorow Photography"
 image: "../../assets/blog/jak-wyglada-dzien-slubu/reportaz-slubny-dzien-slubu.jpg"
