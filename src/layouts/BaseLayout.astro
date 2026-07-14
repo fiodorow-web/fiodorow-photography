@@ -232,6 +232,10 @@ const breadcrumbSchema = breadcrumbs
       }
     </script>
     <script>
+      // Vercel Analytics — bezcookiowa, nie zapisuje nic na urządzeniu (identyfikacja
+      // to hash z żądania, kasowany po 24 h), więc art. 5(3) ePrivacy / PKE jej nie
+      // dotyczy i nie wymaga zgody. Ładujemy zawsze — to jedyne rzetelne źródło
+      // liczby wejść (GA4 raportuje wyłącznie użytkowników, którzy zaakceptowali).
       function loadVercelAnalytics() {
         if (document.querySelector('[data-analytics-loaded]')) return;
         const va = document.createElement('script');
@@ -244,6 +248,8 @@ const breadcrumbSchema = breadcrumbs
         si.defer = true;
         document.head.appendChild(si);
       }
+      loadVercelAnalytics();
+
       // Update consent to granted once the user accepts cookies.
       function grantConsent() {
         gtag('consent', 'update', {
@@ -259,12 +265,25 @@ const breadcrumbSchema = breadcrumbs
           fbq('consent', 'grant');
           fbq('track', 'PageView');
         }
-        loadVercelAnalytics();
       }
-      if (localStorage.getItem('cookies-accepted')) {
-        loadVercelAnalytics();
+
+      // Odmowa — trzyma GA4/Ads/Meta w stanie denied także wtedy, gdy użytkownik
+      // wcześniej zgodę wyraził i teraz ją wycofuje.
+      function denyConsent() {
+        gtag('consent', 'update', {
+          'analytics_storage': 'denied',
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
+        });
+        const fbq = (window as any).fbq;
+        if (typeof fbq === 'function') {
+          fbq('consent', 'revoke');
+        }
       }
+
       document.addEventListener('cookies-accepted', grantConsent);
+      document.addEventListener('cookies-rejected', denyConsent);
     </script>
 
     <!-- klik_kontakt — kliknięcie w numer telefonu lub e-mail (dowolne miejsce) -->

@@ -11,12 +11,20 @@
           Polityka prywatności
         </a>
       </p>
-      <button
-        id="cookie-accept"
-        class="px-6 py-3 bg-white text-charcoal text-xs tracking-[0.15em] uppercase rounded hover:bg-cream transition-colors flex-shrink-0 font-medium"
-      >
-        Akceptuję
-      </button>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <button
+          id="cookie-reject"
+          class="px-6 py-3 border border-white/40 text-white text-xs tracking-[0.15em] uppercase rounded hover:bg-white/10 transition-colors font-medium"
+        >
+          Odrzucam
+        </button>
+        <button
+          id="cookie-accept"
+          class="px-6 py-3 bg-white text-charcoal text-xs tracking-[0.15em] uppercase rounded hover:bg-cream transition-colors font-medium"
+        >
+          Akceptuję
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -24,10 +32,18 @@
 <script>
   const banner = document.getElementById('cookie-banner');
   const acceptBtn = document.getElementById('cookie-accept');
+  const rejectBtn = document.getElementById('cookie-reject');
 
-  // Check if user already accepted
-  if (!localStorage.getItem('cookies-accepted')) {
-    // Show banner after a short delay
+  const hideBanner = () => {
+    banner?.classList.remove('translate-y-0');
+    banner?.classList.add('translate-y-full');
+  };
+
+  // Show only until the user has made a choice — either way.
+  const decided =
+    localStorage.getItem('cookies-accepted') || localStorage.getItem('cookies-rejected');
+
+  if (!decided) {
     setTimeout(() => {
       banner?.classList.remove('translate-y-full');
       banner?.classList.add('translate-y-0');
@@ -35,9 +51,16 @@
   }
 
   acceptBtn?.addEventListener('click', () => {
+    localStorage.removeItem('cookies-rejected');
     localStorage.setItem('cookies-accepted', 'true');
     document.dispatchEvent(new Event('cookies-accepted'));
-    banner?.classList.remove('translate-y-0');
-    banner?.classList.add('translate-y-full');
+    hideBanner();
+  });
+
+  rejectBtn?.addEventListener('click', () => {
+    localStorage.removeItem('cookies-accepted');
+    localStorage.setItem('cookies-rejected', 'true');
+    document.dispatchEvent(new Event('cookies-rejected'));
+    hideBanner();
   });
 </script>
