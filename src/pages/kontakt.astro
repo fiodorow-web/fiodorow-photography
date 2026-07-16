@@ -536,18 +536,11 @@ const localBusinessSchema = {
             value: 1,
             currency: "PLN",
           });
-          // Google Ads — konwersja "Przesłanie formularza kontaktowego – sieć".
-          // Dopasowanie po NAZWIE zdarzenia do akcji SUBMIT_LEAD_FORM; obecny
-          // kreator Google Ads nie wystawia już etykiety send_to. Tag AW-...
-          // konfiguruje BaseLayout, Enhanced Conversions bierze user_data
-          // ustawione wyżej, a Consent Mode pilnuje zgód.
-          const gads = (window as any).GOOGLE_ADS;
-          if (gads && gads.id) {
-            (window as any).gtag("event", "conversion_event_submit_lead_form", {
-              value: 1,
-              currency: "PLN",
-            });
-          }
+          // Google Ads dostaje tę konwersję z importu GA4: generate_lead (wyżej)
+          // jest kluczowym zdarzeniem GA4 i trafia do Ads jako główne działanie
+          // w kategorii "Przesłania formularzy kontaktowych". Dlatego NIE wysyłamy
+          // tu drugiego, osobnego zdarzenia — byłoby liczone podwójnie.
+          // Enhanced Conversions bierze user_data ustawione wyżej.
         }
         // Meta Pixel: standardowe zdarzenie Lead (wysłany formularz).
         // Aktywne tylko gdy ustawiono Pixel ID w BaseLayout → window.META_PIXEL.
