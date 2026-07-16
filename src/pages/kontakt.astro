@@ -536,12 +536,14 @@ const localBusinessSchema = {
             value: 1,
             currency: "PLN",
           });
-          // Google Ads: konwersja (aktywna tylko gdy skonfigurowano id + label
-          // w BaseLayout → window.GOOGLE_ADS). Consent Mode pilnuje zgód.
+          // Google Ads — konwersja "Przesłanie formularza kontaktowego – sieć".
+          // Dopasowanie po NAZWIE zdarzenia do akcji SUBMIT_LEAD_FORM; obecny
+          // kreator Google Ads nie wystawia już etykiety send_to. Tag AW-...
+          // konfiguruje BaseLayout, Enhanced Conversions bierze user_data
+          // ustawione wyżej, a Consent Mode pilnuje zgód.
           const gads = (window as any).GOOGLE_ADS;
-          if (gads && gads.id && gads.leadLabel) {
-            (window as any).gtag("event", "conversion", {
-              send_to: `${gads.id}/${gads.leadLabel}`,
+          if (gads && gads.id) {
+            (window as any).gtag("event", "conversion_event_submit_lead_form", {
               value: 1,
               currency: "PLN",
             });

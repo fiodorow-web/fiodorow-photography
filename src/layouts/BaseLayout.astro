@@ -213,12 +213,11 @@ const breadcrumbSchema = breadcrumbs
         gtag('config', 'G-YVBD3JPM7N');
       })();
 
-      // Google Ads — tag remarketingu + atrybucji (AW-...).
-      // id ustawiony = ładuje tag Google Ads (remarketing, atrybucja).
-      // leadLabel PUSTY celowo — konwersje idą przez import z GA4, więc
-      // natywnego eventu conversion NIE wysyłamy (uniknięcie podwójnego liczenia).
-      // Consent Mode pilnuje zgód (ad_storage itd.).
-      window.GOOGLE_ADS = { id: "AW-18308982086", leadLabel: "" };
+      // Google Ads — tag remarketingu, atrybucji i konwersji (AW-...).
+      // Konwersje wysyłamy zdarzeniami NAZWANYMI (kontakt.astro →
+      // conversion_event_submit_lead_form), bo obecny kreator Google Ads nie
+      // wystawia już etykiet send_to. Consent Mode pilnuje zgód (ad_storage itd.).
+      window.GOOGLE_ADS = { id: "AW-18308982086" };
       if (window.GOOGLE_ADS.id && !window.__NO_ANALYTICS) {
         gtag('config', window.GOOGLE_ADS.id);
       }
