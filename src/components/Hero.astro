@@ -15,7 +15,7 @@ const rendered = await Promise.all(
     {
       slides.map((slide, index) => (
         <div
-          class={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${index === 0 ? "opacity-100 z-10 active-slide" : "opacity-0 z-0"}`}
+          class={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${index === 0 ? "opacity-100 z-10 active-slide hero-initial" : "opacity-0 z-0"}`}
           data-slide={index}
         >
           <!-- Slajd 1 startuje natychmiast, pozostałe po zdarzeniu load -->
@@ -163,6 +163,30 @@ const rendered = await Promise.all(
     animation: fade-slide-up 1s ease-out forwards;
     animation-delay: 0.9s;
   }
+
+  /* Pierwszy slajd przy wejściu na stronę pokazuje tekst od razu.
+     Nagłówek hero jest elementem LCP — startując z opacity: 0 i animacją
+     z opóźnieniem, nie liczy się jako namalowany, dopóki animacja nie
+     dobiegnie końca. Klasa znika po pierwszej zmianie slajdu, więc przy
+     kolejnych przejściach karuzeli animacja działa normalnie. */
+  .hero-initial .hero-content > span,
+  .hero-initial .hero-content p,
+  .hero-initial .hero-content div {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-content > span,
+    .hero-content p,
+    .hero-content div {
+      opacity: 1;
+      animation: none !important;
+      transform: none;
+    }
+    .animate-ken-burns { animation: none; }
+  }
 </style>
 
 <script>
@@ -173,6 +197,9 @@ const rendered = await Promise.all(
   const intervalTime = 6000; // 6 seconds per slide
 
   const nextSlide = () => {
+    // Pierwsza zmiana slajdu oddaje sterowanie animacjom wejścia.
+    document.querySelector(".hero-initial")?.classList.remove("hero-initial");
+
     // Current slide fades out
     slides[currentSlide].classList.remove("opacity-100", "z-10", "active-slide");
     slides[currentSlide].classList.add("opacity-0", "z-0");
