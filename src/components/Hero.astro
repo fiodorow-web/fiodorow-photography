@@ -1,48 +1,12 @@
 ---
-import { Image } from "astro:assets";
-import slide1 from "../assets/hero/sesja-slubna-para-mloda.jpg";
-import slide2 from "../assets/hero/panna-mloda-bukiet-portret.jpg";
-import slide3 from "../assets/hero/ceremonia-slubna-reportaz.jpg";
-import slide4 from "../assets/hero/sesja-poslubna-palac-para-mloda.jpg";
+import { getImage } from "astro:assets";
+import { heroSlides as slides, heroImageOpts } from "../data/hero-slides";
 
-const slides = [
-  {
-    image: slide4,
-    alt: "Sesja poślubna przed pałacem — romantyczny plener ślubny, fotograf Siedlce",
-    position: "center 30%",
-    title: "Tworzymy wspomnienia",
-    subtitle: "Każdy moment zasługuje na piękną oprawę.",
-    buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio"
-  },
-  {
-    image: slide1,
-    alt: "Para młoda w objęciach podczas sesji ślubnej",
-    position: "45% center",
-    title: "Tworzymy dla Was",
-    subtitle: "Fotografie dopasowane do Waszej historii.",
-    buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio"
-  },
-  {
-    image: slide2,
-    alt: "Panna młoda z bukietem — portret ślubny",
-    position: "40% center",
-    title: "Tworzymy z pasją",
-    subtitle: "Nie tylko fotografujemy - kochamy to co robimy.",
-    buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio"
-  },
-  {
-    image: slide3,
-    alt: "Ceremonia ślubna — reportaż fotograficzny",
-    position: "center center",
-    title: "Tworzymy z miłością",
-    subtitle: "Miłość w każdym kadrze",
-    buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio"
-  },
-];
+// Adresy generujemy w czasie builda, żeby móc ręcznie sterować tym,
+// który obraz startuje od razu, a który dopiero po załadowaniu strony.
+const rendered = await Promise.all(
+  slides.map((slide) => getImage({ src: slide.image, ...heroImageOpts })),
+);
 ---
 
 <section class="relative h-screen w-full overflow-hidden">
@@ -54,19 +18,21 @@ const slides = [
           class={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${index === 0 ? "opacity-100 z-10 active-slide" : "opacity-0 z-0"}`}
           data-slide={index}
         >
-          <!-- Image -->
-          <Image
-            src={slide.image}
+          <!-- Slajd 1 startuje natychmiast, pozostałe po zdarzeniu load -->
+          <img
+            src={index === 0 ? rendered[index].src : undefined}
+            srcset={index === 0 ? rendered[index].srcSet.attribute : undefined}
+            data-src={index === 0 ? undefined : rendered[index].src}
+            data-srcset={index === 0 ? undefined : rendered[index].srcSet.attribute}
+            sizes={heroImageOpts.sizes}
+            width={rendered[index].attributes.width}
+            height={rendered[index].attributes.height}
             alt={slide.alt}
             class="absolute inset-0 w-full h-full object-cover animate-ken-burns"
             style={`object-position: ${slide.position}`}
-            loading={index === 0 ? "eager" : "lazy"}
+            loading="eager"
             fetchpriority={index === 0 ? "high" : "low"}
             decoding={index === 0 ? "sync" : "async"}
-            widths={[640, 1024, 1920, 2560]}
-            sizes="100vw"
-            quality={80}
-            format="webp"
           />
           <div class="hero-overlay absolute inset-0 bg-black/30" />
           
@@ -222,6 +188,21 @@ const slides = [
     void (slides[currentSlide] as HTMLElement).offsetWidth; // Trigger reflow to restart css transitions if faulty
     slides[currentSlide].classList.add("opacity-100", "z-10", "active-slide");
   };
+
+  // Pozostałe slajdy pobieramy dopiero, gdy strona się załaduje — pierwsza
+  // zmiana slajdu następuje po 6 s, więc nikt tego nie zauważy, a obraz
+  // odpowiedzialny za LCP nie dzieli łącza z trzema innymi.
+  const hydrateRest = () => {
+    document.querySelectorAll<HTMLImageElement>("#hero-slider img[data-srcset]").forEach((img) => {
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+      if (img.dataset.src) img.src = img.dataset.src;
+      delete img.dataset.srcset;
+      delete img.dataset.src;
+    });
+  };
+
+  if (document.readyState === "complete") hydrateRest();
+  else window.addEventListener("load", hydrateRest, { once: true });
 
   // Start loop
   if (slideCount > 1) {

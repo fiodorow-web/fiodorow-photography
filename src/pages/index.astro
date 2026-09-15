@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { googleReviews } from '../data/google-reviews';
+import { getImage } from 'astro:assets';
+import { heroSlides, heroImageOpts } from '../data/hero-slides';
+
+// Zdjęcie hero odpowiada za LCP. Bez preloadu przeglądarka dowiaduje się
+// o nim dopiero po przeparsowaniu całego HTML-a z wklejonym CSS-em.
+const heroLcp = await getImage({ src: heroSlides[0].image, ...heroImageOpts });
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -97,6 +103,16 @@ const personSchemas = [
   description="Naturalny reportaż ślubny i sesje narzeczeńskie. Duet fotografów z Siedlec — obsługujemy Siedlce, Warszawę i Białystok. Odpiszemy w 6 godzin."
   breadcrumbs={[]}
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href={heroLcp.src}
+    imagesrcset={heroLcp.srcSet.attribute}
+    imagesizes={heroImageOpts.sizes}
+    fetchpriority="high"
+  />
+
   <Header currentPath="/" />
 
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
