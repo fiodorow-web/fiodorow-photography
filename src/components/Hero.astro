@@ -1,7 +1,6 @@
 ---
 import { getImage } from "astro:assets";
 import { heroSlides as slides, heroImageOpts } from "../data/hero-slides";
-import { googleReviews } from "../data/google-reviews";
 
 // Adresy generujemy w czasie builda, żeby móc ręcznie sterować tym,
 // który obraz startuje od razu, a który dopiero po załadowaniu strony.
@@ -10,138 +9,216 @@ const rendered = await Promise.all(
 );
 ---
 
-<section class="relative w-full flex flex-col lg:flex-row lg:h-screen lg:min-h-[660px]">
-
-  <!-- ZDJĘCIA: na telefonie u góry, na desktopie po prawej.
-       Tekst NIE jest już częścią slajdu — dzięki temu nagłówek maluje się
-       natychmiast i nie czeka na animację wejścia (to psuło LCP). -->
-  <div
-    id="hero-slider"
-    class="relative order-1 lg:order-2 w-full lg:w-[56%] h-[54vh] min-h-[340px] lg:h-auto overflow-hidden bg-charcoal"
-  >
+<section class="relative h-screen w-full overflow-hidden">
+  <!-- Slider Container -->
+  <div class="absolute inset-0 w-full h-full" id="hero-slider">
     {
       slides.map((slide, index) => (
         <div
-          class={`absolute inset-0 w-full h-full transition-opacity duration-[1600ms] ease-in-out ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+          class={`absolute inset-0 w-full h-full transition-opacity duration-[1500ms] ease-in-out ${index === 0 ? "opacity-100 z-10 active-slide hero-initial" : "opacity-0 z-0"}`}
           data-slide={index}
         >
+          <!-- Slajd 1 startuje natychmiast, pozostałe po zdarzeniu load -->
           <img
             src={index === 0 ? rendered[index].src : undefined}
             srcset={index === 0 ? rendered[index].srcSet.attribute : undefined}
             data-src={index === 0 ? undefined : rendered[index].src}
             data-srcset={index === 0 ? undefined : rendered[index].srcSet.attribute}
-            sizes="(min-width: 1024px) 56vw, 100vw"
+            sizes={heroImageOpts.sizes}
             width={rendered[index].attributes.width}
             height={rendered[index].attributes.height}
             alt={slide.alt}
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover animate-ken-burns"
             style={`object-position: ${slide.position}`}
             loading="eager"
             fetchpriority={index === 0 ? "high" : "low"}
             decoding={index === 0 ? "sync" : "async"}
           />
+          <div class="hero-overlay absolute inset-0 bg-black/30" />
+          
+          <!-- Content Overlay (Per Slide) -->
+          <div class="relative z-20 h-full flex items-center justify-center text-center text-white px-6">
+            <div class="hero-content">
+              <span class="font-serif font-light tracking-[0.15em] mb-6 block uppercase">
+                {slide.title}
+              </span>
+              <p class="font-sans text-sm md:text-base tracking-[0.15em] mb-10 max-w-md mx-auto">
+                {slide.subtitle}
+              </p>
+              <div>
+                <a
+                  href={slide.buttonLink}
+                  class="btn-primary border-white text-white hover:bg-white hover:text-charcoal inline-block"
+                >
+                  {slide.buttonText}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       ))
     }
-
-    <!-- Wskaźnik slajdów: cienkie kreski zamiast kropek -->
-    <div class="absolute bottom-6 right-6 z-20 flex gap-2" aria-hidden="true">
-      {slides.map((_, i) => (
-        <span
-          data-dot={i}
-          class={`block h-px w-8 transition-colors duration-500 ${i === 0 ? "bg-white" : "bg-white/35"}`}
-        />
-      ))}
-    </div>
   </div>
 
-  <!-- TEKST: statyczny, na kremowym tle -->
-  <div class="order-2 lg:order-1 w-full lg:w-[44%] bg-cream flex items-center px-6 sm:px-10 lg:px-14 xl:px-20 py-16 lg:py-0 lg:pt-24">
-    <div class="max-w-md">
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 z-20"
+  >
+    <div class="w-px h-12 bg-white/30"></div>
+  </div>
 
-      <h1 class="!normal-case !tracking-normal mb-7">
-        <span class="block font-sans text-[0.62rem] font-semibold tracking-[0.3em] uppercase text-olive mb-6">
-          Fotograf ślubny · Siedlce
-        </span>
-        <span class="block font-serif !text-[2.75rem] sm:!text-6xl lg:!text-[4.2rem] !leading-[0.98] tracking-[-0.02em] text-charcoal">
-          Tworzymy
-          <i class="font-light italic text-olive">wspomnienia</i>
-        </span>
-      </h1>
-
-      <p class="text-charcoal-light text-sm font-light leading-relaxed max-w-sm mb-10">
-        Naturalny reportaż ślubny bez sztucznego pozowania. Jesteśmy duetem —
-        jedno z nas jest tam, gdzie dzieje się główna akcja, drugie łapie to,
-        co obok. Siedlce, Mazowsze, Podlasie i cała Polska.
-      </p>
-
-      <div class="flex flex-wrap items-center gap-x-8 gap-y-4 mb-12">
-        <a
-          href="/portfolio"
-          class="group inline-flex items-center gap-3 border-b-2 border-charcoal pb-1.5 font-serif tracking-[0.18em] uppercase text-[0.8rem] text-charcoal hover:border-olive hover:text-olive transition-colors duration-300"
-        >
-          <span>Zobacz nasze prace</span>
-          <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-        <a
-          href="/kontakt"
-          class="font-sans text-[0.7rem] tracking-[0.18em] uppercase text-charcoal-light hover:text-olive transition-colors duration-300"
-        >
-          Sprawdź wolny termin
-        </a>
-      </div>
-
-      <a
-        href={googleReviews.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1"
-        aria-label={`Ocena ${googleReviews.rating} na 5 z ${googleReviews.count} opinii w Google`}
-      >
-        <span class="text-olive text-sm tracking-[0.15em]" aria-hidden="true">★★★★★</span>
-        <span class="font-serif text-base text-charcoal">
-          {googleReviews.rating.toFixed(1).replace(".", ",")}
-        </span>
-        <span class="text-charcoal-light text-[0.68rem] font-light">
-          z {googleReviews.count} opinii w Google
-        </span>
-      </a>
-
-    </div>
+  <!-- Social links -->
+  <div
+    class="hidden md:flex absolute left-8 bottom-8 items-center gap-4 text-white/70 text-xs tracking-wider z-20"
+  >
+    <a
+      href="https://facebook.com/fiodorowphotography"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-white transition-colors">FB</a
+    >
+    <span class="w-8 h-px bg-white/30"></span>
+    <a
+      href="https://instagram.com/fiodorow_photography"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-white transition-colors">IG</a
+    >
   </div>
 </section>
 
 <style>
-  @media (prefers-reduced-motion: reduce) {
-    #hero-slider [data-slide] {
-      transition: none !important;
+  @keyframes ken-burns {
+    0% {
+      transform: scale(1) translate(0, 0);
     }
+    100% {
+      transform: scale(1.1) translate(-2%, 0);
+    }
+  }
+
+  .animate-ken-burns {
+    animation: ken-burns 20s ease-out infinite alternate;
+  }
+  
+  /* Cinematic Reveal Animation */
+  @keyframes cinematic-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      filter: blur(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Subtitle specific (softer blur) */
+  @keyframes cinematic-slide {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* Button specific (sharp slide) */
+  @keyframes fade-slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Initial hidden state */
+  .hero-content > span,
+  .hero-content p,
+  .hero-content div {
+    opacity: 0;
+  }
+
+  /* Animation classes applied when parent has .active-slide */
+  .active-slide .hero-content > span {
+    animation: cinematic-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.3s;
+  }
+  
+  .active-slide .hero-content p {
+    animation: cinematic-slide 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.6s;
+  }
+  
+  .active-slide .hero-content div {
+    animation: fade-slide-up 1s ease-out forwards;
+    animation-delay: 0.9s;
+  }
+
+  /* Pierwszy slajd przy wejściu na stronę pokazuje tekst od razu.
+     Nagłówek hero jest elementem LCP — startując z opacity: 0 i animacją
+     z opóźnieniem, nie liczy się jako namalowany, dopóki animacja nie
+     dobiegnie końca. Klasa znika po pierwszej zmianie slajdu, więc przy
+     kolejnych przejściach karuzeli animacja działa normalnie. */
+  .hero-initial .hero-content > span,
+  .hero-initial .hero-content p,
+  .hero-initial .hero-content div {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-content > span,
+    .hero-content p,
+    .hero-content div {
+      opacity: 1;
+      animation: none !important;
+      transform: none;
+    }
+    .animate-ken-burns { animation: none; }
   }
 </style>
 
 <script>
-  const slides = document.querySelectorAll<HTMLElement>("#hero-slider [data-slide]");
-  const dots = document.querySelectorAll<HTMLElement>("#hero-slider [data-dot]");
-  let current = 0;
-  const count = slides.length;
+  // Simple Slider Logic
+  const slides = document.querySelectorAll("[data-slide]");
+  let currentSlide = 0;
+  const slideCount = slides.length;
+  const intervalTime = 6000; // 6 seconds per slide
 
-  const show = (next: number) => {
-    slides[current].classList.remove("opacity-100", "z-10");
-    slides[current].classList.add("opacity-0", "z-0");
-    dots[current]?.classList.replace("bg-white", "bg-white/35");
+  const nextSlide = () => {
+    // Pierwsza zmiana slajdu oddaje sterowanie animacjom wejścia.
+    document.querySelector(".hero-initial")?.classList.remove("hero-initial");
 
-    current = next;
+    // Current slide fades out
+    slides[currentSlide].classList.remove("opacity-100", "z-10", "active-slide");
+    slides[currentSlide].classList.add("opacity-0", "z-0");
+    
+    // Reset animations in the outgoing slide explicitly if needed, 
+    // but removing 'active-slide' class handles the CSS transition reset.
 
-    slides[current].classList.remove("opacity-0", "z-0");
-    slides[current].classList.add("opacity-100", "z-10");
-    dots[current]?.classList.replace("bg-white/35", "bg-white");
+    // Next slide index
+    currentSlide = (currentSlide + 1) % slideCount;
+
+    // Next slide fades in
+    slides[currentSlide].classList.remove("opacity-0", "z-0");
+    void (slides[currentSlide] as HTMLElement).offsetWidth; // Trigger reflow to restart css transitions if faulty
+    slides[currentSlide].classList.add("opacity-100", "z-10", "active-slide");
   };
 
-  // Slajdy 2-4 dostają adresy dopiero po załadowaniu strony. Leżą w kadrze
-  // (inset-0), więc loading="lazy" by ich nie odroczyło i konkurowałyby
-  // o łącze z obrazem odpowiedzialnym za LCP.
+  // Pozostałe slajdy pobieramy dopiero, gdy strona się załaduje — pierwsza
+  // zmiana slajdu następuje po 6 s, więc nikt tego nie zauważy, a obraz
+  // odpowiedzialny za LCP nie dzieli łącza z trzema innymi.
   const hydrateRest = () => {
     document.querySelectorAll<HTMLImageElement>("#hero-slider img[data-srcset]").forEach((img) => {
       if (img.dataset.srcset) img.srcset = img.dataset.srcset;
@@ -154,7 +231,8 @@ const rendered = await Promise.all(
   if (document.readyState === "complete") hydrateRest();
   else window.addEventListener("load", hydrateRest, { once: true });
 
-  if (count > 1) {
-    setInterval(() => show((current + 1) % count), 6000);
+  // Start loop
+  if (slideCount > 1) {
+    setInterval(nextSlide, intervalTime);
   }
 </script>
