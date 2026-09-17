@@ -235,7 +235,9 @@ const categories = [
         const itemCategory = el.getAttribute("data-category");
 
         if (category === "all" || itemCategory === category) {
-          el.style.display = "block";
+          // display czyścimy, nie ustawiamy na "block" — wartość wraca
+          // do tej z klasy, więc kafelek pozostaje poprawnym dzieckiem grida.
+          el.style.display = "";
           // Kafelek mógł nigdy nie dostać klasy .active, bo przy wejściu
           // na stronę był poniżej linii wyzwalania reveala. Bez niej
           // zostaje visibility: hidden, niezależnie od opacity.
@@ -243,11 +245,11 @@ const categories = [
           el.style.opacity = "";
           el.style.transform = "";
         } else {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(20px)";
-          setTimeout(() => {
-            el.style.display = "none";
-          }, 300);
+          // Ukrywamy natychmiast. Wcześniej był tu inline opacity: 0
+          // i display: none dopiero po 300 ms — ale .reveal.active ma
+          // opacity: 1 !important, więc styl inline nic nie robił
+          // i przez te 300 ms widać było komplet kafelków.
+          el.style.display = "none";
         }
       });
 
