@@ -50,11 +50,15 @@ const label =
 
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
-  <main class="bg-cream">
+  <main class="bg-cream pt-24 lg:pt-0">
     <div class="lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,56%)] lg:min-h-screen">
 
       <!-- LEWA: portret duetu, do krawędzi, bez ramki i cienia -->
-      <div class="relative h-[52vh] lg:h-auto lg:sticky lg:top-0 lg:self-start lg:min-h-screen">
+      <!-- Kolumna rozciąga się na całą wysokość siatki, a przykleja się
+           dopiero wewnętrzny kontener wysokości ekranu. Bez tego kolumna
+           kończyła się po jednym ekranie i niżej zostawało puste tło. -->
+      <div class="relative h-[52vh] lg:h-auto">
+       <div class="relative h-full lg:sticky lg:top-0 lg:h-screen overflow-hidden">
         <Image
           src={portretDuetu}
           alt="Weronika i Mateusz — duet fotografów ślubnych z Siedlec"
@@ -74,10 +78,11 @@ const label =
             Weronika i Mateusz
           </p>
         </div>
+       </div>
       </div>
 
       <!-- PRAWA: treść i formularz wprost na kremowym tle -->
-      <div class="px-6 sm:px-10 lg:px-16 xl:px-24 py-16 lg:py-24">
+      <div class="px-6 sm:px-10 lg:px-16 xl:px-24 py-16 lg:pt-40 lg:pb-24">
         <div class="max-w-xl">
 
           <p class="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-olive mb-5">
@@ -219,16 +224,16 @@ const label =
           <!-- Dane kontaktowe: cicho, tekstem, bez karty i bez mapy -->
           <div class="mt-20 pt-10 border-t border-charcoal/10 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
-              <h2 class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Telefon</h2>
+              <p class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Telefon</p>
               <a href="tel:+48660872121" class="block text-charcoal text-sm font-light hover:text-olive transition-colors">660 872 121</a>
               <a href="tel:+48515631646" class="block text-charcoal text-sm font-light hover:text-olive transition-colors">515 631 646</a>
             </div>
             <div>
-              <h2 class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Email</h2>
+              <p class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Email</p>
               <a href="mailto:fiodorowphotography@gmail.com" class="text-charcoal text-sm font-light hover:text-olive transition-colors break-all">fiodorowphotography@gmail.com</a>
             </div>
             <div>
-              <h2 class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Gdzie pracujemy</h2>
+              <p class="text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-charcoal-light/70 mb-3">Gdzie pracujemy</p>
               <p class="text-charcoal text-sm font-light leading-relaxed">
                 Siedlce, Mazowsze, Podlasie.<br />
                 Dojeżdżamy w każde miejsce w Polsce.

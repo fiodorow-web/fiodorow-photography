@@ -40,7 +40,10 @@
 /* Base Styles */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* clip zamiast hidden: hidden tworzy kontener przewijania, przez który
+     position: sticky przestaje działać w całym drzewie poniżej.
+     clip odcina tak samo, ale kontenera nie tworzy. */
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -51,7 +54,7 @@ body {
   background-color: var(--color-white);
   line-height: 1.7;
   letter-spacing: 0.02em;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
 }
