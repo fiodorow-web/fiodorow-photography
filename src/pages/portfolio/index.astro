@@ -231,22 +231,29 @@ const categories = [
       const category = btn.getAttribute("data-category");
 
       portfolioItems.forEach((item) => {
-        const itemCategory = item.getAttribute("data-category");
+        const el = item as HTMLElement;
+        const itemCategory = el.getAttribute("data-category");
 
         if (category === "all" || itemCategory === category) {
-          (item as HTMLElement).style.display = "block";
-          setTimeout(() => {
-            (item as HTMLElement).style.opacity = "1";
-            (item as HTMLElement).style.transform = "translateY(0)";
-          }, 50);
+          el.style.display = "block";
+          // Kafelek mógł nigdy nie dostać klasy .active, bo przy wejściu
+          // na stronę był poniżej linii wyzwalania reveala. Bez niej
+          // zostaje visibility: hidden, niezależnie od opacity.
+          el.classList.add("active");
+          el.style.opacity = "";
+          el.style.transform = "";
         } else {
-          (item as HTMLElement).style.opacity = "0";
-          (item as HTMLElement).style.transform = "translateY(20px)";
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
           setTimeout(() => {
-            (item as HTMLElement).style.display = "none";
+            el.style.display = "none";
           }, 300);
         }
       });
+
+      // Układ się zmienił bez przewijania — daj znać systemowi reveal,
+      // żeby domknął elementy, które właśnie weszły w widok.
+      window.dispatchEvent(new Event("reveal:refresh"));
     });
   });
 </script>

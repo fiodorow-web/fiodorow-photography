@@ -370,6 +370,12 @@ const breadcrumbSchema = breadcrumbs
         requestReveal();
         window.addEventListener("scroll", requestReveal, { passive: true });
         window.addEventListener("resize", requestReveal);
+
+        // Zmiana układu bez przewijania (np. filtrowanie portfolio) nie
+        // generuje scroll ani resize, więc elementy, które wskoczyły
+        // w widok, zostałyby z visibility: hidden. Kto zmienia układ,
+        // woła reveal:refresh.
+        window.addEventListener("reveal:refresh", requestReveal);
       };
 
       const scheduleRevealObserver = () => {
