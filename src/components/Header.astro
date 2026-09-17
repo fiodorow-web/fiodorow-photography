@@ -1,10 +1,14 @@
 ---
 interface Props {
   currentPath?: string;
+  /** Przezroczysty nagłówek z białym tekstem — tylko nad ciemnym zdjęciem
+      na całą szerokość. Nowe hero ma kremową lewą połowę, więc strona
+      główna tego już nie używa: biały tekst znikał na kremie. */
+  transparentOnTop?: boolean;
 }
 
-const { currentPath = "/" } = Astro.props;
-const isHome = currentPath === "/";
+const { currentPath = "/", transparentOnTop = false } = Astro.props;
+const isHome = transparentOnTop;
 
 const navLinks = [
   { href: "/", label: "Strona główna" },
