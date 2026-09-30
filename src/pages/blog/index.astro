@@ -54,7 +54,7 @@ const blogSchema = {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 reveal-stagger">
         {sortedPosts.map((post, index) => (
           <article class={`group reveal reveal-up ${index === 0 ? '' : `reveal-d${Math.min(index, 5)}`}`}>
-            <a href={`/blog/${post.id}`} class="block">
+            <a href={`/blog/${post.id}/`} class="block">
               <!-- Image -->
               <div class="relative overflow-hidden mb-6 aspect-[4/3]">
                 <Image
@@ -115,7 +115,7 @@ const blogSchema = {
       <p class="text-charcoal-light text-sm md:text-base leading-relaxed mb-10 max-w-xl mx-auto reveal reveal-up reveal-d1">
         Jeśli nie znaleźliście odpowiedzi na swoje pytania w naszych artykułach, chętnie porozmawiamy osobiście.
       </p>
-      <a href="/kontakt" class="btn-primary reveal reveal-up reveal-d2">
+      <a href="/kontakt/" class="btn-primary reveal reveal-up reveal-d2">
         Skontaktuj się
       </a>
     </div>

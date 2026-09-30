@@ -67,11 +67,11 @@ Umawiamy się zwykle o dobrej porze dnia — najczęściej tuż przed zachodem s
 
 Najczęściej pytacie, gdzie taka sesja może się odbyć. Nasza odpowiedź jest zawsze podobna: **tam, gdzie czujecie się dobrze**. Nie musi to być efektowna lokacja rodem z Pinteresta — dużo lepiej sprawdza się miejsce, które coś dla Was znaczy: park, w którym była pierwsza randka, ulubiona kawiarnia, łąka za miastem, brzeg rzeki.
 
-Fotografujemy głównie w [Siedlcach i na Mazowszu](/), ale równie chętnie jeździmy na [Podlasie, w okolice Białegostoku](/fotograf-bialystok). A że jesteśmy duetem, dojazd w Wasze ulubione miejsce nie jest dla nas problemem. Region mamy piękny i różnorodny: od klimatycznych zakątków miasta, przez pola i lasy, po nadrzeczne plenery, które o złotej godzinie wyglądają wyjątkowo. Jeśli macie w głowie konkretne miejsce — powiedzcie nam. Jeśli nie, chętnie coś podpowiemy, dopasowując lokację do pory roku i tego, co lubicie.
+Fotografujemy głównie w [Siedlcach i na Mazowszu](/), ale równie chętnie jeździmy na [Podlasie, w okolice Białegostoku](/fotograf-bialystok/). A że jesteśmy duetem, dojazd w Wasze ulubione miejsce nie jest dla nas problemem. Region mamy piękny i różnorodny: od klimatycznych zakątków miasta, przez pola i lasy, po nadrzeczne plenery, które o złotej godzinie wyglądają wyjątkowo. Jeśli macie w głowie konkretne miejsce — powiedzcie nam. Jeśli nie, chętnie coś podpowiemy, dopasowując lokację do pory roku i tego, co lubicie.
 
 ![Sesja narzeczeńska na Podlasiu, w okolicach Białegostoku — złota godzina w plenerze](../../assets/blog/sesja-narzeczenska/sesja-narzeczenska-podlasie-bialystok-zloty-plener.jpg)
 
-Warto dodać, że pracujemy we dwoje — Weronika i Mateusz. Dwie pary oczu na sesji to spokojniejsza atmosfera i większa różnorodność kadrów: jedno z nas prowadzi, drugie łapie te spontaniczne, niepozowane chwile z boku. Jeśli chcecie zobaczyć, jak wygląda nasza praca w dniu ślubu, opisaliśmy to dokładnie we wpisie [„Jak wygląda dzień ślubu z nami?"](/blog/jak-wyglada-dzien-slubu-z-nami).
+Warto dodać, że pracujemy we dwoje — Weronika i Mateusz. Dwie pary oczu na sesji to spokojniejsza atmosfera i większa różnorodność kadrów: jedno z nas prowadzi, drugie łapie te spontaniczne, niepozowane chwile z boku. Jeśli chcecie zobaczyć, jak wygląda nasza praca w dniu ślubu, opisaliśmy to dokładnie we wpisie [„Jak wygląda dzień ślubu z nami?"](/blog/jak-wyglada-dzien-slubu-z-nami/).
 
 ## Kilka pytań, które słyszymy najczęściej
 
@@ -103,4 +103,4 @@ Jest jeszcze jeden powód, chyba najważniejszy, choć najtrudniejszy do ujęcia
 
 Za kilka lat te zdjęcia nie będą dla Was „ładnymi kadrami sprzed ślubu". Będą początkiem Waszej wspólnej historii, zapisanej od samego początku. I właśnie dlatego, kiedy pytacie nas, czy warto — odpowiadamy: tak, zdecydowanie warto.
 
-Jeśli myślicie o sesji narzeczeńskiej gdziekolwiek na Mazowszu lub Podlasiu, [napiszcie do nas](/kontakt). Chętnie opowiemy więcej, pokażemy [nasze portfolio](/portfolio) i wspólnie zaplanujemy Wasze zdjęcia.
+Jeśli myślicie o sesji narzeczeńskiej gdziekolwiek na Mazowszu lub Podlasiu, [napiszcie do nas](/kontakt/). Chętnie opowiemy więcej, pokażemy [nasze portfolio](/portfolio/) i wspólnie zaplanujemy Wasze zdjęcia.

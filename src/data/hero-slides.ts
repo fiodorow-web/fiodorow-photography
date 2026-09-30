@@ -15,7 +15,7 @@ export const heroSlides = [
     title: "Tworzymy wspomnienia",
     subtitle: "Każdy moment zasługuje na piękną oprawę.",
     buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio",
+    buttonLink: "/portfolio/",
   },
   {
     image: slide1,
@@ -24,7 +24,7 @@ export const heroSlides = [
     title: "Tworzymy dla Was",
     subtitle: "Fotografie dopasowane do Waszej historii.",
     buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio",
+    buttonLink: "/portfolio/",
   },
   {
     image: slide2,
@@ -33,7 +33,7 @@ export const heroSlides = [
     title: "Tworzymy z pasją",
     subtitle: "Nie tylko fotografujemy - kochamy to co robimy.",
     buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio",
+    buttonLink: "/portfolio/",
   },
   {
     image: slide3,
@@ -42,7 +42,7 @@ export const heroSlides = [
     title: "Tworzymy z miłością",
     subtitle: "Miłość w każdym kadrze",
     buttonText: "Zobacz nasze prace",
-    buttonLink: "/portfolio",
+    buttonLink: "/portfolio/",
   },
 ];
 

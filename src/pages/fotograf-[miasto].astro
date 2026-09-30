@@ -195,8 +195,8 @@ const galleryRows = buildJustifiedRows(galleryImages);
 // tę rolę pełni strona główna, która i tak wygrywa na frazach siedleckich.
 const cityPathMap: Record<string, string> = {
   Siedlce: "/",
-  Białystok: "/fotograf-bialystok",
-  Warszawa: "/fotograf-warszawa",
+  Białystok: "/fotograf-bialystok/",
+  Warszawa: "/fotograf-warszawa/",
 };
 
 // Usługa w danym mieście, świadczona przez jedną firmę z Siedlec (BaseLayout).
@@ -321,7 +321,7 @@ const reviews = [
         class="mt-8 flex flex-col sm:flex-row gap-4 justify-center reveal reveal-up reveal-d1"
       >
         <a
-          href="/kontakt"
+          href="/kontakt/"
           class="btn-primary border-white text-white hover:bg-white hover:text-charcoal"
         >
           Zapytaj o termin
@@ -383,7 +383,7 @@ const reviews = [
 
           <!-- Removed Highlights per user request -->
 
-          <a href="/kontakt" class="btn-primary mt-8 inline-block">
+          <a href="/kontakt/" class="btn-primary mt-8 inline-block">
             Zapytaj o termin
           </a>
         </div>
@@ -499,7 +499,7 @@ const reviews = [
               <div class={`flex gap-3 md:gap-4 ${row.full ? "" : "justify-center"}`}>
                 {row.items.map((g) => (
                   <a
-                    href="/portfolio"
+                    href="/portfolio/"
                     class="block overflow-hidden rounded-sm bg-cream-dark transition-opacity duration-300 hover:opacity-90"
                     style={
                       row.full
@@ -546,7 +546,7 @@ const reviews = [
       }
 
       <div class="text-center mt-12 reveal reveal-up">
-        <a href="/portfolio" class="btn-primary inline-block">
+        <a href="/portfolio/" class="btn-primary inline-block">
           Zobacz całe portfolio
         </a>
       </div>
@@ -658,7 +658,7 @@ const reviews = [
           <p class="mt-12 text-center text-charcoal-light text-sm leading-relaxed reveal reveal-up">
             Na wesele oferujemy też{" "}
             <a
-              href={`/${city.fotobudkaSlug}`}
+              href={`/${city.fotobudkaSlug}/`}
               class="text-olive underline underline-offset-4 hover:text-olive-dark transition-colors"
             >
               wynajem drewnianej fotobudki w {city.nameLocative}
@@ -804,13 +804,13 @@ const reviews = [
           +48 660 872 121
         </a>
         <a
-          href="/kontakt"
+          href="/kontakt/"
           class="btn-primary border-white text-white hover:bg-white hover:text-charcoal"
         >
           Napisz do nas
         </a>
         <a
-          href="/portfolio"
+          href="/portfolio/"
           class="btn-primary border-white/50 text-white/90 hover:bg-white hover:text-charcoal"
         >
           Zobacz portfolio
@@ -835,7 +835,7 @@ const reviews = [
       Zadzwoń
     </a>
     <a
-      href="/kontakt"
+      href="/kontakt/"
       class="flex-1 py-4 text-center text-sm tracking-[0.15em] uppercase text-white bg-olive"
     >
       Napisz

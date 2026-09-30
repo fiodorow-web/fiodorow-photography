@@ -185,7 +185,7 @@ const schema = {
           stylowy element, który wpisze się w dekorację każdego przyjęcia.
         </p>
         <div class="flex flex-wrap gap-4 mt-9">
-          <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
+          <a href="/kontakt/?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
           <a href="#pakiet" class="btn-secondary">Co zawiera wynajem</a>
         </div>
         <p class="mt-8 font-sans text-xs tracking-[.12em] uppercase text-olive">
@@ -407,7 +407,7 @@ const schema = {
           )
         }
       </div>
-      <a href="/kontakt?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
+      <a href="/kontakt/?usluga=fotobudka" class="btn-primary">Zarezerwuj termin</a>
     </div>
   </section>
 
@@ -463,7 +463,7 @@ const schema = {
         {
           cities.map((item) => (
             <a
-              href={`/${item.slug}`}
+              href={`/${item.slug}/`}
               class="block bg-white border border-charcoal/10 rounded-[2px] p-[30px_26px] no-underline group transition-colors duration-[400ms] hover:border-olive"
             >
               <span class="block font-serif text-[24px] tracking-[.06em] uppercase text-charcoal mb-2 transition-colors duration-300 group-hover:text-olive">
@@ -491,7 +491,7 @@ const schema = {
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
         <a href="tel:+48660872121" class="btn-on-accent">+48 660 872 121</a>
-        <a href="/kontakt?usluga=fotobudka" class="btn-on-accent">Napisz do nas</a>
+        <a href="/kontakt/?usluga=fotobudka" class="btn-on-accent">Napisz do nas</a>
       </div>
     </div>
   </section>
