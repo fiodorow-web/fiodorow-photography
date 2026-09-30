@@ -17,6 +17,24 @@ const portfolioItems = sanityItems
     date: item.date,
   }));
 
+// Lista realizacji jako kolekcja — wyłącznie prawdziwe realizacje z Sanity.
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Portfolio — Fiodorow Photography",
+  url: "https://fiodorowphotography.pl/portfolio/",
+  about: { "@id": "https://fiodorowphotography.pl/#photographer" },
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: portfolioItems.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.title,
+      url: `https://fiodorowphotography.pl/portfolio/${item.slug.current}/`,
+    })),
+  },
+};
+
 const categories = [
   "Wszystkie",
   "Reportaż ślubny",
@@ -30,6 +48,8 @@ const categories = [
   description="Reportaże ślubne, sesje narzeczeńskie i poślubne. Zobacz portfolio Fiodorow Photography — fotograf Siedlce, Białystok, Warszawa."
   breadcrumbs={[{ name: "Portfolio", href: "/portfolio" }]}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
   <Header currentPath="/portfolio" />
 
   <!-- Portfolio Section -->

@@ -15,23 +15,7 @@ const eventTypes = [
   "Inne",
 ];
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://fiodorowphotography.pl",
-  name: "Fiodorow Photography",
-  description: "Duet fotografów ślubnych z Siedlec. Naturalny reportaż ślubny, sesje narzeczeńskie i poślubne.",
-  url: "https://fiodorowphotography.pl",
-  telephone: "+48660872121",
-  email: "fiodorowphotography@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Siedlce",
-    postalCode: "08-110",
-    addressRegion: "Mazowieckie",
-    addressCountry: "PL",
-  },
-};
+// Dane firmy w danych strukturalnych daje BaseLayout (jeden węzeł #photographer).
 ---
 
 <BaseLayout
@@ -40,9 +24,6 @@ const localBusinessSchema = {
   breadcrumbs={[{ name: "Kontakt", href: "/kontakt" }]}
 >
   <Header currentPath="/kontakt" />
-
-  <!-- Schema.org -->
-  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
   <main class="pt-24 pb-12 md:pt-32 md:pb-20 bg-cream">
     <!-- Hero Text -->

@@ -123,13 +123,7 @@ const schema = {
       "@type": "Service",
       name: `Wynajem fotobudki ${city.nom}`,
       serviceType: "Wynajem fotobudki",
-      provider: {
-        "@type": "LocalBusiness",
-        name: "Fiodorow Photography",
-        telephone: "+48660872121",
-        email: "fiodorowphotography@gmail.com",
-        url: canonical,
-      },
+      provider: { "@id": "https://fiodorowphotography.pl/#photographer" },
       areaServed: { "@type": "City", name: city.nom },
       description,
       offers: {

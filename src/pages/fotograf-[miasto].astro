@@ -199,53 +199,19 @@ const cityPathMap: Record<string, string> = {
   Warszawa: "/fotograf-warszawa",
 };
 
-// Schema.org for Local Business
+// Usługa w danym mieście, świadczona przez jedną firmę z Siedlec (BaseLayout).
+// Wcześniej był tu drugi węzeł LocalBusiness z tym samym @id, ale z geo
+// Białegostoku/Warszawy i godzinami 9–20 — dla Google: firma w dwóch miejscach.
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: `Fiodorow Photography - Fotograf ${city.name}`,
-  image: "https://fiodorowphotography.pl/og-image.jpg",
+  "@type": "Service",
+  "@id": `https://fiodorowphotography.pl/fotograf-${miasto}/#usluga`,
+  name: `Fotografia ślubna — ${city.name}`,
+  serviceType: "Fotografia ślubna",
   description: city.metaDescription,
-  "@id": "https://fiodorowphotography.pl/#photographer",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Siedlce",
-    addressRegion: "Mazowieckie",
-    postalCode: "08-110",
-    addressCountry: "PL",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: {
-      bialystok: 53.1325,
-      warszawa: 52.2297,
-    }[miasto],
-    longitude: {
-      bialystok: 23.1688,
-      warszawa: 21.0122,
-    }[miasto],
-  },
-  areaServed: {
-    "@type": "City",
-    name: city.name,
-  },
-  url: `https://fiodorowphotography.pl/fotograf-${miasto}`,
-  telephone: "+48 660 872 121",
-  priceRange: "$$",
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "09:00",
-    closes: "20:00",
-  },
+  url: `https://fiodorowphotography.pl/fotograf-${miasto}/`,
+  areaServed: { "@type": "City", name: city.name },
+  provider: { "@id": "https://fiodorowphotography.pl/#photographer" },
 };
 
 // FAQ Schema
@@ -292,27 +258,7 @@ const reviews = [
   },
 ];
 
-// Schema ocen — spięta z tym samym @id co Photographer (prawdziwe opinie 5★).
-const reviewSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://fiodorowphotography.pl/#photographer",
-  name: "Fiodorow Photography | Fotografia Ślubna",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: String(googleReviews.rating.toFixed(1)),
-    // Prawdziwa liczba opinii z wizytówki, nie liczba cytatów na stronie.
-    reviewCount: googleReviews.count,
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: reviews.map((r) => ({
-    "@type": "Review",
-    reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    author: { "@type": "Person", name: r.author },
-    reviewBody: r.quote,
-  })),
-};
+// Ocena firmy (aggregateRating) jest w jednym węźle w BaseLayout — tu bez kopii.
 ---
 
 <BaseLayout
@@ -899,5 +845,4 @@ const reviewSchema = {
   <!-- Schema.org -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
 </BaseLayout>

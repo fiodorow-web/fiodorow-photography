@@ -54,47 +54,28 @@ const faqSchema = {
   ],
 };
 
-const localBusinessSchema = {
+// Strona „O nas" opisuje ludzi. Firma jest zdefiniowana raz, w BaseLayout.
+const aboutSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://fiodorowphotography.pl/#photographer",
-  name: "Fiodorow Photography",
-  description:
-    "Duet fotografów ślubnych z Siedlec. Naturalny reportaż ślubny, sesje narzeczeńskie i poślubne na Mazowszu, Podlasiu i Lubelszczyźnie.",
-  url: "https://fiodorowphotography.pl",
-  telephone: "+48660872121",
-  email: "fiodorowphotography@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Siedlce",
-    postalCode: "08-110",
-    addressRegion: "Mazowieckie",
-    addressCountry: "PL",
-  },
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Mazowieckie" },
-    { "@type": "AdministrativeArea", name: "Podlaskie" },
-    { "@type": "AdministrativeArea", name: "Lubelskie" },
+  "@type": "AboutPage",
+  url: "https://fiodorowphotography.pl/o-nas/",
+  mainEntity: { "@id": "https://fiodorowphotography.pl/#photographer" },
+  about: [
+    {
+      "@type": "Person",
+      "@id": "https://fiodorowphotography.pl/#mateusz",
+      name: "Mateusz Fiodorow",
+      jobTitle: "Fotograf ślubny",
+      worksFor: { "@id": "https://fiodorowphotography.pl/#photographer" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://fiodorowphotography.pl/#weronika",
+      name: "Weronika Fiodorow",
+      jobTitle: "Fotograf ślubny",
+      worksFor: { "@id": "https://fiodorowphotography.pl/#photographer" },
+    },
   ],
-  sameAs: [
-    "https://www.facebook.com/fiodorowphotography",
-    "https://www.instagram.com/fiodorow_photography"
-  ],
-  priceRange: "$$",
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "08:00",
-    closes: "20:00",
-  },
 };
 ---
 
@@ -109,7 +90,7 @@ const localBusinessSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <script
     type="application/ld+json"
-    set:html={JSON.stringify(localBusinessSchema)}
+    set:html={JSON.stringify(aboutSchema)}
   />
   <!-- Hero Section - Contained & Elegant -->
   <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-white overflow-hidden">

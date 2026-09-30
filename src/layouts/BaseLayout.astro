@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import CookieBanner from "../components/CookieBanner.astro";
+import { googleReviews } from "../data/google-reviews";
 
 interface Props {
   title: string;
@@ -24,7 +25,9 @@ const {
 
 const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 
-const breadcrumbSchema = breadcrumbs
+const withSlash = (href: string) => (href.endsWith("/") ? href : `${href}/`);
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0
   ? {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -41,7 +44,7 @@ const breadcrumbSchema = breadcrumbs
             "@type": "ListItem",
             position: i + 2,
             name: crumb.name,
-            ...(isLast ? {} : { item: `https://fiodorowphotography.pl${crumb.href}` }),
+            ...(isLast ? {} : { item: `https://fiodorowphotography.pl${withSlash(crumb.href)}` }),
           };
         }),
       ],
@@ -91,17 +94,25 @@ const breadcrumbSchema = breadcrumbs
 
     <slot name="head" />
 
-    <!-- Schema.org — LocalBusiness (typ „Photographer" nie istnieje w schema.org) -->
+    <!-- Schema.org — JEDEN węzeł firmy dla całego serwisu. Podstrony nie definiują
+         firmy od nowa, tylko wskazują na ten @id. Wcześniej ta sama firma była
+         opisana w 5 miejscach z różnymi godzinami (24/7, 9–20, 8–20), nazwami
+         i współrzędnymi — na stronach miast nawet z geo Białegostoku/Warszawy. -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://fiodorowphotography.pl/#photographer",
-        name: "Fiodorow Photography | Fotografia Ślubna",
-        image: new URL(image, Astro.site).href,
+        name: "Fiodorow Photography",
+        alternateName: "Fiodorow Photography | Fotografia Ślubna",
+        description:
+          "Duet fotografów ślubnych z Siedlec. Naturalny reportaż ślubny, sesje narzeczeńskie i poślubne na Mazowszu, Podlasiu i Lubelszczyźnie.",
+        url: "https://fiodorowphotography.pl/",
+        image: "https://fiodorowphotography.pl/og-image.jpg",
         logo: "https://fiodorowphotography.pl/logo-dark.webp",
-        description: description,
+        telephone: "+48 660 872 121",
+        email: "fiodorowphotography@gmail.com",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Prymasa Stefana Wyszyńskiego",
@@ -110,15 +121,14 @@ const breadcrumbSchema = breadcrumbs
           postalCode: "08-110",
           addressCountry: "PL",
         },
+        // Współrzędne z wizytówki Google (Business Profile API).
         geo: {
           "@type": "GeoCoordinates",
-          latitude: 52.1676,
-          longitude: 22.2903,
+          latitude: 52.16376,
+          longitude: 22.28946,
         },
-        priceRange: "$$",
-        telephone: "+48 660 872 121",
-        url: "https://fiodorowphotography.pl",
         hasMap: "https://maps.google.com/?cid=1555365222895602722",
+        priceRange: "$$",
         areaServed: [
           { "@type": "City", name: "Siedlce" },
           { "@type": "City", name: "Warszawa" },
@@ -128,21 +138,31 @@ const breadcrumbSchema = breadcrumbs
           { "@type": "City", name: "Sokołów Podlaski" },
           { "@type": "City", name: "Węgrów" },
           { "@type": "City", name: "Garwolin" },
+          { "@type": "AdministrativeArea", name: "Mazowieckie" },
+          { "@type": "AdministrativeArea", name: "Podlaskie" },
+          { "@type": "AdministrativeArea", name: "Lubelskie" },
         ],
+        // Godziny jak w wizytówce Google (24/7 — decyzja właściciela).
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-          ],
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
           opens: "00:00",
           closes: "23:59",
         },
+        // Prawdziwa liczba opinii z wizytówki (src/data/google-reviews.ts).
+        // Google nie pokaże z tego gwiazdek (oceny firmy na własnej stronie),
+        // ale to spójny, prawdziwy fakt dla wyszukiwarek i asystentów AI.
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: googleReviews.rating.toFixed(1),
+          reviewCount: googleReviews.count,
+          bestRating: "5",
+          worstRating: "1",
+        },
+        founder: [
+          { "@type": "Person", "@id": "https://fiodorowphotography.pl/#mateusz", name: "Mateusz Fiodorow" },
+          { "@type": "Person", "@id": "https://fiodorowphotography.pl/#weronika", name: "Weronika Fiodorow" },
+        ],
         sameAs: [
           "https://maps.google.com/?cid=1555365222895602722",
           "https://www.instagram.com/fiodorow_photography",

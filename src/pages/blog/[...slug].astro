@@ -31,20 +31,12 @@ const articleSchema = {
   "image": `https://fiodorowphotography.pl${post.data.image.src}`,
   "datePublished": post.data.date,
   "dateModified": post.data.date,
-  "author": {
-    "@type": "Person",
-    "name": post.data.author,
-    "url": "https://fiodorowphotography.pl/o-nas"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Fiodorow Photography",
-    "url": "https://fiodorowphotography.pl",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://fiodorowphotography.pl/logo-dark.webp"
-    }
-  },
+  // „Fiodorow Photography" to firma, nie osoba — wcześniej był tu Person
+  // z nazwą firmy. Gdy wpis ma autora-osobę, zostaje Person.
+  "author": post.data.author === "Fiodorow Photography"
+    ? { "@id": "https://fiodorowphotography.pl/#photographer" }
+    : { "@type": "Person", "name": post.data.author, "url": "https://fiodorowphotography.pl/o-nas/" },
+  "publisher": { "@id": "https://fiodorowphotography.pl/#photographer" },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": `https://fiodorowphotography.pl/blog/${post.id}`
