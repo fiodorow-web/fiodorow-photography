@@ -36,12 +36,14 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
   return sanityClient.fetch(`
     *[_type == "portfolio"] | order(order asc, date desc) {
       _id,
+      _updatedAt,
       title,
       slug,
       date,
       category,
       venue { venueName, venueUrl },
-      coverImage,
+      // Brak okładki → pierwsze zdjęcie z galerii. Nigdy zdjęcia zastępcze.
+      "coverImage": coalesce(coverImage, images[0]),
       images,
       featured,
       order
@@ -85,7 +87,7 @@ export async function getLatestPortfolio(count: number = 3): Promise<PortfolioIt
       slug,
       date,
       category,
-      coverImage
+      "coverImage": coalesce(coverImage, images[0])
     }
   `)
 }

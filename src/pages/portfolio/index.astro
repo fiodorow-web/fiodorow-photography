@@ -4,66 +4,18 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { getPortfolioItems, urlFor, categoryLabels } from "../../lib/sanity";
 
-// Fetch from Sanity
-let sanityItems: any[] = [];
-try {
-  sanityItems = await getPortfolioItems();
-} catch (e) {
-  console.log("Sanity fetch failed, using fallback data");
-}
-
-// Fallback static data (used when Sanity is empty)
-const fallbackItems = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=800&q=80",
-    category: "reportaz-slubny",
-    title: "Joanna & Darek",
-    slug: { current: "joanna-darek" },
-    date: "2024-06-08",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80",
-    category: "sesja-narzeczenska",
-    title: "Natalia & Michał",
-    slug: { current: "natalia-michal" },
-    date: "2024-05-15",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80",
-    category: "reportaz-slubny",
-    title: "Amelia & Damian",
-    slug: { current: "amelia-damian" },
-    date: "2024-07-22",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
-    category: "sesja-poslubna",
-    title: "Karolina & Piotr",
-    slug: { current: "karolina-piotr" },
-    date: "2024-08-10",
-  },
-];
-
-// Use Sanity data if available, otherwise fallback
-const portfolioItems =
-  sanityItems.length > 0
-    ? sanityItems.map((item) => ({
-        image: item.coverImage
-          ? urlFor(item.coverImage).width(800).quality(80).url()
-          : fallbackItems[0].image,
-        srcset: item.coverImage
-          ? `${urlFor(item.coverImage).width(400).quality(75).url()} 400w, ${urlFor(item.coverImage).width(800).quality(80).url()} 800w`
-          : undefined,
-        category: item.category,
-        title: item.title,
-        slug: item.slug,
-        date: item.date,
-      }))
-    : fallbackItems;
+// Realizacje z Sanity. Bez danych zastępczych — patrz komentarz w index.astro.
+const sanityItems = await getPortfolioItems();
+const portfolioItems = sanityItems
+  .filter((item) => item.coverImage)
+  .map((item) => ({
+    image: urlFor(item.coverImage).width(800).quality(80).url(),
+    srcset: `${urlFor(item.coverImage).width(400).quality(75).url()} 400w, ${urlFor(item.coverImage).width(800).quality(80).url()} 800w`,
+    category: item.category,
+    title: item.title,
+    slug: item.slug,
+    date: item.date,
+  }));
 
 const categories = [
   "Wszystkie",

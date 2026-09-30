@@ -18,47 +18,20 @@ import sesjaPoSlubnaImg from "../assets/home/sesja-poslubna-plener-slubny.jpg";
 import sesiaNarzeczenskaImg from "../assets/home/sesja-narzeczenska-plener.jpg";
 import reportazSlubnyImg from "../assets/home/reportaz-slubny-para-mloda.jpg";
 
-// Fetch latest 3 portfolio items from Sanity
-let sanityItems: any[] = [];
-try {
-  sanityItems = await getLatestPortfolio(3);
-} catch (e) {
-  console.log('Sanity fetch failed, using fallback data');
-}
-
-// Fallback static data
-const fallbackItems = [
-  {
-    image: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1200&q=90",
-    category: "reportaz-slubny",
-    title: "Joanna & Darek",
-    slug: { current: "joanna-darek" },
-    date: "2024-06-08"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&q=90",
-    category: "sesja-narzeczenska",
-    title: "Natalia & Michał",
-    slug: { current: "natalia-michal" },
-    date: "2024-05-15"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=90",
-    category: "reportaz-slubny",
-    title: "Amelia & Damian",
-    slug: { current: "amelia-damian" },
-    date: "2024-07-22"
-  }
-];
-
-// Use Sanity data if available
-const portfolioItems = sanityItems.length > 0 ? sanityItems.map(item => ({
-  image: item.coverImage ? urlFor(item.coverImage).width(1400).quality(85).auto('format').url() : fallbackItems[0].image,
-  category: item.category,
-  title: item.title,
-  slug: item.slug,
-  date: item.date
-})) : fallbackItems;
+// Najnowsze realizacje z Sanity. Celowo bez danych zastępczych: wcześniej
+// przy braku okładki albo awarii Sanity pokazywały się zdjęcia z Unsplash
+// podpisane jako nasze realizacje. Gdy Sanity nie odpowie, build ma się
+// przerwać — na produkcji zostaje wtedy poprzednia, poprawna wersja.
+const sanityItems = await getLatestPortfolio(3);
+const portfolioItems = sanityItems
+  .filter((item) => item.coverImage)
+  .map((item) => ({
+    image: urlFor(item.coverImage).width(1400).quality(85).auto('format').url(),
+    category: item.category,
+    title: item.title,
+    slug: item.slug,
+    date: item.date,
+  }));
 
 const websiteSchema = {
   "@context": "https://schema.org",

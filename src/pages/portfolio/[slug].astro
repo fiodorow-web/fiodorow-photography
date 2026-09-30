@@ -6,60 +6,13 @@ import { getPortfolioItems, urlFor, categoryLabels } from "../../lib/sanity";
 
 // Fetch from Sanity for static path generation
 export async function getStaticPaths() {
-  // Fallback static data
-  const fallbackData: Record<string, any> = {
-    "joanna-darek": {
-      title: "Joanna & Darek",
-      date: "8 czerwca 2024",
-      category: "reportaz-slubny",
-      venue: {
-        venueName: "Siedlce",
-        venueUrl: "https://maps.google.com/?q=Siedlce",
-      },
-      images: [
-        { src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80 400w, https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85 800w, https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90 1400w" },
-        { src: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=80 400w, https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=85 800w, https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1400&q=90 1400w" },
-        { src: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=400&q=80 400w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=800&q=85 800w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90 1400w" },
-      ],
-    },
-    "natalia-michal": {
-      title: "Natalia & Michał",
-      date: "15 maja 2024",
-      category: "sesja-narzeczenska",
-      venue: {
-        venueName: "Białystok",
-        venueUrl: "https://maps.google.com/?q=Bialystok",
-      },
-      images: [
-        { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&q=80 400w, https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=85 800w, https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90 1400w" },
-        { src: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=400&q=80 400w, https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=85 800w, https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=1400&q=90 1400w" },
-      ],
-    },
-    "amelia-damian": {
-      title: "Amelia & Damian",
-      date: "22 lipca 2024",
-      category: "reportaz-slubny",
-      venue: {
-        venueName: "Warszawa",
-        venueUrl: "https://maps.google.com/?q=Warszawa",
-      },
-      images: [
-        { src: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&q=80 400w, https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=85 800w, https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1400&q=90 1400w" },
-        { src: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90", srcset: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=400&q=80 400w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=800&q=85 800w, https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=1400&q=90 1400w" },
-      ],
-    },
-  };
+  // Wyłącznie realizacje z Sanity. Wcześniej doklejane były tu na stałe dwie
+  // demonstracyjne („Joanna & Darek", „Natalia & Michał") ze zdjęciami
+  // z Unsplash — trafiały do indeksu Google jako nasze prace. Gdy Sanity nie
+  // odpowie, build ma się przerwać (na produkcji zostaje poprzednia wersja).
+  const sanityItems = await getPortfolioItems();
 
-  // Try to fetch from Sanity
-  let sanityItems: any[] = [];
-  try {
-    sanityItems = await getPortfolioItems();
-  } catch (e) {
-    console.log("Sanity fetch failed in getStaticPaths, using fallback");
-  }
-
-  // Build paths from Sanity data
-  const sanityPaths = sanityItems.map((item) => ({
+  return sanityItems.map((item: any) => ({
     params: { slug: item.slug.current },
     props: {
       portfolio: {
@@ -71,6 +24,8 @@ export async function getStaticPaths() {
               year: "numeric",
             })
           : "",
+        // Data w formacie ISO do danych strukturalnych (datePublished).
+        dateISO: item.date || null,
         category: item.category || "reportaz-slubny",
         venue: item.venue || null,
         coverImage: item.coverImage
@@ -85,20 +40,6 @@ export async function getStaticPaths() {
       },
     },
   }));
-
-  // Build paths from fallback data
-  const fallbackPaths = Object.entries(fallbackData).map(([slug, data]) => ({
-    params: { slug },
-    props: { portfolio: data },
-  }));
-
-  // Merge: Sanity paths first, then fallback paths that don't exist in Sanity
-  const existingSlugs = new Set(sanityPaths.map((p) => p.params.slug));
-  const uniqueFallbackPaths = fallbackPaths.filter(
-    (p) => !existingSlugs.has(p.params.slug),
-  );
-
-  return [...sanityPaths, ...uniqueFallbackPaths];
 }
 
 const { portfolio } = Astro.props;
@@ -120,7 +61,7 @@ const seoTitle = venue
   : `${catLabel} — ${portfolio.title} | Fiodorow Photography`;
 
 const seoDescription = venue
-  ? `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""} w ${venue}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`
+  ? `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""} — ${venue}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`
   : `${catLabel}: ${portfolio.title}${portfolio.date ? `, ${portfolio.date}` : ""}. Zobacz galerię zdjęć. Duet fotografów Fiodorow Photography.`;
 
 const imageGallerySchema = {
@@ -129,23 +70,14 @@ const imageGallerySchema = {
   name: `${catLabel} — ${portfolio.title}`,
   description: seoDescription,
   url: `https://fiodorowphotography.pl/portfolio/${Astro.params.slug}`,
+  // Nazwa sali to miejsce, nie miejscowość — wcześniej trafiała do
+  // addressLocality („Orchidea Siedlce").
   ...(venue && {
-    contentLocation: {
-      "@type": "Place",
-      name: venue,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: venue,
-        addressCountry: "PL",
-      },
-    },
+    contentLocation: { "@type": "Place", name: venue },
   }),
-  ...(portfolio.date && { datePublished: portfolio.date }),
-  author: {
-    "@type": "Organization",
-    name: "Fiodorow Photography",
-    url: "https://fiodorowphotography.pl",
-  },
+  ...(portfolio.dateISO && { datePublished: portfolio.dateISO }),
+  // Ta sama encja firmy co w BaseLayout — jeden węzeł zamiast kilku kopii.
+  author: { "@id": "https://fiodorowphotography.pl/#photographer" },
   image: portfolio.images.map((img: any) => img.src),
 };
 ---
