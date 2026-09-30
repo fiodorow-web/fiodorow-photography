@@ -22,7 +22,7 @@ faq:
 
 Jeśli jesteście przed swoim ślubem, to bardzo możliwe, że oprócz ekscytacji pojawia się też stres. To zupełnie normalne. Wiele par zastanawia się, jak właściwie wygląda dzień reportażu ślubnego, kiedy przyjeżdżamy, co robimy, czy będzie dużo pozowania i czy w tym wszystkim znajdzie się jeszcze przestrzeń, żeby po prostu przeżyć ten dzień po swojemu.
 
-Aby nieco zapoznać Was z naszym stylem działania i pokazać, że naprawdę nie ma się czym stresować, przygotowaliśmy krótki przewodnik po tym, jak zazwyczaj wygląda nasza praca. Oczywiście każdy ślub jest inny, potraktujcie to jako pogląd, który pomoże Wam przygotować się do reportażu.
+Aby nieco zapoznać Was z naszym stylem działania i pokazać, że naprawdę nie ma się czym stresować, przygotowaliśmy krótki przewodnik po tym, jak zazwyczaj wygląda nasza praca. Oczywiście każdy ślub jest inny, potraktujcie to jako ogólny zarys, który pomoże Wam przygotować się do reportażu.
 
 ## Reportaż ślubny w skrócie — plan dnia
 

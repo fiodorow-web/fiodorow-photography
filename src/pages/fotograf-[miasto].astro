@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { googleReviews } from "../data/google-reviews";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
@@ -30,7 +29,7 @@ export function getStaticPaths() {
       ],
       serviceDescriptions: {
         wedding:
-          "Reportaż ślubny od przygotowań, przez wzruszającą ceremonię, aż po szaloną zabawę. Podlaskie wesela mają niepowtarzalny klimat, a my potrafimy go uchwycić w każdym kadrze. Mieszkamy oraz studiujemy tutaj na codzień, więc znamy tutejsze okolice.",
+          "Reportaż ślubny od przygotowań, przez wzruszającą ceremonię, aż po szaloną zabawę. Podlaskie wesela mają niepowtarzalny klimat, a my potrafimy go uchwycić w każdym kadrze. Mieszkamy oraz studiujemy tutaj na co dzień, więc znamy tutejsze okolice.",
         engagement:
           "Sesje narzeczeńskie w najpiękniejszych zakątkach Podlasia. Puszcza Knyszyńska, okolice Supraśla, Dolina Narwi – te miejsca tworzą magiczne tło dla Waszych zdjęć. To też okazja, żebyśmy się lepiej poznali przed ślubem.",
         postwedding:
@@ -96,7 +95,7 @@ export function getStaticPaths() {
         engagement:
           "Sesja narzeczeńska w klimatycznych zakątkach stolicy. Łazienki Królewskie, Stare Miasto, Park w Wilanowie, Muzeum Chopina – dobierzemy lokalizację, która podkreśli Wasz styl. To idealna okazja, żebyśmy poznali się przed ślubem.",
         postwedding:
-          "Zjawiskowe sesje plenerowe niedługo po dniu Waszego ślubu. To szansa na odwiedzenie najbardziej spektakularnych miejsc na Mazowszu i w stolicy, bez stresu i pospiechu, w sam raz na romantyczne ujęcia w Waszych kreacjach.",
+          "Zjawiskowe sesje plenerowe niedługo po dniu Waszego ślubu. To szansa na odwiedzenie najbardziej spektakularnych miejsc na Mazowszu i w stolicy, bez stresu i pośpiechu, w sam raz na romantyczne ujęcia w Waszych kreacjach.",
       },
       faq: [
         {
@@ -118,7 +117,7 @@ export function getStaticPaths() {
         {
           question: "Jak wygląda współpraca z fotografem spoza Warszawy?",
           answer:
-            "Oczywiście! Obsługujemy zarówno śluby w samej stolicy, jak i wesela w Piasecznie, Pruszkowie, Legionowie, Otwocku, Konstancinie-Jeziornie i wielu innych podwarszawskich miejscowościach. Podwarszawskie sale weselne oferują fantastyczne warunki — od kameralnych dworków po nowoczesne przestrzenie eventowe.",
+            "Dokładnie tak samo jak z fotografem z Warszawy. Na początku spotykamy się — osobiście lub online — żeby poznać Waszą wizję i ustalić szczegóły dnia. Z Siedlec do stolicy mamy niecałą godzinę jazdy, a koszty dojazdu są wliczone w cenę pakietu, więc nie dopłacacie za to, że mieszkamy poza Warszawą. Na ślubie jesteśmy zawsze we dwoje, a gotową galerię online otrzymujecie w ciągu 3 miesięcy.",
         },
       ],
       localPlaces: [
@@ -307,7 +306,7 @@ const reviews = [
       <h1
         class="font-serif text-3xl sm:text-4xl md:text-6xl font-light tracking-[0.1em] sm:tracking-[0.15em] uppercase"
       >
-        Fotograf ślubny<br /><span class="text-olive-light"
+        Fotograf ślubny <br /><span class="text-olive-light"
           >w {city.nameLocative}</span
         >
       </h1>
@@ -509,7 +508,7 @@ const reviews = [
                   >
                     <img
                       src={urlFor(g.image).width(800).quality(72).url()}
-                      alt={`Fotografia ślubna ${city.nameLocative} — realizacja`}
+                      alt={`Fotografia ślubna w ${city.nameLocative} — realizacja`}
                       loading="lazy"
                       class="w-full h-full object-cover"
                     />

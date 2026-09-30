@@ -3,27 +3,20 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
-# AI Crawlers
+# AI Crawlers — jawnie wpuszczone. Jedna grupa, bo bot z własną grupą
+# ignoruje grupę "*", więc Disallow trzeba powtórzyć tutaj.
 User-agent: GPTBot
-Allow: /
-
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
 User-agent: Google-Extended
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
+User-agent: Claude-SearchBot
+User-agent: Claude-User
 User-agent: PerplexityBot
-Allow: /
-
+User-agent: Perplexity-User
 User-agent: Applebot
 Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
+Disallow: /studio
 
 # Sitemap
 Sitemap: https://fiodorowphotography.pl/sitemap-index.xml
